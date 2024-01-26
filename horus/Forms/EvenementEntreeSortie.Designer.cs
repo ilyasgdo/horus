@@ -38,19 +38,22 @@
             // 
             // btnValiderEvenement
             // 
+            btnValiderEvenement.BackColor = Color.PaleTurquoise;
+            btnValiderEvenement.Font = new Font("Sans Serif Collection", 9F);
             btnValiderEvenement.Location = new Point(65, 139);
             btnValiderEvenement.Name = "btnValiderEvenement";
             btnValiderEvenement.Size = new Size(96, 37);
             btnValiderEvenement.TabIndex = 9;
             btnValiderEvenement.Text = "Valider";
-            btnValiderEvenement.UseVisualStyleBackColor = true;
+            btnValiderEvenement.UseVisualStyleBackColor = false;
             // 
             // lblDeuxPoints
             // 
             lblDeuxPoints.AutoSize = true;
+            lblDeuxPoints.Font = new Font("Segoe UI", 11F);
             lblDeuxPoints.Location = new Point(108, 99);
             lblDeuxPoints.Name = "lblDeuxPoints";
-            lblDeuxPoints.Size = new Size(10, 15);
+            lblDeuxPoints.Size = new Size(12, 20);
             lblDeuxPoints.TabIndex = 8;
             lblDeuxPoints.Text = ":";
             // 
@@ -75,16 +78,17 @@
             // lblHoraireEntreePersonne
             // 
             lblHoraireEntreePersonne.AutoSize = true;
-            lblHoraireEntreePersonne.Location = new Point(27, 59);
+            lblHoraireEntreePersonne.Font = new Font("Sans Serif Collection", 7F);
+            lblHoraireEntreePersonne.Location = new Point(33, 69);
             lblHoraireEntreePersonne.Name = "lblHoraireEntreePersonne";
-            lblHoraireEntreePersonne.Size = new Size(52, 15);
+            lblHoraireEntreePersonne.Size = new Size(65, 24);
             lblHoraireEntreePersonne.TabIndex = 5;
             lblHoraireEntreePersonne.Text = "Horaire :";
             // 
             // cboEvenements
             // 
             cboEvenements.FormattingEnabled = true;
-            cboEvenements.Location = new Point(50, 23);
+            cboEvenements.Location = new Point(51, 32);
             cboEvenements.Name = "cboEvenements";
             cboEvenements.Size = new Size(121, 23);
             cboEvenements.TabIndex = 10;
@@ -93,6 +97,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(225, 206);
             Controls.Add(cboEvenements);
             Controls.Add(btnValiderEvenement);

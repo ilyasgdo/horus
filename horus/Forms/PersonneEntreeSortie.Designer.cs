@@ -38,9 +38,10 @@
             // lblHoraireEntreePersonne
             // 
             lblHoraireEntreePersonne.AutoSize = true;
-            lblHoraireEntreePersonne.Location = new Point(24, 26);
+            lblHoraireEntreePersonne.Font = new Font("Sans Serif Collection", 8F);
+            lblHoraireEntreePersonne.Location = new Point(24, 35);
             lblHoraireEntreePersonne.Name = "lblHoraireEntreePersonne";
-            lblHoraireEntreePersonne.Size = new Size(52, 15);
+            lblHoraireEntreePersonne.Size = new Size(77, 27);
             lblHoraireEntreePersonne.TabIndex = 0;
             lblHoraireEntreePersonne.Text = "Horaire :";
             // 
@@ -65,25 +66,29 @@
             // lblDeuxPoints
             // 
             lblDeuxPoints.AutoSize = true;
+            lblDeuxPoints.Font = new Font("Segoe UI", 11F);
             lblDeuxPoints.Location = new Point(105, 66);
             lblDeuxPoints.Name = "lblDeuxPoints";
-            lblDeuxPoints.Size = new Size(10, 15);
+            lblDeuxPoints.Size = new Size(12, 20);
             lblDeuxPoints.TabIndex = 3;
             lblDeuxPoints.Text = ":";
             // 
             // btnValiderPersonne
             // 
+            btnValiderPersonne.BackColor = Color.PaleTurquoise;
+            btnValiderPersonne.Font = new Font("Sans Serif Collection", 9F);
             btnValiderPersonne.Location = new Point(62, 106);
             btnValiderPersonne.Name = "btnValiderPersonne";
             btnValiderPersonne.Size = new Size(96, 37);
             btnValiderPersonne.TabIndex = 4;
             btnValiderPersonne.Text = "Valider";
-            btnValiderPersonne.UseVisualStyleBackColor = true;
+            btnValiderPersonne.UseVisualStyleBackColor = false;
             // 
             // PersonneEntreeSortie
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(225, 173);
             Controls.Add(btnValiderPersonne);
             Controls.Add(lblDeuxPoints);

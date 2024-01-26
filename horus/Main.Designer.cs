@@ -36,6 +36,8 @@
             picLogo = new PictureBox();
             picParametres = new PictureBox();
             picTelechargement = new PictureBox();
+            lblDate = new Label();
+            lblHeure = new Label();
             ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picParametres).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picTelechargement).BeginInit();
@@ -43,7 +45,9 @@
             // 
             // btnPersonneEntree
             // 
-            btnPersonneEntree.BackColor = SystemColors.Control;
+            btnPersonneEntree.BackColor = Color.PaleTurquoise;
+            btnPersonneEntree.Font = new Font("Sans Serif Collection", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPersonneEntree.ForeColor = SystemColors.ControlText;
             btnPersonneEntree.Location = new Point(153, 147);
             btnPersonneEntree.Name = "btnPersonneEntree";
             btnPersonneEntree.Size = new Size(150, 86);
@@ -54,7 +58,8 @@
             // 
             // btnPersonneSortie
             // 
-            btnPersonneSortie.BackColor = SystemColors.Control;
+            btnPersonneSortie.BackColor = Color.PaleTurquoise;
+            btnPersonneSortie.Font = new Font("Sans Serif Collection", 9F);
             btnPersonneSortie.Location = new Point(475, 147);
             btnPersonneSortie.Name = "btnPersonneSortie";
             btnPersonneSortie.Size = new Size(150, 86);
@@ -65,7 +70,8 @@
             // 
             // btnEvenementAjout
             // 
-            btnEvenementAjout.BackColor = SystemColors.Control;
+            btnEvenementAjout.BackColor = Color.PaleTurquoise;
+            btnEvenementAjout.Font = new Font("Sans Serif Collection", 9F);
             btnEvenementAjout.Location = new Point(153, 297);
             btnEvenementAjout.Name = "btnEvenementAjout";
             btnEvenementAjout.Size = new Size(150, 86);
@@ -76,7 +82,8 @@
             // 
             // btnEvenementSuppression
             // 
-            btnEvenementSuppression.BackColor = SystemColors.Control;
+            btnEvenementSuppression.BackColor = Color.PaleTurquoise;
+            btnEvenementSuppression.Font = new Font("Sans Serif Collection", 9F);
             btnEvenementSuppression.Location = new Point(475, 297);
             btnEvenementSuppression.Name = "btnEvenementSuppression";
             btnEvenementSuppression.Size = new Size(150, 86);
@@ -98,9 +105,10 @@
             // 
             picParametres.BackColor = SystemColors.Control;
             picParametres.Image = (Image)resources.GetObject("picParametres.Image");
-            picParametres.Location = new Point(706, 29);
+            picParametres.Location = new Point(705, 29);
             picParametres.Name = "picParametres";
-            picParametres.Size = new Size(50, 51);
+            picParametres.Size = new Size(56, 51);
+            picParametres.SizeMode = PictureBoxSizeMode.StretchImage;
             picParametres.TabIndex = 5;
             picParametres.TabStop = false;
             picParametres.Click += picParametres_Click;
@@ -109,18 +117,40 @@
             // 
             picTelechargement.BackColor = SystemColors.Control;
             picTelechargement.Image = (Image)resources.GetObject("picTelechargement.Image");
-            picTelechargement.Location = new Point(612, 29);
+            picTelechargement.Location = new Point(637, 29);
             picTelechargement.Name = "picTelechargement";
             picTelechargement.Size = new Size(50, 51);
+            picTelechargement.SizeMode = PictureBoxSizeMode.StretchImage;
             picTelechargement.TabIndex = 6;
             picTelechargement.TabStop = false;
             picTelechargement.Click += picTelechargement_Click;
+            // 
+            // lblDate
+            // 
+            lblDate.AutoSize = true;
+            lblDate.Location = new Point(353, 55);
+            lblDate.Name = "lblDate";
+            lblDate.Size = new Size(31, 15);
+            lblDate.TabIndex = 7;
+            lblDate.Text = "Date";
+            // 
+            // lblHeure
+            // 
+            lblHeure.AutoSize = true;
+            lblHeure.Location = new Point(422, 55);
+            lblHeure.Name = "lblHeure";
+            lblHeure.Size = new Size(39, 15);
+            lblHeure.TabIndex = 8;
+            lblHeure.Text = "Heure";
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblHeure);
+            Controls.Add(lblDate);
             Controls.Add(picTelechargement);
             Controls.Add(picParametres);
             Controls.Add(picLogo);
@@ -134,6 +164,7 @@
             ((System.ComponentModel.ISupportInitialize)picParametres).EndInit();
             ((System.ComponentModel.ISupportInitialize)picTelechargement).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -145,5 +176,7 @@
         private PictureBox picLogo;
         private PictureBox picParametres;
         private PictureBox picTelechargement;
+        private Label lblDate;
+        private Label lblHeure;
     }
 }

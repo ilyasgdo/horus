@@ -16,6 +16,16 @@ namespace horus
         public Main()
         {
             InitializeComponent();
+
+            // Initialisation du Timer
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = 1000; // Intervalle en millisecondes (une seconde)
+            timer.Tick += (sender, e) => lblHeure.Text = DateTime.Now.ToString("HH:mm:ss");
+            timer.Start();
+
+            // Appel initial pour mettre à jour l'heure dès le démarrage
+            lblHeure.Text = DateTime.Now.ToString("HH:mm:ss");
+            lblDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         private void btnPersonne_Click(object sender, EventArgs e)
