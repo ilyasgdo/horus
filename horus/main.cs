@@ -18,40 +18,47 @@ namespace horus
             InitializeComponent();
         }
 
-        private void btnPersonneEntree_Click(object sender, EventArgs e)
+        private void btnPersonne_Click(object sender, EventArgs e)
         {
             PersonneEntreeSortie personneEntreeSortie = new PersonneEntreeSortie();
-            personneEntreeSortie.Show();
+            open_Click(personneEntreeSortie);
         }
 
-        private void btnPersonneSortie_Click(object sender, EventArgs e)
-        {
-            PersonneEntreeSortie personneEntreeSortie = new PersonneEntreeSortie();
-            personneEntreeSortie.Show();
-        }
-
-        private void btnEvenementAjout_Click(object sender, EventArgs e)
+        private void btnEvenement_Click(object sender, EventArgs e)
         {
             EvenementEntreeSortie evenementEntreeSortie = new EvenementEntreeSortie();
-            evenementEntreeSortie.Show();
-        }
-
-        private void btnEvenementSuppression_Click(object sender, EventArgs e)
-        {
-            EvenementEntreeSortie evenementEntreeSortie = new EvenementEntreeSortie();
-            evenementEntreeSortie.Show();
+            open_Click(evenementEntreeSortie);
         }
 
         private void picTelechargement_Click(object sender, EventArgs e)
         {
             Telechargement telechargement = new Telechargement();
-            telechargement.Show();
+            open_Click(telechargement);
         }
 
         private void picParametres_Click(object sender, EventArgs e)
         {
             Parametres parametres = new Parametres();
-            parametres.Show();
+            open_Click(parametres);
         }
+
+        private void open_Click(Form form)
+        {
+            bool isOpen = false;
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Text == form.Text)
+                {
+                    isOpen = true;
+                    f.Focus();
+                }
+            }
+            if (!isOpen)
+            {
+                form.Show();
+            }
+            
+        }
+        
     }
 }
