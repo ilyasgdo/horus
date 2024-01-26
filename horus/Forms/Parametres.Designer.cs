@@ -28,7 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            contextMenuStrip1 = new ContextMenuStrip(components);
             SuspendLayout();
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(61, 4);
             // 
             // Parametres
             // 
@@ -41,5 +48,7 @@
         }
 
         #endregion
+
+        private ContextMenuStrip contextMenuStrip1;
     }
 }
