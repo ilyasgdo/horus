@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace horus.Forms
 {
-    public partial class EvenementEntree : Form
+    public partial class Telechargement : Form
     {
-        public EvenementEntree()
+        public Telechargement()
         {
             InitializeComponent();
         }
