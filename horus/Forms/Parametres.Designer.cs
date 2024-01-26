@@ -28,27 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            contextMenuStrip1 = new ContextMenuStrip(components);
             SuspendLayout();
-            // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
             // 
             // Parametres
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(469, 338);
+            BackColor = SystemColors.ControlLightLight;
+            ClientSize = new Size(580, 385);
+            Controls.Add(panel1);
+            Controls.Add(pictureBox1);
+            Controls.Add(textBox1);
+            Controls.Add(btnValider);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "Parametres";
             Text = "Parametres";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-
-        private ContextMenuStrip contextMenuStrip1;
     }
 }
