@@ -16,5 +16,10 @@ namespace horus.Forms
         {
             InitializeComponent();
         }
+
+        private void btnValider_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
