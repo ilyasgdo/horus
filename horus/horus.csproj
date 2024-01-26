@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="FichiersCSV\" />
+    <Compile Remove="FichiersCSV\**" />
+    <EmbeddedResource Remove="FichiersCSV\**" />
+    <None Remove="FichiersCSV\**" />
   </ItemGroup>
 
 </Project>

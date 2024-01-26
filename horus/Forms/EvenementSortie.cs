@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace horus
+namespace horus.Forms
 {
-    public partial class parametre : Form
+    public partial class EvenementSortie : Form
     {
-        public parametre()
+        public EvenementSortie()
         {
             InitializeComponent();
         }
