@@ -52,8 +52,6 @@ namespace horus.Forms
         {
             evenement = evenements.GetEvenement(cboEvenements.Text);
             evenement ??= new horus.@class.Evenement();
-
-            label1.Text = cboEvenements.Text;
         }
     }
 }
