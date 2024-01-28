@@ -54,7 +54,7 @@
             btnPersonneEntree.TabIndex = 0;
             btnPersonneEntree.Text = "Une personne est entrée";
             btnPersonneEntree.UseVisualStyleBackColor = false;
-            btnPersonneEntree.Click += btnPersonne_Click;
+            btnPersonneEntree.Click += btnPersonneEntree_Click;
             // 
             // btnPersonneSortie
             // 
@@ -66,7 +66,7 @@
             btnPersonneSortie.TabIndex = 1;
             btnPersonneSortie.Text = "Une personne est sortie";
             btnPersonneSortie.UseVisualStyleBackColor = false;
-            btnPersonneSortie.Click += btnPersonne_Click;
+            btnPersonneSortie.Click += btnPersonneSortie_Click;
             // 
             // btnEvenementAjout
             // 
@@ -78,7 +78,7 @@
             btnEvenementAjout.TabIndex = 2;
             btnEvenementAjout.Text = "Ajouter un évènement";
             btnEvenementAjout.UseVisualStyleBackColor = false;
-            btnEvenementAjout.Click += btnEvenement_Click;
+            btnEvenementAjout.Click += btnEvenementAjout_Click;
             // 
             // btnEvenementSuppression
             // 
@@ -90,7 +90,7 @@
             btnEvenementSuppression.TabIndex = 3;
             btnEvenementSuppression.Text = "Supprimer un évènement";
             btnEvenementSuppression.UseVisualStyleBackColor = false;
-            btnEvenementSuppression.Click += btnEvenement_Click;
+            btnEvenementSuppression.Click += btnEvenementSuppression_Click;
             // 
             // picLogo
             // 

@@ -34,6 +34,7 @@
             cbHeureEvenement = new ComboBox();
             lblHoraireEntreePersonne = new Label();
             cboEvenements = new ComboBox();
+            label1 = new Label();
             SuspendLayout();
             // 
             // btnValiderEvenement
@@ -46,6 +47,7 @@
             btnValiderEvenement.TabIndex = 9;
             btnValiderEvenement.Text = "Valider";
             btnValiderEvenement.UseVisualStyleBackColor = false;
+            btnValiderEvenement.Click += btnValiderEvenement_Click;
             // 
             // lblDeuxPoints
             // 
@@ -92,20 +94,31 @@
             cboEvenements.Name = "cboEvenements";
             cboEvenements.Size = new Size(121, 23);
             cboEvenements.TabIndex = 10;
+            cboEvenements.TextChanged += cboEvenements_TextChanged;
             // 
-            // EvenementEntreeSortie
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(82, 182);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 11;
+            label1.Text = "label1";
+            // 
+            // EvenementEntreeSortieForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(225, 206);
+            Controls.Add(label1);
             Controls.Add(cboEvenements);
             Controls.Add(btnValiderEvenement);
             Controls.Add(lblDeuxPoints);
             Controls.Add(cboMinuteEvenement);
             Controls.Add(cbHeureEvenement);
             Controls.Add(lblHoraireEntreePersonne);
-            Name = "EvenementEntreeSortie";
+            Name = "EvenementEntreeSortieForm";
             Text = "EvenementEntree";
             ResumeLayout(false);
             PerformLayout();
@@ -119,5 +132,6 @@
         private ComboBox cbHeureEvenement;
         private Label lblHoraireEntreePersonne;
         private ComboBox cboEvenements;
+        private Label label1;
     }
 }

@@ -83,8 +83,9 @@
             btnValiderPersonne.TabIndex = 4;
             btnValiderPersonne.Text = "Valider";
             btnValiderPersonne.UseVisualStyleBackColor = false;
+            btnValiderPersonne.Click += btnValiderPersonne_Click;
             // 
-            // PersonneEntreeSortie
+            // PersonneEntreeSortieForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -95,7 +96,7 @@
             Controls.Add(cboMinutePersonne);
             Controls.Add(cbHeurePersonne);
             Controls.Add(lblHoraireEntreePersonne);
-            Name = "PersonneEntreeSortie";
+            Name = "PersonneEntreeSortieForm";
             Text = "PersonneEntreeSortie";
             ResumeLayout(false);
             PerformLayout();

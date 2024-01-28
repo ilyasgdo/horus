@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Classe Parametres qui permet de gérer les paramètres (ajout, suppression...)
+/// </summary>
 namespace horus.@class
 {
     internal class Parametres
@@ -16,7 +19,7 @@ namespace horus.@class
             evenements.Add("Personne");
         }
 
-        public void ajouterEvenement(String nom)
+        public void AjouterEvenement(String nom)
         {
             if (evenements.Contains("Personne"))
             {
@@ -25,7 +28,7 @@ namespace horus.@class
             evenements.Add(nom);
         }
 
-        public void supprimerEvenement(String nom)
+        public void SupprimerEvenement(String nom)
         {
             if (evenements.Contains("Personne"))
             {

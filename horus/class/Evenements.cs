@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Clase Evenements qui permet de gérer les événements (ajout, suppression)
+/// </summary>
 namespace horus.@class
 {
-    internal class Evenements
+    public class Evenements
     {
         private Dictionary<String, Evenement> evenements;
 
@@ -15,17 +18,24 @@ namespace horus.@class
             this.evenements = new Dictionary<String, Evenement>();
         }
 
-        public void ajouterEvenement(String nom, DateTime date)
+        public void AjouterEvenement(String nom, Evenement evenement)
         {
-            evenements.Add(nom, new Evenement(date));
+            if (evenements.ContainsKey(nom))
+            {
+                evenements[nom] = evenement;
+            }
+            else
+            {
+                evenements.Add(nom, evenement);
+            }
         }
 
-        public void supprimerEvenement(String nom)
+        public void SupprimerEvenement(String nom)
         {
             evenements.Remove(nom);
         }
 
-        public Evenement getEvenement(String nom)
+        public Evenement GetEvenement(String nom)
         {
             if (evenements.ContainsKey(nom))
             {
