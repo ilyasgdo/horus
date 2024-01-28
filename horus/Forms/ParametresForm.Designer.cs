@@ -1,6 +1,6 @@
 ﻿namespace horus.Forms
 {
-    partial class Telechargement
+    partial class ParametresForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Telechargement";
+            this.Text = "ParametresForm";
         }
 
         #endregion

@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace horus
 {
-    public partial class Main : Form
+    public partial class MainForm : Form
     {
-        public Main()
+        public MainForm()
         {
             InitializeComponent();
 
@@ -30,25 +30,25 @@ namespace horus
 
         private void btnPersonne_Click(object sender, EventArgs e)
         {
-            PersonneEntreeSortie personneEntreeSortie = new PersonneEntreeSortie();
+            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm();
             open_Click(personneEntreeSortie);
         }
 
         private void btnEvenement_Click(object sender, EventArgs e)
         {
-            EvenementEntreeSortie evenementEntreeSortie = new EvenementEntreeSortie();
+            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm();
             open_Click(evenementEntreeSortie);
         }
 
         private void picTelechargement_Click(object sender, EventArgs e)
         {
-            Telechargement telechargement = new Telechargement();
+            TelechargementForm telechargement = new TelechargementForm();
             open_Click(telechargement);
         }
 
         private void picParametres_Click(object sender, EventArgs e)
         {
-            Parametres parametres = new Parametres();
+            ParametresForm parametres = new ParametresForm();
             open_Click(parametres);
         }
 

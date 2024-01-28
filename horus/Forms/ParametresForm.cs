@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace horus.Forms
 {
-    public partial class Telechargement : Form
+    public partial class ParametresForm : Form
     {
-        public Telechargement()
+        public ParametresForm()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace horus.Forms
 {
-    partial class Parametres
+    partial class TelechargementForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,24 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            SuspendLayout();
-            // 
-            // Parametres
-            // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(580, 385);
-            Controls.Add(panel1);
-            Controls.Add(pictureBox1);
-            Controls.Add(textBox1);
-            Controls.Add(btnValider);
-            Margin = new Padding(4, 5, 4, 5);
-            Name = "Parametres";
-            Text = "Parametres";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "TelechargementForm";
         }
 
         #endregion

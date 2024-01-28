@@ -1,6 +1,6 @@
 ﻿namespace horus.Forms
 {
-    partial class EvenementEntreeSortie
+    partial class EvenementEntreeSortieForm
     {
         /// <summary>
         /// Required designer variable.

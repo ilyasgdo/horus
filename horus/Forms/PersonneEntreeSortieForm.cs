@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace horus.Forms
 {
-    public partial class Parametres : Form
+    public partial class PersonneEntreeSortieForm : Form
     {
-        public Parametres()
+        public PersonneEntreeSortieForm()
         {
             InitializeComponent();
-        }
-
-        private void btnValider_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
