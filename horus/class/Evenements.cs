@@ -16,9 +16,10 @@ namespace horus.@class
         public Evenements()
         {
             this.evenements = new Dictionary<String, Evenement>();
+            evenements.Add("personne", new Evenement());
         }
 
-        public void AjouterEvenement(String nom, Evenement evenement)
+        public void AjouterModifierEvenement(String nom, Evenement evenement)
         {
             if (evenements.ContainsKey(nom))
             {

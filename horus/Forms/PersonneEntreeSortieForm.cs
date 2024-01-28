@@ -23,7 +23,6 @@ namespace horus.Forms
             this.entree = entree;
 
             evenement = evenements.GetEvenement("Personne");
-            evenement ??= new horus.@class.Evenement();
         }
 
         private void btnValiderPersonne_Click(object sender, EventArgs e)
@@ -36,7 +35,7 @@ namespace horus.Forms
             {
                 evenement.Fin();
             }
-            evenements.AjouterEvenement("Personne", evenement);
+            evenements.AjouterModifierEvenement("Personne", evenement);
 
             this.Close();
         }

@@ -42,7 +42,7 @@ namespace horus.Forms
             {
                 evenement.Fin();
             }
-            evenements.AjouterEvenement(cboEvenements.Text, evenement);
+            evenements.AjouterModifierEvenement(cboEvenements.Text, evenement);
 
 
             this.Close();
