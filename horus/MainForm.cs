@@ -1,4 +1,5 @@
-﻿using horus.Forms;
+﻿using horus.@class;
+using horus.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,10 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace horus
 {
     public partial class MainForm : Form
     {
+        private const string fichierCSV = "evenements.csv";
+        int nbPersonnesPresentent; 
+
         public MainForm()
         {
             InitializeComponent();
@@ -27,6 +32,25 @@ namespace horus
             lblHeure.Text = DateTime.Now.ToString("HH:mm:ss");
             lblDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
+            //Récupération de la mémoire 
+            List<String> listeEvenements = ChargerEvenements();
+            Parametres parametre = new Parametres();
+            for ( int i = 0; i < listeEvenements.Count; i++ )
+            {
+                Evenement evenementi = new Evenement(listeEvenements[i]);
+                parametre.AjouterEvenement(evenementi);
+            }
+
+        }
+
+        private List<string> ChargerEvenements()
+        {
+            // Charger la liste d'événements depuis le fichier CSV
+            if (File.Exists(fichierCSV))
+            {
+                return File.ReadAllLines(fichierCSV).ToList();
+            }
+            return new List<string>();
         }
 
         private void btnPersonneEntree_Click(object sender, EventArgs e)

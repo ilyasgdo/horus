@@ -19,6 +19,11 @@ namespace horus.@class
             evenements.Add(evenement);
         }
 
+        public Parametres()
+        {
+            this.evenements = new List<Evenement>();
+        }
+
         public void AjouterEvenement(Evenement evenement)
         {
             evenements.Add(evenement);
