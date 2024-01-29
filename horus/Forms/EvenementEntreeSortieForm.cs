@@ -16,6 +16,11 @@ namespace horus.Forms
         private horus.@class.Evenement evenement;
         private bool entree;
 
+        public EvenementEntreeSortieForm()
+        {
+            InitializeComponent();
+        }
+
         public EvenementEntreeSortieForm(Evenement evenement, bool entree)
         {
             InitializeComponent();

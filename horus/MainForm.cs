@@ -55,13 +55,13 @@ namespace horus
 
         private void btnPersonneEntree_Click(object sender, EventArgs e)
         {
-            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm();
+            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(nbPersonnesPresentent, true);
             open_Click(personneEntreeSortie);
         }
 
         private void btnPersonneSortie_Click(object sender, EventArgs e)
         {
-            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm();
+            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(nbPersonnesPresentent, false);
             open_Click(personneEntreeSortie);
         }
 
