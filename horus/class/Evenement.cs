@@ -42,5 +42,10 @@ namespace horus.@class
             return this.actif;
         }
 
+        public string getNom()
+        {
+            return this.nom;
+        }
+
     }
 }
