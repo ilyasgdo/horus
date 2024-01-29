@@ -28,12 +28,69 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "ParametresForm";
+            comboBoxEvenements = new ComboBox();
+            btnSupprimer = new Button();
+            btnAjouter = new Button();
+            textBoxNouvelEvenement = new TextBox();
+            SuspendLayout();
+            // 
+            // comboBoxEvenements
+            // 
+            comboBoxEvenements.FormattingEnabled = true;
+            comboBoxEvenements.Location = new Point(226, 100);
+            comboBoxEvenements.Name = "comboBoxEvenements";
+            comboBoxEvenements.Size = new Size(328, 28);
+            comboBoxEvenements.TabIndex = 0;
+            // 
+            // btnSupprimer
+            // 
+            btnSupprimer.BackColor = Color.IndianRed;
+            btnSupprimer.Location = new Point(226, 262);
+            btnSupprimer.Name = "btnSupprimer";
+            btnSupprimer.Size = new Size(94, 29);
+            btnSupprimer.TabIndex = 1;
+            btnSupprimer.Text = "suprimer";
+            btnSupprimer.UseVisualStyleBackColor = false;
+            btnSupprimer.Click += btnSupprimer_Click;
+            // 
+            // btnAjouter
+            // 
+            btnAjouter.BackColor = Color.Chartreuse;
+            btnAjouter.Location = new Point(460, 262);
+            btnAjouter.Name = "btnAjouter";
+            btnAjouter.Size = new Size(94, 29);
+            btnAjouter.TabIndex = 2;
+            btnAjouter.Text = "ajouter";
+            btnAjouter.UseVisualStyleBackColor = false;
+            btnAjouter.Click += btnAjouter_Click;
+            // 
+            // textBoxNouvelEvenement
+            // 
+            textBoxNouvelEvenement.Location = new Point(226, 178);
+            textBoxNouvelEvenement.Name = "textBoxNouvelEvenement";
+            textBoxNouvelEvenement.Size = new Size(328, 27);
+            textBoxNouvelEvenement.TabIndex = 3;
+            // 
+            // ParametresForm
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(textBoxNouvelEvenement);
+            Controls.Add(btnAjouter);
+            Controls.Add(btnSupprimer);
+            Controls.Add(comboBoxEvenements);
+            Name = "ParametresForm";
+            Text = "ParametresForm";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private ComboBox comboBoxEvenements;
+        private Button btnSupprimer;
+        private Button btnAjouter;
+        private TextBox textBoxNouvelEvenement;
     }
 }
