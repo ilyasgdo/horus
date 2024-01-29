@@ -18,16 +18,17 @@ namespace horus.Forms
         {
             InitializeComponent();
 
-           
+
 
             // Chemin complet du fichier CSV
-             fichierCSV = "../../../CSV/evenementss.csv";
+            fichierCSV = "../../../CSV/evenementss.csv";
 
             // Vérifie si le fichier CSV existe, sinon le crée
             CreerFichierCSV(fichierCSV);
 
             // Chargement des événements à partir du fichier CSV
             evenements = ChargerEvenements();
+            ActualiserComboBox();
         }
 
         private void ParametresForm_Load(object sender, EventArgs e)
@@ -45,6 +46,7 @@ namespace horus.Forms
                 evenements.Remove(evenementSelectionne);
                 ActualiserComboBox();
                 SauvegarderEvenements();
+                textBoxNouvelEvenement.Text = "";
             }
         }
 
@@ -57,6 +59,7 @@ namespace horus.Forms
                 evenements.Add(nouvelEvenement);
                 ActualiserComboBox();
                 SauvegarderEvenements();
+                textBoxNouvelEvenement.Text = "";
             }
         }
 
@@ -127,5 +130,7 @@ namespace horus.Forms
 
             base.OnFormClosing(e);
         }
+
+    
     }
 }
