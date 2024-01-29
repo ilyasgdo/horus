@@ -20,5 +20,22 @@ namespace horus.@class
             this.nom = nom;
             this.actif = false;
         }
+
+        public Evenement(string nom, bool actif)
+        {
+            this.nom = nom;
+            this.actif = actif;
+        }
+
+        public void Debut()
+        {
+            this.actif = true;
+        }
+
+        public void Fin()
+        {
+            this.actif = false;
+        }
+
     }
 }
