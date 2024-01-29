@@ -98,8 +98,12 @@ namespace horus.Forms
         private void ActualiserComboBox()
         {
             // Mettre à jour la ComboBox avec la liste d'événements
-            comboBoxEvenements.DataSource = null;
-            comboBoxEvenements.DataSource = evenements;
+            for (int i = 0; i < evenements.Count; i++)
+            {
+                comboBoxEvenements.Items.Insert(i, evenements[i]);
+                comboBoxEvenements.SelectedIndex = i;
+                comboBoxEvenements.DisplayMember = evenements[i].getNom();
+            }
         }
 
         private void CreerFichierCSV(string cheminFichier)
