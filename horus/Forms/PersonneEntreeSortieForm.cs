@@ -12,31 +12,14 @@ namespace horus.Forms
 {
     public partial class PersonneEntreeSortieForm : Form
     {
-        private horus.@class.Evenements evenements;
-        private horus.@class.Evenement evenement;
-        private bool entree;
 
-        public PersonneEntreeSortieForm(horus.@class.Evenements evenements, bool entree)
+        public PersonneEntreeSortieForm()
         {
             InitializeComponent();
-            this.evenements = evenements;
-            this.entree = entree;
-
-            evenement = evenements.GetEvenement("Personne");
         }
 
         private void btnValiderPersonne_Click(object sender, EventArgs e)
         {
-            if (entree)
-            {
-                evenement.Debut();
-            }
-            else
-            {
-                evenement.Fin();
-            }
-            evenements.AjouterModifierEvenement("Personne", evenement);
-
             this.Close();
         }
     }

@@ -13,9 +13,6 @@ namespace horus
 {
     public partial class MainForm : Form
     {
-
-        private horus.@class.Parametres parametres;
-        private horus.@class.Evenements evenements;
         public MainForm()
         {
             InitializeComponent();
@@ -30,33 +27,29 @@ namespace horus
             lblHeure.Text = DateTime.Now.ToString("HH:mm:ss");
             lblDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
-            // Initialisation des paramètres
-            parametres = new horus.@class.Parametres();
-            evenements = new horus.@class.Evenements();
-
         }
 
         private void btnPersonneEntree_Click(object sender, EventArgs e)
         {
-            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(evenements, true);
+            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm();
             open_Click(personneEntreeSortie);
         }
 
         private void btnPersonneSortie_Click(object sender, EventArgs e)
         {
-            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(evenements, false);
+            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm();
             open_Click(personneEntreeSortie);
         }
 
         private void btnEvenementAjout_Click(object sender, EventArgs e)
         {
-            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(evenements, true);
+            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm();
             open_Click(evenementEntreeSortie);
         }
 
         private void btnEvenementSuppression_Click(object sender, EventArgs e)
         {
-            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(evenements, false);
+            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm();
             open_Click(evenementEntreeSortie);
         }
 
