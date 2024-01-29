@@ -12,30 +12,33 @@ namespace horus.Forms
 {
     public partial class PersonneEntreeSortieForm : Form
     {
-        private horus.@class.Evenements evenements;
-        private horus.@class.Evenement evenement;
+        int nombrePersonnes;
         private bool entree;
 
-        public PersonneEntreeSortieForm(horus.@class.Evenements evenements, bool entree)
+        public PersonneEntreeSortieForm(int nombrePersonnes, bool entree)
         {
             InitializeComponent();
-            this.evenements = evenements;
+            this.nombrePersonnes = nombrePersonnes;
             this.entree = entree;
-
-            evenement = evenements.GetEvenement("Personne");
         }
 
         private void btnValiderPersonne_Click(object sender, EventArgs e)
         {
             if (entree)
             {
-                evenement.Debut();
+                nombrePersonnes++;
             }
             else
             {
-                evenement.Fin();
+                if (nombrePersonnes > 0)
+                {
+                    nombrePersonnes--;
+                }
+                else
+                {
+                    MessageBox.Show("Il n'y a personne à faire sortir", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            evenements.AjouterModifierEvenement("Personne", evenement);
 
             this.Close();
         }

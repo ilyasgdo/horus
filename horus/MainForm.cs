@@ -1,4 +1,5 @@
-﻿using horus.Forms;
+﻿using horus.@class;
+using horus.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,13 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace horus
 {
     public partial class MainForm : Form
     {
+        private const string fichierCSV = "evenements.csv";
+        int nbPersonnesPresentent; 
 
-        private horus.@class.Parametres parametres;
-        private horus.@class.Evenements evenements;
         public MainForm()
         {
             InitializeComponent();
@@ -30,33 +32,48 @@ namespace horus
             lblHeure.Text = DateTime.Now.ToString("HH:mm:ss");
             lblDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
-            // Initialisation des paramètres
-            parametres = new horus.@class.Parametres();
-            evenements = new horus.@class.Evenements();
+            //Récupération de la mémoire 
+            List<String> listeEvenements = ChargerEvenements();
+            Parametres parametre = new Parametres();
+            for ( int i = 0; i < listeEvenements.Count; i++ )
+            {
+                Evenement evenementi = new Evenement(listeEvenements[i]);
+                parametre.AjouterEvenement(evenementi);
+            }
 
+        }
+
+        private List<string> ChargerEvenements()
+        {
+            // Charger la liste d'événements depuis le fichier CSV
+            if (File.Exists(fichierCSV))
+            {
+                return File.ReadAllLines(fichierCSV).ToList();
+            }
+            return new List<string>();
         }
 
         private void btnPersonneEntree_Click(object sender, EventArgs e)
         {
-            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(evenements, true);
+            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(nbPersonnesPresentent, true);
             open_Click(personneEntreeSortie);
         }
 
         private void btnPersonneSortie_Click(object sender, EventArgs e)
         {
-            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(evenements, false);
+            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(nbPersonnesPresentent, false);
             open_Click(personneEntreeSortie);
         }
 
         private void btnEvenementAjout_Click(object sender, EventArgs e)
         {
-            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(evenements, true);
+            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm();
             open_Click(evenementEntreeSortie);
         }
 
         private void btnEvenementSuppression_Click(object sender, EventArgs e)
         {
-            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(evenements, false);
+            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm();
             open_Click(evenementEntreeSortie);
         }
 

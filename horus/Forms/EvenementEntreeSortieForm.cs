@@ -13,45 +13,47 @@ namespace horus.Forms
 {
     public partial class EvenementEntreeSortieForm : Form
     {
-        private horus.@class.Evenements evenements;
         private horus.@class.Evenement evenement;
         private bool entree;
 
-        public EvenementEntreeSortieForm(horus.@class.Evenements evenements, bool entree)
+        public EvenementEntreeSortieForm()
         {
             InitializeComponent();
-            this.evenements = evenements;
+        }
+
+        public EvenementEntreeSortieForm(Evenement evenement, bool entree)
+        {
+            InitializeComponent();
+            this.evenement = evenement;
             this.entree = entree;
-
-            evenement = evenements.GetEvenement(cboEvenements.Text);
-            evenement ??= new horus.@class.Evenement();
-
-            cboEvenements.Items.Insert(0, "porte");
-            cboEvenements.Items.Insert(1, "fenetre");
-            cboEvenements.SelectedIndex = 0;
-            cboEvenements.DisplayMember = "Name";
         }
 
         private void btnValiderEvenement_Click(object sender, EventArgs e)
         {
             if (entree)
             {
-                evenement.Debut();
+                if (!evenement.isActif())
+                {
+                    evenement.Debut();
+                }
+                else
+                {
+                    MessageBox.Show("L'événement est déjà actif", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                evenement.Fin();
+                if (evenement.isActif())
+                {
+                    evenement.Fin();
+                }
+                else
+                {
+                    MessageBox.Show("L'événement n'est pas actif", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            evenements.AjouterModifierEvenement(cboEvenements.Text, evenement);
-
 
             this.Close();
-        }
-
-        private void cboEvenements_TextChanged(object sender, EventArgs e)
-        {
-            evenement = evenements.GetEvenement(cboEvenements.Text);
-            evenement ??= new horus.@class.Evenement();
         }
     }
 }

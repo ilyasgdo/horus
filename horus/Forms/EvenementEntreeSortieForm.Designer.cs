@@ -94,7 +94,6 @@
             cboEvenements.Name = "cboEvenements";
             cboEvenements.Size = new Size(121, 23);
             cboEvenements.TabIndex = 10;
-            cboEvenements.TextChanged += cboEvenements_TextChanged;
             // 
             // label1
             // 

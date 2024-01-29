@@ -100,6 +100,7 @@ namespace horus.Forms
             // Mettre à jour la ComboBox avec la liste d'événements
             comboBoxEvenements.DataSource = null;
             comboBoxEvenements.DataSource = evenements;
+
         }
 
         private void CreerFichierCSV(string cheminFichier)
