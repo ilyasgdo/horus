@@ -37,5 +37,10 @@ namespace horus.@class
             this.actif = false;
         }
 
+        public bool isActif()
+        {
+            return this.actif;
+        }
+
     }
 }
