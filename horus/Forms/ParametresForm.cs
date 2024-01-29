@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -17,24 +18,22 @@ namespace horus.Forms
         {
             InitializeComponent();
 
-            // Obtenir le chemin du répertoire où se trouve l'exécutable
-            string repertoireExecutable = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+           
 
             // Chemin complet du fichier CSV
-            fichierCSV = Path.Combine(repertoireExecutable, "evenementss.csv");
-            
+             fichierCSV = "../../../CSV/evenementss.csv";
+
             // Vérifie si le fichier CSV existe, sinon le crée
             CreerFichierCSV(fichierCSV);
-            
 
+            // Chargement des événements à partir du fichier CSV
+            evenements = ChargerEvenements();
         }
 
         private void ParametresForm_Load(object sender, EventArgs e)
         {
-            // Chargement des événements à partir du fichier CSV
-            evenements = ChargerEvenements();
+            // Actualiser la ComboBox avec les événements chargés
             ActualiserComboBox();
-            
         }
 
         private void btnSupprimer_Click(object sender, EventArgs e)
@@ -46,17 +45,13 @@ namespace horus.Forms
                 evenements.Remove(evenementSelectionne);
                 ActualiserComboBox();
                 SauvegarderEvenements();
-               
-
             }
-            
         }
 
         private void btnAjouter_Click(object sender, EventArgs e)
         {
             // Ajouter un nouvel événement
             string nouvelEvenement = textBoxNouvelEvenement.Text.Trim();
-            
             if (!string.IsNullOrEmpty(nouvelEvenement))
             {
                 evenements.Add(nouvelEvenement);
@@ -68,10 +63,18 @@ namespace horus.Forms
         private List<string> ChargerEvenements()
         {
             // Charger la liste d'événements depuis le fichier CSV
-            if (File.Exists(fichierCSV))
+            try
             {
-                return File.ReadAllLines(fichierCSV).ToList();
+                if (File.Exists(fichierCSV))
+                {
+                    return File.ReadAllLines(fichierCSV).ToList();
+                }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur lors du chargement des événements : {ex.Message}");
+            }
+
             return new List<string>();
         }
 
@@ -81,11 +84,11 @@ namespace horus.Forms
             {
                 // Enregistrer la liste d'événements dans le fichier CSV
                 File.WriteAllLines(fichierCSV, evenements);
-                Console.WriteLine("Événements sauvegardés avec succès dans le fichier CSV.");
+                Debug.WriteLine("Événements sauvegardés avec succès dans le fichier CSV.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erreur lors de la sauvegarde des événements : {ex.Message}");
+                Debug.WriteLine($"Erreur lors de la sauvegarde des événements : {ex.Message}");
             }
         }
 
@@ -119,7 +122,7 @@ namespace horus.Forms
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            // Appeler la méthode de sauvegarde eqdqdqdqdqqq événements lors de la fermeture du formulaire
+            // Appeler la méthode de sauvegarde des événements lors de la fermeture du formulaire
             SauvegarderEvenements();
 
             base.OnFormClosing(e);
