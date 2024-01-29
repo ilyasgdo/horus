@@ -11,30 +11,22 @@ namespace horus.@class
 {
     internal class Parametres
     {
-        private List<String> evenements;
+        private List<Evenement> evenements;
 
-        public Parametres()
+        public Parametres(Evenement evenement)
         {
-            this.evenements = new List<String>();
-            evenements.Add("Personne");
+            this.evenements = new List<Evenement>();
+            evenements.Add(evenement);
         }
 
-        public void AjouterEvenement(String nom)
+        public void AjouterEvenement(Evenement evenement)
         {
-            if (evenements.Contains("Personne"))
-            {
-                return;
-            }
-            evenements.Add(nom);
+            evenements.Add(evenement);
         }
 
-        public void SupprimerEvenement(String nom)
+        public void SupprimerEvenement(Evenement evenement)
         {
-            if (evenements.Contains("Personne"))
-            {
-                return;
-            }
-            evenements.Remove(nom);
+            evenements.Remove(evenement);
         }
     }
 }

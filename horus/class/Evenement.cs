@@ -6,39 +6,19 @@ using System.Threading.Tasks;
 
 /// <summary>
 /// Classe Evenement qui permet d'utiliser les événements dans les forms
+/// </summary>
 namespace horus.@class
 {
     public class Evenement
     {
 
-        private DateTime date;
-        private int compteur;
+        String nom;
+        bool actif;
 
-        public Evenement()
+        public Evenement(string nom)
         {
-            this.date = new DateTime();
-            this.compteur = 0;
+            this.nom = nom;
+            this.actif = false;
         }
-
-        public void Debut()
-        {
-            this.compteur++;
-        }
-
-        public void Fin()
-        {
-            this.compteur--;
-        }
-
-        public DateTime SetDateTime()
-        {
-            return this.date;
-        }
-
-        public void SetDateTime(DateTime date)
-        {
-            this.date = date;
-        }
-
     }
 }
