@@ -14,12 +14,13 @@ namespace horus.@class
         private Parametres param;
         private string fichierCSV = "../../../CSV/memoire.csv";
         private List<string> contenuCSV = new List<string>();
+        private static int nbEvenement;
 
-        public Modification(int nbPersonnes)
+        public Modification(int nbPersonnes, Parametres para)
         {
             this.dateEtHeure = DateTime.Now;
             this.nbPersonnesPrésentes = nbPersonnes;
-            this.param = new Parametres();
+            this.param = para;
             EcritureCSV();
         }
 
@@ -65,12 +66,22 @@ namespace horus.@class
 
         private string CreerLigneModification()
         {
-            string nvModification = Convert.ToString(dateEtHeure) + ";" + Convert.ToString(nbPersonnesPrésentes) + ";";
             List<Evenement> listeEvenements = param.getParametres();
+            if (listeEvenements.Count != nbEvenement)
+            {
+                CreerLigneDebut();
+            }
+            string nvModification = Convert.ToString(dateEtHeure) + ";" + Convert.ToString(nbPersonnesPrésentes) + ";";
             for (int i = 0; i < listeEvenements.Count; i++)
             {
                 bool EveActif = listeEvenements[i].isActif();
-                nvModification = nvModification + Convert.ToString(EveActif) + ";";
+                if (EveActif == true) {
+                    nvModification = nvModification + "1;";
+                }
+                else { 
+                    nvModification = nvModification + "0;";
+                }
+                
             }
             return nvModification;
         }
@@ -96,9 +107,10 @@ namespace horus.@class
 
             string ligne = "Date et heure ; nombre de personnes dans la pièce ; ";
             List<Evenement> listeEvenements = param.getParametres();
+            nbEvenement = listeEvenements.Count();
             for (int i = 0; i < listeEvenements.Count; i++)
             {
-                ligne= ligne + listeEvenements[i].getNom+" ; ";
+                ligne= ligne + listeEvenements[i].getNom()+" ; ";
             }
             contenuCSV.Add(ligne);
             SauvegarderModifs();

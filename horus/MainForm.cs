@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,7 +17,7 @@ namespace horus
 {
     public partial class MainForm : Form
     {
-        private const string fichierCSV = "evenements.csv";
+        private const string fichierCSV = "../../../CSV/evenementss.csv";
         int nbPersonnesPresentent; 
 
         public MainForm()
@@ -40,7 +42,9 @@ namespace horus
                 Evenement evenementi = new Evenement(listeEvenements[i]);
                 parametre.AjouterEvenement(evenementi);
             }
-
+            // test!!!!!!!!!!!!!!!!!!!!!!!
+            Modification test1 = new Modification(3,parametre);
+            Modification test2 = new Modification(4,parametre);
         }
 
         private List<string> ChargerEvenements()
