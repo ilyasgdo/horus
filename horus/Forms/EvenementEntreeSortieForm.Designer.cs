@@ -43,7 +43,7 @@
             btnValiderEvenement.Location = new Point(65, 139);
             btnValiderEvenement.Name = "btnValiderEvenement";
             btnValiderEvenement.Size = new Size(96, 37);
-            btnValiderEvenement.TabIndex = 9;
+            btnValiderEvenement.TabIndex = 2;
             btnValiderEvenement.Text = "Valider";
             btnValiderEvenement.UseVisualStyleBackColor = false;
             btnValiderEvenement.Click += btnValiderEvenement_Click;
@@ -61,20 +61,20 @@
             // cbMinuteEvenement
             // 
             cbMinuteEvenement.FormattingEnabled = true;
-            cbMinuteEvenement.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" });
+            cbMinuteEvenement.Items.AddRange(new object[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" });
             cbMinuteEvenement.Location = new Point(124, 96);
             cbMinuteEvenement.Name = "cbMinuteEvenement";
             cbMinuteEvenement.Size = new Size(37, 23);
-            cbMinuteEvenement.TabIndex = 7;
+            cbMinuteEvenement.TabIndex = 4;
             // 
             // cbHeureEvenement
             // 
             cbHeureEvenement.FormattingEnabled = true;
-            cbHeureEvenement.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" });
+            cbHeureEvenement.Items.AddRange(new object[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" });
             cbHeureEvenement.Location = new Point(65, 96);
             cbHeureEvenement.Name = "cbHeureEvenement";
             cbHeureEvenement.Size = new Size(37, 23);
-            cbHeureEvenement.TabIndex = 6;
+            cbHeureEvenement.TabIndex = 3;
             // 
             // lblHoraireEntreePersonne
             // 
@@ -88,11 +88,13 @@
             // 
             // comboBoxEvenements
             // 
+            comboBoxEvenements.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxEvenements.FormattingEnabled = true;
             comboBoxEvenements.Location = new Point(51, 32);
             comboBoxEvenements.Name = "comboBoxEvenements";
             comboBoxEvenements.Size = new Size(121, 23);
-            comboBoxEvenements.TabIndex = 10;
+            comboBoxEvenements.TabIndex = 1;
+            comboBoxEvenements.UseWaitCursor = true;
             // 
             // EvenementEntreeSortieForm
             // 
