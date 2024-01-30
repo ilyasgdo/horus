@@ -16,10 +16,18 @@ namespace horus.@class
         private List<string> contenuCSV = new List<string>();
         private static int nbEvenement;
 
-        public Modification(int nbPersonnes, Parametres para)
+        public Modification(Parametres para)
         {
             this.dateEtHeure = DateTime.Now;
-            this.nbPersonnesPrésentes = nbPersonnes;
+            this.nbPersonnesPrésentes = para.Getnbpersonnes();
+            this.param = para;
+            EcritureCSV();
+        }
+
+        public Modification(DateTime temps, Parametres para)
+        {
+            this.dateEtHeure = temps;
+            this.nbPersonnesPrésentes = para.Getnbpersonnes();
             this.param = para;
             EcritureCSV();
         }

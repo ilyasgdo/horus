@@ -17,8 +17,9 @@ namespace horus
 {
     public partial class MainForm : Form
     {
-        private const string fichierCSV = "../../../CSV/evenementss.csv";
-        int nbPersonnesPresentent; 
+        private const string fichierCSVEve = "../../../CSV/evenementss.csv";
+        private const string fichierCSVPers = "../../../CSV/personnes.csv";
+        public Parametres parametre = new Parametres();
 
         public MainForm()
         {
@@ -36,48 +37,68 @@ namespace horus
 
             //Récupération de la mémoire 
             List<String> listeEvenements = ChargerEvenements();
-            Parametres parametre = new Parametres();
+            List<String> listePersonnes = ChargerPersonnes();
+            int nbPersonnesPresentent = 0;
+            if (listePersonnes.Count > 0)
+            {
+                nbPersonnesPresentent = Convert.ToInt32(listePersonnes[0],10);
+            }
+            parametre.Setnbpersonnes(nbPersonnesPresentent);
             for ( int i = 0; i < listeEvenements.Count; i++ )
             {
-                Evenement evenementi = new Evenement(listeEvenements[i]);
+                string[] ligne = listeEvenements[i].Split(';');
+                bool activite;
+                if (ligne[1]=="0") { activite = false; } else {  activite = true; }
+                Evenement evenementi = new Evenement(ligne[0], activite);
                 parametre.AjouterEvenement(evenementi);
             }
+
             // test!!!!!!!!!!!!!!!!!!!!!!!
-            Modification test1 = new Modification(3,parametre);
-            Modification test2 = new Modification(4,parametre);
+            //Modification test1 = new Modification(3,parametre);
+            //Modification test2 = new Modification(4,parametre);
         }
 
         private List<string> ChargerEvenements()
         {
             // Charger la liste d'événements depuis le fichier CSV
-            if (File.Exists(fichierCSV))
+            if (File.Exists(fichierCSVEve))
             {
-                return File.ReadAllLines(fichierCSV).ToList();
+                return File.ReadAllLines(fichierCSVEve).ToList();
+            }
+            return new List<string>();
+        }
+
+        private List<string> ChargerPersonnes()
+        {
+            // Charger la liste d'événements depuis le fichier CSV
+            if (File.Exists(fichierCSVPers))
+            {
+                return File.ReadAllLines(fichierCSVPers).ToList();
             }
             return new List<string>();
         }
 
         private void btnPersonneEntree_Click(object sender, EventArgs e)
         {
-            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(nbPersonnesPresentent, true);
+            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(parametre.Getnbpersonnes(), true);
             open_Click(personneEntreeSortie);
         }
 
         private void btnPersonneSortie_Click(object sender, EventArgs e)
         {
-            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(nbPersonnesPresentent, false);
+            PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(parametre.Getnbpersonnes(), false);
             open_Click(personneEntreeSortie);
         }
 
         private void btnEvenementAjout_Click(object sender, EventArgs e)
         {
-            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(true);
+            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(parametre.Getnbpersonnes(), true);
             open_Click(evenementEntreeSortie);
         }
 
         private void btnEvenementSuppression_Click(object sender, EventArgs e)
         {
-            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(false);
+            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(parametre.Getnbpersonnes(), false);
             open_Click(evenementEntreeSortie);
         }
 

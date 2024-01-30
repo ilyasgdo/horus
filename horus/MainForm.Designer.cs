@@ -38,7 +38,6 @@
             picTelechargement = new PictureBox();
             lblDate = new Label();
             lblHeure = new Label();
-            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picParametres).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picTelechargement).BeginInit();
@@ -153,22 +152,12 @@
             lblHeure.TabIndex = 8;
             lblHeure.Text = "Heure";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(374, 155);
-            label1.Name = "label1";
-            label1.Size = new Size(59, 25);
-            label1.TabIndex = 9;
-            label1.Text = "label1";
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(1142, 750);
-            Controls.Add(label1);
             Controls.Add(lblHeure);
             Controls.Add(lblDate);
             Controls.Add(picTelechargement);
@@ -199,6 +188,5 @@
         private PictureBox picTelechargement;
         private Label lblDate;
         private Label lblHeure;
-        private Label label1;
     }
 }

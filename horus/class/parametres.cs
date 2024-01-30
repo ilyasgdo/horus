@@ -12,6 +12,7 @@ namespace horus.@class
     public class Parametres
     {
         private static List<Evenement> evenements;
+        public static int nbpersonnes;
 
         public Parametres(Evenement evenement)
         {
@@ -30,6 +31,16 @@ namespace horus.@class
             }
         }
 
+        public void Setnbpersonnes(int nb)
+        {
+            nbpersonnes = nb;
+        }
+
+        public int Getnbpersonnes()
+        {
+            return nbpersonnes;
+        }
+
         public void AjouterEvenement(Evenement evenement)
         {
             evenements.Add(evenement);
@@ -45,5 +56,9 @@ namespace horus.@class
             return evenements;
         }
 
+        public void InitParametres(List<Evenement> liste)
+        {
+            evenements = liste;
+        }
     }
 }

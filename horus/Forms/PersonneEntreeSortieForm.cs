@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using horus.@class;
 
 namespace horus.Forms
 {
@@ -24,19 +25,29 @@ namespace horus.Forms
             DateTime now = DateTime.Now;
             cbHeurePersonne.SelectedItem = now.ToString("HH");
             cbMinutePersonne.SelectedItem = now.ToString("mm");
-        }
+
+    }
 
         private void btnValiderPersonne_Click(object sender, EventArgs e)
         {
             if (entree)
             {
                 nombrePersonnes++;
+                Parametres parametres = new Parametres();
+                parametres.Setnbpersonnes(nombrePersonnes);
+                // !!!!!!!!!!!!!!!!!!!!!! ATTENTION NE PREND PAS ENCORE EN COMPTE L'HEURE
+                Modification modif = new Modification(parametres);
+
             }
             else
             {
                 if (nombrePersonnes > 0)
                 {
                     nombrePersonnes--;
+                    Parametres parametres = new Parametres();
+                    parametres.Setnbpersonnes(nombrePersonnes);
+                    // !!!!!!!!!!!!!!!!!!!!!! ATTENTION NE PREND PAS ENCORE EN COMPTE L'HEURE
+                    Modification modif = new Modification(parametres);
                 }
                 else
                 {

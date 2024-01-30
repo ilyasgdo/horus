@@ -19,8 +19,9 @@ public partial class EvenementEntreeSortieForm : Form
         private List<string> evenements = new List<string>();
 
         private bool entree;
+        private int nbPersonnesPresentent;
 
-        public EvenementEntreeSortieForm(bool entree)
+        public EvenementEntreeSortieForm(int nbPersonnesPresentent, bool entree)
         {
             InitializeComponent();
 
@@ -37,11 +38,12 @@ public partial class EvenementEntreeSortieForm : Form
             cbHeureEvenement.SelectedItem = now.ToString("HH");
             cbMinuteEvenement.SelectedItem = now.ToString("mm");
 
+            this.nbPersonnesPresentent = nbPersonnesPresentent;
         }
 
         private void btnValiderEvenement_Click(object sender, EventArgs e)
         {
-
+            CreationModification();
             this.Close();
         }
 
@@ -71,6 +73,22 @@ public partial class EvenementEntreeSortieForm : Form
             }
 
             return new List<string>();
+        }
+
+        private void CreationModification()
+        {
+            Parametres parametres = new Parametres();
+            List<Evenement> evenements = parametres.getParametres();
+            for (int i = 0; i < evenements.Count; i++)
+            {
+                if (evenements[i].getNom()== comboBoxEvenements.DataSource)
+                {
+                    evenements[i].Change();
+                }
+            }
+            parametres.InitParametres(evenements);
+            // !!!!!!!!!!!!!!!!!!!! ATTENTION NE PREND PAS ENCORE EN COMPTE L'HEURE
+            Modification modif = new Modification(parametres);
         }
     }
 

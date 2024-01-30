@@ -32,6 +32,11 @@ namespace horus.@class
             this.actif = true;
         }
 
+        public void Change()
+        {
+            this.actif = !this.actif;
+        }
+
         public void Fin()
         {
             this.actif = false;
