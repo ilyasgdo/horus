@@ -30,11 +30,10 @@
         {
             btnValiderEvenement = new Button();
             lblDeuxPoints = new Label();
-            cboMinuteEvenement = new ComboBox();
+            cbMinuteEvenement = new ComboBox();
             cbHeureEvenement = new ComboBox();
             lblHoraireEntreePersonne = new Label();
-            cboEvenements = new ComboBox();
-            label1 = new Label();
+            comboBoxEvenements = new ComboBox();
             SuspendLayout();
             // 
             // btnValiderEvenement
@@ -59,14 +58,14 @@
             lblDeuxPoints.TabIndex = 8;
             lblDeuxPoints.Text = ":";
             // 
-            // cboMinuteEvenement
+            // cbMinuteEvenement
             // 
-            cboMinuteEvenement.FormattingEnabled = true;
-            cboMinuteEvenement.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" });
-            cboMinuteEvenement.Location = new Point(124, 96);
-            cboMinuteEvenement.Name = "cboMinuteEvenement";
-            cboMinuteEvenement.Size = new Size(37, 23);
-            cboMinuteEvenement.TabIndex = 7;
+            cbMinuteEvenement.FormattingEnabled = true;
+            cbMinuteEvenement.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" });
+            cbMinuteEvenement.Location = new Point(124, 96);
+            cbMinuteEvenement.Name = "cbMinuteEvenement";
+            cbMinuteEvenement.Size = new Size(37, 23);
+            cbMinuteEvenement.TabIndex = 7;
             // 
             // cbHeureEvenement
             // 
@@ -87,22 +86,13 @@
             lblHoraireEntreePersonne.TabIndex = 5;
             lblHoraireEntreePersonne.Text = "Horaire :";
             // 
-            // cboEvenements
+            // comboBoxEvenements
             // 
-            cboEvenements.FormattingEnabled = true;
-            cboEvenements.Location = new Point(51, 32);
-            cboEvenements.Name = "cboEvenements";
-            cboEvenements.Size = new Size(121, 23);
-            cboEvenements.TabIndex = 10;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(82, 182);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 11;
-            label1.Text = "label1";
+            comboBoxEvenements.FormattingEnabled = true;
+            comboBoxEvenements.Location = new Point(51, 32);
+            comboBoxEvenements.Name = "comboBoxEvenements";
+            comboBoxEvenements.Size = new Size(121, 23);
+            comboBoxEvenements.TabIndex = 10;
             // 
             // EvenementEntreeSortieForm
             // 
@@ -110,11 +100,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(225, 206);
-            Controls.Add(label1);
-            Controls.Add(cboEvenements);
+            Controls.Add(comboBoxEvenements);
             Controls.Add(btnValiderEvenement);
             Controls.Add(lblDeuxPoints);
-            Controls.Add(cboMinuteEvenement);
+            Controls.Add(cbMinuteEvenement);
             Controls.Add(cbHeureEvenement);
             Controls.Add(lblHoraireEntreePersonne);
             Name = "EvenementEntreeSortieForm";
@@ -127,10 +116,9 @@
 
         private Button btnValiderEvenement;
         private Label lblDeuxPoints;
-        private ComboBox cboMinuteEvenement;
+        private ComboBox cbMinuteEvenement;
         private ComboBox cbHeureEvenement;
         private Label lblHoraireEntreePersonne;
-        private ComboBox cboEvenements;
-        private Label label1;
+        private ComboBox comboBoxEvenements;
     }
 }

@@ -67,13 +67,13 @@ namespace horus
 
         private void btnEvenementAjout_Click(object sender, EventArgs e)
         {
-            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm();
+            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(true);
             open_Click(evenementEntreeSortie);
         }
 
         private void btnEvenementSuppression_Click(object sender, EventArgs e)
         {
-            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm();
+            EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(false);
             open_Click(evenementEntreeSortie);
         }
 

@@ -30,7 +30,7 @@
         {
             lblHoraireEntreePersonne = new Label();
             cbHeurePersonne = new ComboBox();
-            cboMinutePersonne = new ComboBox();
+            cbMinutePersonne = new ComboBox();
             lblDeuxPoints = new Label();
             btnValiderPersonne = new Button();
             SuspendLayout();
@@ -54,14 +54,14 @@
             cbHeurePersonne.Size = new Size(37, 23);
             cbHeurePersonne.TabIndex = 1;
             // 
-            // cboMinutePersonne
+            // cbMinutePersonne
             // 
-            cboMinutePersonne.FormattingEnabled = true;
-            cboMinutePersonne.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" });
-            cboMinutePersonne.Location = new Point(121, 63);
-            cboMinutePersonne.Name = "cboMinutePersonne";
-            cboMinutePersonne.Size = new Size(37, 23);
-            cboMinutePersonne.TabIndex = 2;
+            cbMinutePersonne.FormattingEnabled = true;
+            cbMinutePersonne.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" });
+            cbMinutePersonne.Location = new Point(121, 63);
+            cbMinutePersonne.Name = "cbMinutePersonne";
+            cbMinutePersonne.Size = new Size(37, 23);
+            cbMinutePersonne.TabIndex = 2;
             // 
             // lblDeuxPoints
             // 
@@ -93,7 +93,7 @@
             ClientSize = new Size(225, 173);
             Controls.Add(btnValiderPersonne);
             Controls.Add(lblDeuxPoints);
-            Controls.Add(cboMinutePersonne);
+            Controls.Add(cbMinutePersonne);
             Controls.Add(cbHeurePersonne);
             Controls.Add(lblHoraireEntreePersonne);
             Name = "PersonneEntreeSortieForm";
@@ -106,7 +106,7 @@
 
         private Label lblHoraireEntreePersonne;
         private ComboBox cbHeurePersonne;
-        private ComboBox cboMinutePersonne;
+        private ComboBox cbMinutePersonne;
         private Label lblDeuxPoints;
         private Button btnValiderPersonne;
     }

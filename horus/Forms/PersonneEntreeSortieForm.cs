@@ -20,6 +20,10 @@ namespace horus.Forms
             InitializeComponent();
             this.nombrePersonnes = nombrePersonnes;
             this.entree = entree;
+
+            DateTime now = DateTime.Now;
+            cbHeurePersonne.SelectedItem = now.ToString("HH");
+            cbMinutePersonne.SelectedItem = now.ToString("mm");
         }
 
         private void btnValiderPersonne_Click(object sender, EventArgs e)

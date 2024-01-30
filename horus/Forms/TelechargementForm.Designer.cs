@@ -31,28 +31,39 @@
             monthCalendarDebut = new MonthCalendar();
             monthCalendarFin = new MonthCalendar();
             btnValiderTelechargement = new Button();
+            fileSystemWatcher1 = new FileSystemWatcher();
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
             // 
             // monthCalendarDebut
             // 
+            monthCalendarDebut.BackColor = SystemColors.Window;
             monthCalendarDebut.Location = new Point(44, 44);
             monthCalendarDebut.Name = "monthCalendarDebut";
+            monthCalendarDebut.ShowToday = false;
             monthCalendarDebut.TabIndex = 0;
             // 
             // monthCalendarFin
             // 
             monthCalendarFin.Location = new Point(309, 44);
             monthCalendarFin.Name = "monthCalendarFin";
+            monthCalendarFin.ShowToday = false;
             monthCalendarFin.TabIndex = 1;
             // 
             // btnValiderTelechargement
             // 
-            btnValiderTelechargement.Location = new Point(461, 240);
+            btnValiderTelechargement.BackColor = Color.PaleTurquoise;
+            btnValiderTelechargement.Location = new Point(452, 240);
             btnValiderTelechargement.Name = "btnValiderTelechargement";
-            btnValiderTelechargement.Size = new Size(75, 23);
+            btnValiderTelechargement.Size = new Size(84, 23);
             btnValiderTelechargement.TabIndex = 2;
-            btnValiderTelechargement.Text = "valider";
-            btnValiderTelechargement.UseVisualStyleBackColor = true;
+            btnValiderTelechargement.Text = "Télécharger";
+            btnValiderTelechargement.UseVisualStyleBackColor = false;
+            // 
+            // fileSystemWatcher1
+            // 
+            fileSystemWatcher1.EnableRaisingEvents = true;
+            fileSystemWatcher1.SynchronizingObject = this;
             // 
             // TelechargementForm
             // 
@@ -64,6 +75,7 @@
             Controls.Add(monthCalendarDebut);
             Name = "TelechargementForm";
             Text = "TelechargementForm";
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
             ResumeLayout(false);
         }
 
@@ -72,5 +84,6 @@
         private MonthCalendar monthCalendarDebut;
         private MonthCalendar monthCalendarFin;
         private Button btnValiderTelechargement;
+        private FileSystemWatcher fileSystemWatcher1;
     }
 }
