@@ -41,18 +41,20 @@
             // comboBoxEvenements
             // 
             comboBoxEvenements.FormattingEnabled = true;
-            comboBoxEvenements.Location = new Point(226, 162);
+            comboBoxEvenements.Location = new Point(198, 122);
+            comboBoxEvenements.Margin = new Padding(3, 2, 3, 2);
             comboBoxEvenements.Name = "comboBoxEvenements";
-            comboBoxEvenements.Size = new Size(328, 28);
-            comboBoxEvenements.TabIndex = 0;
+            comboBoxEvenements.Size = new Size(288, 23);
+            comboBoxEvenements.TabIndex = 4;
             // 
             // btnSupprimer
             // 
             btnSupprimer.BackColor = Color.IndianRed;
-            btnSupprimer.Location = new Point(226, 306);
+            btnSupprimer.Location = new Point(198, 230);
+            btnSupprimer.Margin = new Padding(3, 2, 3, 2);
             btnSupprimer.Name = "btnSupprimer";
-            btnSupprimer.Size = new Size(143, 51);
-            btnSupprimer.TabIndex = 1;
+            btnSupprimer.Size = new Size(125, 38);
+            btnSupprimer.TabIndex = 3;
             btnSupprimer.Text = "suprimer";
             btnSupprimer.UseVisualStyleBackColor = false;
             btnSupprimer.Click += btnSupprimer_Click;
@@ -60,9 +62,10 @@
             // btnAjouter
             // 
             btnAjouter.BackColor = Color.Chartreuse;
-            btnAjouter.Location = new Point(399, 306);
+            btnAjouter.Location = new Point(349, 230);
+            btnAjouter.Margin = new Padding(3, 2, 3, 2);
             btnAjouter.Name = "btnAjouter";
-            btnAjouter.Size = new Size(155, 50);
+            btnAjouter.Size = new Size(136, 38);
             btnAjouter.TabIndex = 2;
             btnAjouter.Text = "ajouter";
             btnAjouter.UseVisualStyleBackColor = false;
@@ -70,26 +73,27 @@
             // 
             // textBoxNouvelEvenement
             // 
-            textBoxNouvelEvenement.Location = new Point(226, 257);
+            textBoxNouvelEvenement.Location = new Point(198, 193);
+            textBoxNouvelEvenement.Margin = new Padding(3, 2, 3, 2);
             textBoxNouvelEvenement.Name = "textBoxNouvelEvenement";
-            textBoxNouvelEvenement.Size = new Size(328, 27);
-            textBoxNouvelEvenement.TabIndex = 3;
+            textBoxNouvelEvenement.Size = new Size(288, 23);
+            textBoxNouvelEvenement.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(226, 139);
+            label1.Location = new Point(198, 104);
             label1.Name = "label1";
-            label1.Size = new Size(149, 20);
+            label1.Size = new Size(119, 15);
             label1.TabIndex = 4;
             label1.Text = "Liste des evenements";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(226, 225);
+            label2.Location = new Point(198, 169);
             label2.Name = "label2";
-            label2.Size = new Size(128, 20);
+            label2.Size = new Size(102, 15);
             label2.TabIndex = 5;
             label2.Text = "Saisir l'évenement";
             // 
@@ -97,9 +101,9 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Red;
-            label3.Location = new Point(12, 39);
+            label3.Location = new Point(10, 29);
             label3.Name = "label3";
-            label3.Size = new Size(457, 20);
+            label3.Size = new Size(369, 15);
             label3.TabIndex = 6;
             label3.Text = "Pour supprimer, selectionner un evenement et cliquer sur supprimer ";
             // 
@@ -107,17 +111,17 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.LawnGreen;
-            label4.Location = new Point(11, 9);
+            label4.Location = new Point(10, 7);
             label4.Name = "label4";
-            label4.Size = new Size(543, 20);
+            label4.Size = new Size(435, 15);
             label4.TabIndex = 7;
             label4.Text = "Pour ajouter un évenements ecriver le nom de l'événement et cliquer sur ajouter  ";
             // 
             // ParametresForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -126,6 +130,7 @@
             Controls.Add(btnAjouter);
             Controls.Add(btnSupprimer);
             Controls.Add(comboBoxEvenements);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ParametresForm";
             Text = "ParametresForm";
             ResumeLayout(false);

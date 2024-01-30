@@ -51,7 +51,7 @@
             btnPersonneEntree.Location = new Point(153, 147);
             btnPersonneEntree.Name = "btnPersonneEntree";
             btnPersonneEntree.Size = new Size(150, 86);
-            btnPersonneEntree.TabIndex = 0;
+            btnPersonneEntree.TabIndex = 1;
             btnPersonneEntree.Text = "Une personne est entrée";
             btnPersonneEntree.UseVisualStyleBackColor = false;
             btnPersonneEntree.Click += btnPersonneEntree_Click;
@@ -63,7 +63,7 @@
             btnPersonneSortie.Location = new Point(475, 147);
             btnPersonneSortie.Name = "btnPersonneSortie";
             btnPersonneSortie.Size = new Size(150, 86);
-            btnPersonneSortie.TabIndex = 1;
+            btnPersonneSortie.TabIndex = 2;
             btnPersonneSortie.Text = "Une personne est sortie";
             btnPersonneSortie.UseVisualStyleBackColor = false;
             btnPersonneSortie.Click += btnPersonneSortie_Click;
@@ -75,7 +75,7 @@
             btnEvenementAjout.Location = new Point(153, 297);
             btnEvenementAjout.Name = "btnEvenementAjout";
             btnEvenementAjout.Size = new Size(150, 86);
-            btnEvenementAjout.TabIndex = 2;
+            btnEvenementAjout.TabIndex = 3;
             btnEvenementAjout.Text = "Ajouter un évènement";
             btnEvenementAjout.UseVisualStyleBackColor = false;
             btnEvenementAjout.Click += btnEvenementAjout_Click;
@@ -87,7 +87,7 @@
             btnEvenementSuppression.Location = new Point(475, 297);
             btnEvenementSuppression.Name = "btnEvenementSuppression";
             btnEvenementSuppression.Size = new Size(150, 86);
-            btnEvenementSuppression.TabIndex = 3;
+            btnEvenementSuppression.TabIndex = 4;
             btnEvenementSuppression.Text = "Supprimer un évènement";
             btnEvenementSuppression.UseVisualStyleBackColor = false;
             btnEvenementSuppression.Click += btnEvenementSuppression_Click;
@@ -143,7 +143,7 @@
             lblHeure.TabIndex = 8;
             lblHeure.Text = "Heure";
             // 
-            // Main
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -158,7 +158,7 @@
             Controls.Add(btnEvenementAjout);
             Controls.Add(btnPersonneSortie);
             Controls.Add(btnPersonneEntree);
-            Name = "Main";
+            Name = "MainForm";
             Text = "Main";
             ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             ((System.ComponentModel.ISupportInitialize)picParametres).EndInit();

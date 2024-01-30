@@ -41,14 +41,14 @@
             monthCalendarDebut.Location = new Point(44, 44);
             monthCalendarDebut.Name = "monthCalendarDebut";
             monthCalendarDebut.ShowToday = false;
-            monthCalendarDebut.TabIndex = 0;
+            monthCalendarDebut.TabIndex = 2;
             // 
             // monthCalendarFin
             // 
             monthCalendarFin.Location = new Point(309, 44);
             monthCalendarFin.Name = "monthCalendarFin";
             monthCalendarFin.ShowToday = false;
-            monthCalendarFin.TabIndex = 1;
+            monthCalendarFin.TabIndex = 3;
             // 
             // btnValiderTelechargement
             // 
@@ -56,7 +56,7 @@
             btnValiderTelechargement.Location = new Point(452, 240);
             btnValiderTelechargement.Name = "btnValiderTelechargement";
             btnValiderTelechargement.Size = new Size(84, 23);
-            btnValiderTelechargement.TabIndex = 2;
+            btnValiderTelechargement.TabIndex = 1;
             btnValiderTelechargement.Text = "Télécharger";
             btnValiderTelechargement.UseVisualStyleBackColor = false;
             // 
