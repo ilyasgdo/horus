@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 /// </summary>
 namespace horus.@class
 {
-    internal class Parametres
+    public class Parametres
     {
         private static List<Evenement> evenements;
 
