@@ -7,33 +7,30 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Diagnostics;
 
+
 namespace horus.Forms
 {
     public partial class ParametresForm : Form
     {
-        private string fichierCSV; // Chemin du fichier CSV
+        private string fichierCSV; 
         private List<string> evenements = new List<string>();
 
         public ParametresForm()
         {
             InitializeComponent();
 
-
-
-            // Chemin complet du fichier CSV
             fichierCSV = "../../../CSV/evenementss.csv";
 
-            // Vérifie si le fichier CSV existe, sinon le crée
             CreerFichierCSV(fichierCSV);
 
-            // Chargement des événements à partir du fichier CSV
+          
             evenements = ChargerEvenements();
             ActualiserComboBox();
         }
 
         private void ParametresForm_Load(object sender, EventArgs e)
         {
-            // Actualiser la ComboBox avec les événements chargés
+           
             ActualiserComboBox();
         }
 
@@ -54,13 +51,20 @@ namespace horus.Forms
         {
             // Ajouter un nouvel événement
             string nouvelEvenement = textBoxNouvelEvenement.Text.Trim();
-            if (!string.IsNullOrEmpty(nouvelEvenement))
+
+            if (nouvelEvenement.Contains(";"))
             {
-                evenements.Add(nouvelEvenement);
-                ActualiserComboBox();
-                SauvegarderEvenements();
-                textBoxNouvelEvenement.Text = "";
+                textBoxNouvelEvenement.BackColor = Color.Red;
+                Debug.WriteLine("Le texte ne peut pas contenir le caractère ';'.");
+                return;
             }
+
+            textBoxNouvelEvenement.BackColor = SystemColors.Window;
+
+            evenements.Add($"{nouvelEvenement};0");
+            ActualiserComboBox();
+            SauvegarderEvenements();
+            textBoxNouvelEvenement.Text = "";
         }
 
         private List<string> ChargerEvenements()
@@ -70,7 +74,9 @@ namespace horus.Forms
             {
                 if (File.Exists(fichierCSV))
                 {
-                    return File.ReadAllLines(fichierCSV).ToList();
+                    return File.ReadAllLines(fichierCSV)
+                        .Select(line => line.Split(';')[0])
+                        .ToList();
                 }
             }
             catch (Exception ex)
@@ -86,7 +92,7 @@ namespace horus.Forms
             try
             {
                 // Enregistrer la liste d'événements dans le fichier CSV
-                File.WriteAllLines(fichierCSV, evenements);
+                File.WriteAllLines(fichierCSV, evenements.Select(ev => $"{ev};0"));
                 Debug.WriteLine("Événements sauvegardés avec succès dans le fichier CSV.");
             }
             catch (Exception ex)
@@ -97,10 +103,9 @@ namespace horus.Forms
 
         private void ActualiserComboBox()
         {
-            // Mettre à jour la ComboBox avec la liste d'événements
+            // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
             comboBoxEvenements.DataSource = null;
-            comboBoxEvenements.DataSource = evenements;
-
+            comboBoxEvenements.DataSource = evenements.Select(ev => ev.Split(';')[0]).ToList();
         }
 
         private void CreerFichierCSV(string cheminFichier)
@@ -131,7 +136,5 @@ namespace horus.Forms
 
             base.OnFormClosing(e);
         }
-
-
     }
 }

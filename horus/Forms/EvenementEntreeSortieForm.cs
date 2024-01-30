@@ -47,9 +47,9 @@ public partial class EvenementEntreeSortieForm : Form
 
         private void ActualiserComboBox()
         {
-            // Mettre à jour la ComboBox avec la liste d'événements
+            // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
             comboBoxEvenements.DataSource = null;
-            comboBoxEvenements.DataSource = evenements;
+            comboBoxEvenements.DataSource = evenements.Select(ev => ev.Split(';')[0]).ToList();
         }
 
         private List<string> ChargerEvenements()
@@ -59,7 +59,10 @@ public partial class EvenementEntreeSortieForm : Form
             {
                 if (File.Exists(fichierCSV))
                 {
-                    return File.ReadAllLines(fichierCSV).ToList();
+                    // Séparer le nom de l événement de la partie après le ;
+                    return File.ReadAllLines(fichierCSV)
+                        .Select(line => line.Split(';')[0])
+                        .ToList();
                 }
             }
             catch (Exception ex)
