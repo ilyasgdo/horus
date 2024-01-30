@@ -70,12 +70,25 @@ namespace horus
 
         private List<string> ChargerPersonnes()
         {
-            // Charger la liste d'événements depuis le fichier CSV
-            if (File.Exists(fichierCSVPers))
+            try
             {
+                // Crée le fichier s'il n'existe pas
+                if (!File.Exists(fichierCSVPers))
+                {
+                    File.WriteAllText(fichierCSVPers, "");
+                    Debug.WriteLine("Fichier CSV créé avec succès.");
+                }
+                else
+                {
+                    Debug.WriteLine("Le fichier CSV existe déjà.");
+                }
                 return File.ReadAllLines(fichierCSVPers).ToList();
             }
-            return new List<string>();
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur lors de la création ou vérification du fichier CSV : {ex.Message}");
+                return new List<string>();
+            }
         }
 
         private void btnPersonneEntree_Click(object sender, EventArgs e)
