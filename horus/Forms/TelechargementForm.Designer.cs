@@ -38,14 +38,16 @@
             // monthCalendarDebut
             // 
             monthCalendarDebut.BackColor = SystemColors.Window;
-            monthCalendarDebut.Location = new Point(44, 44);
+            monthCalendarDebut.Location = new Point(50, 59);
+            monthCalendarDebut.Margin = new Padding(10, 12, 10, 12);
             monthCalendarDebut.Name = "monthCalendarDebut";
             monthCalendarDebut.ShowToday = false;
             monthCalendarDebut.TabIndex = 2;
             // 
             // monthCalendarFin
             // 
-            monthCalendarFin.Location = new Point(309, 44);
+            monthCalendarFin.Location = new Point(353, 59);
+            monthCalendarFin.Margin = new Padding(10, 12, 10, 12);
             monthCalendarFin.Name = "monthCalendarFin";
             monthCalendarFin.ShowToday = false;
             monthCalendarFin.TabIndex = 3;
@@ -53,12 +55,14 @@
             // btnValiderTelechargement
             // 
             btnValiderTelechargement.BackColor = Color.PaleTurquoise;
-            btnValiderTelechargement.Location = new Point(452, 240);
+            btnValiderTelechargement.Location = new Point(517, 320);
+            btnValiderTelechargement.Margin = new Padding(3, 4, 3, 4);
             btnValiderTelechargement.Name = "btnValiderTelechargement";
-            btnValiderTelechargement.Size = new Size(84, 23);
+            btnValiderTelechargement.Size = new Size(96, 31);
             btnValiderTelechargement.TabIndex = 1;
             btnValiderTelechargement.Text = "Télécharger";
             btnValiderTelechargement.UseVisualStyleBackColor = false;
+            btnValiderTelechargement.Click += btnValiderTelechargement_Click;
             // 
             // fileSystemWatcher1
             // 
@@ -67,12 +71,13 @@
             // 
             // TelechargementForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(571, 286);
+            ClientSize = new Size(653, 381);
             Controls.Add(btnValiderTelechargement);
             Controls.Add(monthCalendarFin);
             Controls.Add(monthCalendarDebut);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "TelechargementForm";
             Text = "TelechargementForm";
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
