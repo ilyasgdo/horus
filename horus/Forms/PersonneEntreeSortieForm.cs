@@ -79,7 +79,7 @@ namespace horus.Forms
                     parametres.Setnbpersonnes(nombrePersonnes);
                     string strDateEtHeure = DateTime.Now.ToString("dd/MM/yyyy") + " " + cbHeurePersonne.SelectedItem + ":" + cbMinutePersonne.SelectedItem;
                     DateTime DateEtHeure = DateTime.Parse(strDateEtHeure);
-                    Modification modif = new Modification(parametres);
+                    Modification modif = new Modification(DateEtHeure,parametres);
                 }
                 else
                 {
