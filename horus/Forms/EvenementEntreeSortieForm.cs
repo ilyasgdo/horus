@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,16 +13,14 @@ using System.Windows.Forms;
 
 namespace horus.Forms
 {
-
-public partial class EvenementEntreeSortieForm : Form
+    public partial class EvenementEntreeSortieForm : Form
     {
         private string fichierCSV; // Chemin du fichier CSV
         private List<string> evenements = new List<string>();
 
         private bool entree;
-        private int nbPersonnesPresentent;
 
-        public EvenementEntreeSortieForm(int nbPersonnesPresentent, bool entree)
+        public EvenementEntreeSortieForm(int nbGens, bool entree)
         {
             InitializeComponent();
 
@@ -37,13 +36,28 @@ public partial class EvenementEntreeSortieForm : Form
             DateTime now = DateTime.Now;
             cbHeureEvenement.SelectedItem = now.ToString("HH");
             cbMinuteEvenement.SelectedItem = now.ToString("mm");
-
-            this.nbPersonnesPresentent = nbPersonnesPresentent;
         }
 
         private void btnValiderEvenement_Click(object sender, EventArgs e)
         {
-            CreationModification();
+
+            //On recupére la valeur decla combo box
+            string evenementSelectionne = comboBoxEvenements.SelectedItem as string;
+
+            if (!string.IsNullOrEmpty(evenementSelectionne))
+            {
+                //on cherche lma ligne ou la premier aveleurs de la ligne = le non selectionner dans la combo
+                int indexEvenement = evenements.FindIndex(ev => ev.Split(';')[0] == evenementSelectionne);
+
+                if (indexEvenement != -1)
+                {
+                    //on modifie 
+                    evenements[indexEvenement] = $"{evenementSelectionne};{(entree ? "1" : "0")}";
+
+                    SauvegarderEvenements();
+                }
+            }
+
             this.Close();
         }
 
@@ -61,35 +75,32 @@ public partial class EvenementEntreeSortieForm : Form
             {
                 if (File.Exists(fichierCSV))
                 {
-                    // Séparer le nom de l événement de la partie après le ;
-                    return File.ReadAllLines(fichierCSV)
-                        .Select(line => line.Split(';')[0])
-                        .ToList();
+                    return File.ReadAllLines(fichierCSV).ToList();
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Erreur lors du chargement des événements : {ex.Message}");
+                Debug.WriteLine($"Err lors du chargement des événements: {ex.Message}");
             }
 
             return new List<string>();
         }
 
-        private void CreationModification()
+        //methode pour enregistrer les modification dans le evenemnts.csv
+        private void SauvegarderEvenements()
         {
-            Parametres parametres = new Parametres();
-            List<Evenement> evenements = parametres.getParametres();
-            for (int i = 0; i < evenements.Count; i++)
+            try
             {
-                if (evenements[i].getNom()== comboBoxEvenements.DataSource)
-                {
-                    evenements[i].Change();
-                }
+
+                File.WriteAllLines(fichierCSV, evenements);
+                Debug.WriteLine("event sauvegardés avec succes CSV.");
             }
-            parametres.InitParametres(evenements);
-            // !!!!!!!!!!!!!!!!!!!! ATTENTION NE PREND PAS ENCORE EN COMPTE L'HEURE
-            Modification modif = new Modification(parametres);
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur sauvegarde des event : {ex.Message}");
+            }
         }
     }
-
 }
+
+
