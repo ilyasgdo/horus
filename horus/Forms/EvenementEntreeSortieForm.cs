@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -56,6 +57,21 @@ namespace horus.Forms
 
                     SauvegarderEvenements();
                 }
+                //enregistrements de la modificaion dans la mémoire 
+                Parametres param = new Parametres();
+                List<Evenement> liste = new List<Evenement>();
+                for (int i = 0; i < evenements.Count; i++)
+                {
+                    string[] ligne = evenements[i].Split(';');
+                    bool activite;
+                    if (ligne[1] == "0") { activite = false; } else { activite = true; }
+                    Evenement evenementi = new Evenement(ligne[0], activite);
+                    liste.Add(evenementi);
+                }
+                param.InitParametres(liste);
+                string strDateEtHeure = DateTime.Now.ToString("dd/MM/yyyy") + " " + cbHeureEvenement.SelectedItem + ":" + cbMinuteEvenement.SelectedItem;
+                DateTime DateEtHeure = DateTime.Parse(strDateEtHeure);
+                Modification modif = new Modification(DateEtHeure, param);  
             }
 
             this.Close();
