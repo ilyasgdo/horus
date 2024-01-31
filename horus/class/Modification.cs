@@ -14,7 +14,6 @@ namespace horus.@class
         private Parametres param;
         private string fichierCSV = "../../../CSV/memoire.csv";
         private List<string> contenuCSV = new List<string>();
-        private static int nbEvenement;
 
         public Modification(Parametres para)
         {
@@ -75,9 +74,10 @@ namespace horus.@class
         private string CreerLigneModification()
         {
             List<Evenement> listeEvenements = param.getParametres();
-            if (listeEvenements.Count != nbEvenement)
+            if (listeEvenements.Count != param.GetNbEvenement())
             {
                 CreerLigneDebut();
+                param.SetNbEvenement(listeEvenements.Count);
             }
             string nvModification = Convert.ToString(dateEtHeure) + ";" + Convert.ToString(nbPersonnesPrésentes) + ";";
             for (int i = 0; i < listeEvenements.Count; i++)
@@ -115,7 +115,6 @@ namespace horus.@class
 
             string ligne = "Date et heure ; nombre de personnes dans la pièce ; ";
             List<Evenement> listeEvenements = param.getParametres();
-            nbEvenement = listeEvenements.Count();
             for (int i = 0; i < listeEvenements.Count; i++)
             {
                 ligne= ligne + listeEvenements[i].getNom()+" ; ";

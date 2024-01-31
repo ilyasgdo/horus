@@ -44,6 +44,7 @@ namespace horus
                 nbPersonnesPresentent = Convert.ToInt32(listePersonnes[0],10);
             }
             parametre.Setnbpersonnes(nbPersonnesPresentent);
+            parametre.SetNbEvenement(listeEvenements.Count);
             for ( int i = 0; i < listeEvenements.Count; i++ )
             {
                 string[] ligne = listeEvenements[i].Split(';');

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ namespace horus.@class
     {
         private static List<Evenement> evenements;
         public static int nbpersonnes;
+        private static int NbEvenement;
 
         public Parametres(Evenement evenement)
         {
@@ -21,6 +23,16 @@ namespace horus.@class
                 evenements = new List<Evenement>();
             }
             evenements.Add(evenement);
+        }
+
+        public void SetNbEvenement(int nb)
+        {
+            NbEvenement = nb;
+        }
+
+        public int GetNbEvenement()
+        {
+            return NbEvenement;
         }
 
         public List<Evenement> ChargerEvenementsDepuisCSV()
