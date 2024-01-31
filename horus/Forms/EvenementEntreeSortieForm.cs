@@ -71,7 +71,7 @@ namespace horus.Forms
                 param.InitParametres(liste);
                 string strDateEtHeure = DateTime.Now.ToString("dd/MM/yyyy") + " " + cbHeureEvenement.SelectedItem + ":" + cbMinuteEvenement.SelectedItem;
                 DateTime DateEtHeure = DateTime.Parse(strDateEtHeure);
-                Modification modif = new Modification(DateEtHeure, param);
+                Modification modif = new Modification(DateEtHeure, param);  
             }
 
             this.Close();
