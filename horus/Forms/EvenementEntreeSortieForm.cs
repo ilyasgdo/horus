@@ -19,7 +19,7 @@ namespace horus.Forms
         private string fichierCSV; // Chemin du fichier CSV
         private List<string> evenements = new List<string>();
 
-        private bool entree;
+        public bool entree;
 
         public EvenementEntreeSortieForm(int nbGens, bool entree)
         {
@@ -30,9 +30,15 @@ namespace horus.Forms
 
             // Chargement des événements à partir du fichier CSV
             evenements = ChargerEvenements();
-            ActualiserComboBox();
-
             this.entree = entree;
+            if (this.entree)
+            {
+                ActualiserComboBoxEntree();
+            } else
+            {
+                ActualiserComboBoxSortie();
+            }
+
 
             DateTime now = DateTime.Now;
             cbHeureEvenement.SelectedItem = now.ToString("HH");
@@ -77,11 +83,37 @@ namespace horus.Forms
             this.Close();
         }
 
-        private void ActualiserComboBox()
+        private void ActualiserComboBoxEntree()
         {
             // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
+            List<string> EvenementNonActif = new List<string>();
+            for (int i=0; i<evenements.Count; i++)
+            {
+                string[] ligne = evenements[i].Split(';');
+                if (ligne[1] == "0")
+                {
+                    EvenementNonActif.Add(ligne[0]);
+                }
+            }
             comboBoxEvenements.DataSource = null;
-            comboBoxEvenements.DataSource = evenements.Select(ev => ev.Split(';')[0]).ToList();
+            comboBoxEvenements.DataSource = EvenementNonActif;
+        }
+
+        private void ActualiserComboBoxSortie()
+        {
+            // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
+            List<string> EvenementActif = new List<string>();
+            for (int i = 0; i < evenements.Count; i++)
+            {
+                string[] ligne = evenements[i].Split(';');
+                if (ligne[1] == "1")
+                {
+                    EvenementActif.Add(ligne[0]);
+                }
+            }
+            comboBoxEvenements.DataSource = null;
+            comboBoxEvenements.DataSource = EvenementActif;
+            
         }
 
         private List<string> ChargerEvenements()
