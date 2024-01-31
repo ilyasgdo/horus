@@ -23,6 +23,53 @@ namespace horus.@class
             evenements.Add(evenement);
         }
 
+        public List<Evenement> ChargerEvenementsDepuisCSV()
+        {
+            string cheminFichierCSV = "../../../CSV/evenementss.csv";
+            List<Evenement> listeEvenements = new List<Evenement>();
+
+            try
+            {
+                if (File.Exists(cheminFichierCSV))
+                {
+                    
+                    string[] lignes = File.ReadAllLines(cheminFichierCSV);
+
+                    foreach (string ligne in lignes)
+                    {
+                        string[] elements = ligne.Split(';');
+
+                        if (elements.Length >= 2)
+                        {
+                            string nomEvenement = elements[0].Trim();
+                            bool etatEvenement = elements[1].Trim() == "1"; 
+
+                            Evenement evenement = new Evenement(nomEvenement, etatEvenement);
+                            listeEvenements.Add(evenement);
+                        }
+                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+               
+                Console.WriteLine($"Erreur lors de la lecture du fichier CSV : {ex.Message}");
+            }
+
+            return listeEvenements;
+        }
+        public string GetEvenementsAsString()
+        {
+            List<string> nomsEvenements = new List<string>();
+
+            foreach (Evenement evenement in evenements)
+            {
+                nomsEvenements.Add(evenement.getNom());
+            }
+
+            return string.Join(" ; ", nomsEvenements);
+        }
         public Parametres()
         {
             if (evenements == null)
