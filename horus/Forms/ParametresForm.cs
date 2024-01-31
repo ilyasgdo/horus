@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Linq;
 using System.Diagnostics;
+using horus.@class;
 
 
 namespace horus.Forms
@@ -13,7 +14,7 @@ namespace horus.Forms
     public partial class ParametresForm : Form
     {
         private string fichierCSV; 
-        private List<string> evenements = new List<string>();
+        private List<string[]> evenements = new List<string[]>();
 
         public ParametresForm()
         {
@@ -40,7 +41,25 @@ namespace horus.Forms
             string evenementSelectionne = comboBoxEvenements.SelectedItem as string;
             if (!string.IsNullOrEmpty(evenementSelectionne))
             {
-                evenements.Remove(evenementSelectionne);
+                for(int i = 0; i < evenements.Count; i++)
+                {
+                    if (evenements[i][0] == evenementSelectionne)
+                    {
+                        evenements.Remove(evenements[i]);
+                    }
+                }
+                //enregistrement mémoire
+                Parametres param = new Parametres();
+                List<Evenement> liste = new List<Evenement>();
+                for (int i = 0; i < evenements.Count; i++)
+                {
+                    bool activite;
+                    if (evenements[i][1]=="0") { activite = false; } else { activite = true; }
+                    Evenement evenementi = new Evenement(evenements[i][0], activite);
+                    liste.Add(evenementi);
+                }
+                param.InitParametres(liste);
+                Modification modif1 = new Modification(param);
                 ActualiserComboBox();
                 SauvegarderEvenements();
                 textBoxNouvelEvenement.Text = "";
@@ -61,13 +80,25 @@ namespace horus.Forms
 
             textBoxNouvelEvenement.BackColor = SystemColors.Window;
 
-            evenements.Add($"{nouvelEvenement}");
+            evenements.Add([$"{nouvelEvenement}","0"]) ;
+            //enregistrement mémoire
+            Parametres param = new Parametres();
+            List<Evenement> liste = new List<Evenement>();
+            for (int i = 0; i < evenements.Count; i++)
+            {
+                bool activite;
+                if (evenements[i][1] == "0") { activite = false; } else { activite = true; }
+                Evenement evenementi = new Evenement(evenements[i][0], activite);
+                liste.Add(evenementi);
+            }
+            param.InitParametres(liste);
+            Modification modif1 = new Modification(param);
             ActualiserComboBox();
             SauvegarderEvenements();
             textBoxNouvelEvenement.Text = "";
         }
 
-        private List<string> ChargerEvenements()
+        private List<string[]> ChargerEvenements()
         {
             // Charger la liste d'événements depuis le fichier CSV
             try
@@ -75,7 +106,7 @@ namespace horus.Forms
                 if (File.Exists(fichierCSV))
                 {
                     return File.ReadAllLines(fichierCSV)
-                        .Select(line => line.Split(';')[0])
+                        .Select(line => line.Split(';'))
                         .ToList();
                 }
             }
@@ -84,7 +115,7 @@ namespace horus.Forms
                 Debug.WriteLine($"Erreur lors du chargement des événements : {ex.Message}");
             }
 
-            return new List<string>();
+            return new List<string[]>();
         }
 
         private void SauvegarderEvenements()
@@ -92,7 +123,7 @@ namespace horus.Forms
             try
             {
                 // Enregistrer la liste d'événements dans le fichier CSV
-                File.WriteAllLines(fichierCSV, evenements.Select(ev => $"{ev};0"));
+                File.WriteAllLines(fichierCSV, evenements.Select(ev => $"{ev[0]};{ev[1]}"));
                 Debug.WriteLine("Événements sauvegardés avec succès dans le fichier CSV.");
             }
             catch (Exception ex)
@@ -105,7 +136,7 @@ namespace horus.Forms
         {
             // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
             comboBoxEvenements.DataSource = null;
-            comboBoxEvenements.DataSource = evenements.Select(ev => ev.Split(';')[0]).ToList();
+            comboBoxEvenements.DataSource = evenements.Select(ev => $"{ev[0]}").ToList();
         }
 
         private void CreerFichierCSV(string cheminFichier)
