@@ -61,7 +61,7 @@ namespace horus.Forms
 
             textBoxNouvelEvenement.BackColor = SystemColors.Window;
 
-            evenements.Add($"{nouvelEvenement};0");
+            evenements.Add($"{nouvelEvenement}");
             ActualiserComboBox();
             SauvegarderEvenements();
             textBoxNouvelEvenement.Text = "";
