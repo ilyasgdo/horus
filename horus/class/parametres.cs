@@ -15,6 +15,7 @@ namespace horus.@class
         private static List<Evenement> evenements;
         public static int nbpersonnes;
         private static int NbEvenement;
+        private static DateTime date;
 
         public Parametres(Evenement evenement)
         {
@@ -23,6 +24,16 @@ namespace horus.@class
                 evenements = new List<Evenement>();
             }
             evenements.Add(evenement);
+        }
+
+        public void SetDate(DateTime d)
+        {
+            date=d;
+        }
+
+        public DateTime GetDate()
+        {
+            return date;
         }
 
         public void SetNbEvenement(int nb)
