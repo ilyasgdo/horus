@@ -99,43 +99,48 @@ namespace horus
         private void btnPersonneEntree_Click(object sender, EventArgs e)
         {
             PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(parametre.Getnbpersonnes(), true);
+            personneEntreeSortie.FormClosed += PersonneEntreeSortie_FormClosed; // Ajoutez cette ligne
             open_Click(personneEntreeSortie);
-            actualiser_label();
         }
 
         private void btnPersonneSortie_Click(object sender, EventArgs e)
         {
             PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(parametre.Getnbpersonnes(), false);
+            personneEntreeSortie.FormClosed += PersonneEntreeSortie_FormClosed; // Ajoutez cette ligne
             open_Click(personneEntreeSortie);
+        }
+
+        private void PersonneEntreeSortie_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Appelé lorsque le formulaire PersonneEntreeSortieForm est fermé
             actualiser_label();
         }
+
 
         private void btnEvenementAjout_Click(object sender, EventArgs e)
         {
             EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(parametre.Getnbpersonnes(), true);
             open_Click(evenementEntreeSortie);
-            actualiser_label();
         }
 
         private void btnEvenementSuppression_Click(object sender, EventArgs e)
         {
             EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(parametre.Getnbpersonnes(), false);
             open_Click(evenementEntreeSortie);
-            actualiser_label();
         }
 
         private void picTelechargement_Click(object sender, EventArgs e)
         {
             TelechargementForm telechargement = new TelechargementForm();
             open_Click(telechargement);
-            actualiser_label();
+            
         }
 
         private void picParametres_Click(object sender, EventArgs e)
         {
             ParametresForm parametres = new ParametresForm();
             open_Click(parametres);
-            actualiser_label();
+            
         }
 
         private void open_Click(Form form)
@@ -159,34 +164,35 @@ namespace horus
         {
             try
             {
-               
+                string cheminFichierCSV = "../../../CSV/personnes.csv";
 
-                if (File.Exists(fichierCSVPers))
+                if (File.Exists(cheminFichierCSV))
                 {
-                    List<string> referenceLines = File.ReadAllLines(fichierCSVPers).ToList();
+                    List<string> referenceLines = File.ReadAllLines(cheminFichierCSV).ToList();
 
                     if (referenceLines.Count > 0)
                     {
-                        return int.Parse(referenceLines[0].Split(';')[1]);
+                        return int.Parse(referenceLines[0].Split(';')[0]);
                     }
                     else
                     {
                         Console.WriteLine("Le fichier CSV est vide.");
-                        return -8;
+                        return 0;
                     }
                 }
                 else
                 {
                     Console.WriteLine("Le fichier CSV n'existe pas.");
-                    return -9;
+                    return 0;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Erreur lors de la lecture du fichier CSV : {ex.Message}");
-                return -6;
+                return 0;
             }
         }
+
 
 
 
