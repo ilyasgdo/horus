@@ -299,7 +299,7 @@ namespace horus
         {
             DateTime currentDateTime = DateTime.Now;
 
-            if (currentDateTime.Hour == 21 && currentDateTime.Minute == 00)
+            if (currentDateTime.Hour == 13 && currentDateTime.Minute == 11)
             {
                 int nbPersonnesActuel = GetNombrePersonnesReference();
 
