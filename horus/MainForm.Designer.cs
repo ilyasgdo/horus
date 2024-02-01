@@ -39,6 +39,10 @@
             lblDate = new Label();
             lblHeure = new Label();
             lblNbPersonnes = new Label();
+            label1 = new Label();
+            labelEvent = new Label();
+            labelAlertes = new Label();
+            btnSupprimerAlerte = new Button();
             ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picParametres).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picTelechargement).BeginInit();
@@ -160,12 +164,53 @@
             lblNbPersonnes.TabIndex = 9;
             lblNbPersonnes.Text = "label1";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(50, 20);
+            label1.TabIndex = 10;
+            label1.Text = "label1";
+            // 
+            // labelEvent
+            // 
+            labelEvent.AutoSize = true;
+            labelEvent.Location = new Point(378, 455);
+            labelEvent.Name = "labelEvent";
+            labelEvent.Size = new Size(50, 20);
+            labelEvent.TabIndex = 11;
+            labelEvent.Text = "label2";
+            // 
+            // labelAlertes
+            // 
+            labelAlertes.AutoSize = true;
+            labelAlertes.Location = new Point(609, 138);
+            labelAlertes.Name = "labelAlertes";
+            labelAlertes.Size = new Size(50, 20);
+            labelAlertes.TabIndex = 12;
+            labelAlertes.Text = "label2";
+            // 
+            // btnSupprimerAlerte
+            // 
+            btnSupprimerAlerte.Location = new Point(510, 138);
+            btnSupprimerAlerte.Name = "btnSupprimerAlerte";
+            btnSupprimerAlerte.Size = new Size(76, 24);
+            btnSupprimerAlerte.TabIndex = 13;
+            btnSupprimerAlerte.Text = "button1";
+            btnSupprimerAlerte.UseVisualStyleBackColor = true;
+            btnSupprimerAlerte.Click += BtnSupprimerAlerte_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(914, 600);
+            Controls.Add(btnSupprimerAlerte);
+            Controls.Add(labelAlertes);
+            Controls.Add(labelEvent);
+            Controls.Add(label1);
             Controls.Add(lblNbPersonnes);
             Controls.Add(lblHeure);
             Controls.Add(lblDate);
@@ -199,5 +244,9 @@
         private Label lblDate;
         private Label lblHeure;
         private Label lblNbPersonnes;
+        private Label label1;
+        private Label labelEvent;
+        private Label labelAlertes;
+        private Button btnSupprimerAlerte;
     }
 }
