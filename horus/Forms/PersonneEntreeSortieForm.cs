@@ -18,12 +18,14 @@ namespace horus.Forms
         private bool entree;
         string fichierCSVPers = "../../../CSV/personnes.csv";
         List<string> contenu;
+        public bool DateModif;
 
         public PersonneEntreeSortieForm(int nombrePersonnes, bool entree)
         {
             InitializeComponent();
             this.nombrePersonnes = nombrePersonnes;
             this.entree = entree;
+            this.DateModif = false;
 
             DateTime now = DateTime.Now;
             cbHeurePersonne.SelectedItem = now.ToString("HH");
@@ -55,15 +57,24 @@ namespace horus.Forms
 
         private void btnValiderPersonne_Click(object sender, EventArgs e)
         {
+            Parametres parametres = new Parametres();
+            string dateDuJour;
+            if (DateModif == true)
+            {
+                dateDuJour = parametres.GetDate().ToString("dd/MM/yyyy");
+            }
+            else
+            {
+                dateDuJour = DateTime.Now.ToString("dd/MM/yyyy");
+            }
             if (entree)
             {
                 nombrePersonnes++;
                 //changer le contenu du csv
                 contenu.Clear(); contenu.Add(nombrePersonnes.ToString());
                 Sauvegarder();
-                Parametres parametres = new Parametres();
                 parametres.Setnbpersonnes(nombrePersonnes);
-                string strDateEtHeure = DateTime.Now.ToString("dd/MM/yyyy") +" "+cbHeurePersonne.SelectedItem+":"+cbMinutePersonne.SelectedItem;
+                string strDateEtHeure = dateDuJour + " " + cbHeurePersonne.SelectedItem + ":" + cbMinutePersonne.SelectedItem;
                 DateTime DateEtHeure = DateTime.Parse(strDateEtHeure);
                 Modification modif = new Modification(DateEtHeure, parametres);
 
@@ -75,11 +86,10 @@ namespace horus.Forms
                     nombrePersonnes--;
                     contenu.Clear(); contenu.Add(nombrePersonnes.ToString());
                     Sauvegarder();
-                    Parametres parametres = new Parametres();
                     parametres.Setnbpersonnes(nombrePersonnes);
-                    string strDateEtHeure = DateTime.Now.ToString("dd/MM/yyyy") + " " + cbHeurePersonne.SelectedItem + ":" + cbMinutePersonne.SelectedItem;
+                    string strDateEtHeure = dateDuJour + " " + cbHeurePersonne.SelectedItem + ":" + cbMinutePersonne.SelectedItem;
                     DateTime DateEtHeure = DateTime.Parse(strDateEtHeure);
-                    Modification modif = new Modification(DateEtHeure,parametres);
+                    Modification modif = new Modification(DateEtHeure, parametres);
                 }
                 else
                 {
@@ -122,6 +132,30 @@ namespace horus.Forms
             catch (Exception ex)
             {
                 Debug.WriteLine($"Erreur lors de la création ou vérification du fichier CSV : {ex.Message}");
+            }
+        }
+
+        private void pctboxDate_Click(object sender, EventArgs e)
+        {
+            DateModif = true;
+            Date formDate = new Date();
+            open_Click(formDate);
+        }
+
+        private void open_Click(Form form)
+        {
+            bool isOpen = false;
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Text == form.Text)
+                {
+                    isOpen = true;
+                    f.Focus();
+                }
+            }
+            if (!isOpen)
+            {
+                form.Show();
             }
         }
     }

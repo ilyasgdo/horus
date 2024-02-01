@@ -20,6 +20,7 @@ namespace horus.Forms
         private List<string> evenements = new List<string>();
 
         public bool entree;
+        public bool DateModif;
 
         public EvenementEntreeSortieForm(int nbGens, bool entree)
         {
@@ -34,11 +35,12 @@ namespace horus.Forms
             if (this.entree)
             {
                 ActualiserComboBoxEntree();
-            } else
+            }
+            else
             {
                 ActualiserComboBoxSortie();
             }
-
+            DateModif = false;
 
             DateTime now = DateTime.Now;
             cbHeureEvenement.SelectedItem = now.ToString("HH");
@@ -75,9 +77,17 @@ namespace horus.Forms
                     liste.Add(evenementi);
                 }
                 param.InitParametres(liste);
-                string strDateEtHeure = DateTime.Now.ToString("dd/MM/yyyy") + " " + cbHeureEvenement.SelectedItem + ":" + cbMinuteEvenement.SelectedItem;
+                string dateDuJour;
+                if (DateModif == true)
+                {
+                    dateDuJour = param.GetDate().ToString("dd/MM/yyyy");
+                } else
+                {
+                    dateDuJour = DateTime.Now.ToString("dd/MM/yyyy");
+                }
+                string strDateEtHeure = dateDuJour + " " + cbHeureEvenement.SelectedItem + ":" + cbMinuteEvenement.SelectedItem;
                 DateTime DateEtHeure = DateTime.Parse(strDateEtHeure);
-                Modification modif = new Modification(DateEtHeure, param);  
+                Modification modif = new Modification(DateEtHeure, param);
             }
 
             this.Close();
@@ -87,7 +97,7 @@ namespace horus.Forms
         {
             // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
             List<string> EvenementNonActif = new List<string>();
-            for (int i=0; i<evenements.Count; i++)
+            for (int i = 0; i < evenements.Count; i++)
             {
                 string[] ligne = evenements[i].Split(';');
                 if (ligne[1] == "0")
@@ -113,7 +123,7 @@ namespace horus.Forms
             }
             comboBoxEvenements.DataSource = null;
             comboBoxEvenements.DataSource = EvenementActif;
-            
+
         }
 
         private List<string> ChargerEvenements()
@@ -146,6 +156,30 @@ namespace horus.Forms
             catch (Exception ex)
             {
                 Debug.WriteLine($"Erreur sauvegarde des event : {ex.Message}");
+            }
+        }
+
+        private void pctboxDate_Click(object sender, EventArgs e)
+        {
+            DateModif = true;
+            Date formDate = new Date();
+            open_Click(formDate);
+        }
+
+        private void open_Click(Form form)
+        {
+            bool isOpen = false;
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Text == form.Text)
+                {
+                    isOpen = true;
+                    f.Focus();
+                }
+            }
+            if (!isOpen)
+            {
+                form.Show();
             }
         }
     }
