@@ -79,7 +79,7 @@ namespace horus.Forms
             }
         }
 
-        // Méthode pour obtenir le nombre de personnes du fichier de référence p our une date donnée
+        // Méthode pour obtenir le nombre de personnes du fichier de référence p  our une date donnée
         private int GetNombrePersonnesReference(DateTime currentDate)
         {
             // Charger les données depuis le fichier CSV de référence
