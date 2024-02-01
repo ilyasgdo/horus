@@ -33,7 +33,7 @@ namespace horus
             timer.Start();
             //tick pour warnig
             System.Windows.Forms.Timer timer10Minutes = new System.Windows.Forms.Timer();
-            timer10Minutes.Interval = 20000;
+            timer10Minutes.Interval = 1000;
             timer10Minutes.Tick += Timer10Minutes_Tick;
             timer10Minutes.Start();
 
@@ -121,6 +121,7 @@ namespace horus
             // Appelé lorsque le formulaire PersonneEntreeSortieForm est fermé
             actualiser_label();
             UpdateLabelEvenement();
+            CheckAndRecordWarnings();
         }
 
 
@@ -143,6 +144,7 @@ namespace horus
             // Appelé lorsque le formulaire PersonneEntreeSortieForm est fermé
             actualiser_label();
             UpdateLabelEvenement();
+            CheckAndRecordWarnings();
         }
 
         private void picTelechargement_Click(object sender, EventArgs e)
@@ -219,6 +221,7 @@ namespace horus
             int nbPersonnesPremierFichier = GetNombrePersonnesReference();
             lblNbPersonnes.Text = $"Nombre de personnes : {nbPersonnesPremierFichier}";
             CheckAndRecordWarnings();
+
         }
 
         public List<string> GetEvenementsActifs()
@@ -263,7 +266,7 @@ namespace horus
             return evenementsActifs;
         }
 
-
+        
         public void UpdateLabelEvenement()
         {
             CheckAndRecordWarnings();
@@ -295,25 +298,72 @@ namespace horus
             UpdateLabelEvenement();
             CheckAndRecordWarnings();
         }
+        private void RecordOrUpdateWarning(DateTime dateTime, int nbPersonnes)
+        {
+            try
+            {
+                string cheminFichierAvertissements = "../../../CSV/avertissements.csv";
+
+                // Charger les alertes existantes
+                List<string> alertes = ChargerAlertes();
+
+                // Vérifier s'il y a déjà une alerte pour la même journée
+                string dateHeureFormattee = dateTime.ToString("dd/MM/yyyy");
+                bool alerteExistante = false;
+
+                for (int i = 0; i < alertes.Count; i++)
+                {
+                    string[] elements = alertes[i].Split(';');
+
+                    if (elements.Length >= 2)
+                    {
+                        string dateHeure = elements[0].Trim();
+
+                        if (dateHeure.StartsWith(dateHeureFormattee))
+                        {
+                            // Il y a déjà une alerte pour la même journée, supprimer l'ancienne
+                            alertes.RemoveAt(i);
+                            alerteExistante = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Ajouter la nouvelle alerte
+                string ligneAvertissement = $"{dateTime.ToString("dd/MM/yyyy HH:mm:ss")};{nbPersonnes}";
+                alertes.Add(ligneAvertissement);
+
+                // Écrire les alertes mises à jour dans le fichier CSV
+                File.WriteAllLines(cheminFichierAvertissements, alertes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de l'enregistrement ou de la mise à jour de l'avertissement : {ex.Message}");
+            }
+        }
+
+        // Utilisez cette méthode dans votre code pour enregistrer ou mettre à jour une alerte
         private void CheckAndRecordWarnings()
         {
             DateTime currentDateTime = DateTime.Now;
 
-            if (currentDateTime.Hour == 13 && currentDateTime.Minute == 11)
+            if (currentDateTime.Hour >= 13 && currentDateTime.Minute >= 48 )
             {
                 int nbPersonnesActuel = GetNombrePersonnesReference();
 
                 if (nbPersonnesActuel != 0)
                 {
-                    RecordWarning(currentDateTime, nbPersonnesActuel);
+                    RecordOrUpdateWarning(currentDateTime, nbPersonnesActuel);
 
-                    MessageBox.Show($"Avertissement : Il y a encore {nbPersonnesActuel} personne(s) à 21h00.", "Avertissement", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                   
                 }
             }
 
+            // Affichez les alertes mises à jour
             List<string> alertes = ChargerAlertes();
             AfficherAlertes(alertes);
         }
+
 
 
         private void Timer10Minutes_Tick(object sender, EventArgs e)
@@ -322,25 +372,7 @@ namespace horus
             UpdateLabelEvenement();
         }
 
-        private void RecordWarning(DateTime dateTime, int nbPersonnes)
-        {
-            try
-            {
-                string cheminFichierAvertissements = "../../../CSV/avertissements.csv";
-
-                if (!File.Exists(cheminFichierAvertissements))
-                {
-                    File.WriteAllText(cheminFichierAvertissements, "Date et heure;Nombre de personnes\n");
-                }
-
-                string ligneAvertissement = $"{dateTime.ToString("dd/MM/yyyy HH:mm:ss")};{nbPersonnes}";
-                File.AppendAllLines(cheminFichierAvertissements, new List<string> { ligneAvertissement });
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erreur lors de l'enregistrement de l'avertissement : {ex.Message}");
-            }
-        }
+        
         private List<string> ChargerAlertes()
         {
             try
@@ -392,7 +424,10 @@ namespace horus
             {
                 string cheminFichierAvertissements = "../../../CSV/avertissements.csv";
 
+              
                 File.WriteAllText(cheminFichierAvertissements, string.Empty);
+
+               
             }
             catch (Exception ex)
             {
@@ -400,6 +435,7 @@ namespace horus
             }
         }
 
-        
+
+
     }
 }

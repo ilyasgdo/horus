@@ -185,7 +185,7 @@
             // labelAlertes
             // 
             labelAlertes.AutoSize = true;
-            labelAlertes.Location = new Point(609, 138);
+            labelAlertes.Location = new Point(610, 546);
             labelAlertes.Name = "labelAlertes";
             labelAlertes.Size = new Size(50, 20);
             labelAlertes.TabIndex = 12;
@@ -193,11 +193,11 @@
             // 
             // btnSupprimerAlerte
             // 
-            btnSupprimerAlerte.Location = new Point(510, 138);
+            btnSupprimerAlerte.Location = new Point(494, 544);
             btnSupprimerAlerte.Name = "btnSupprimerAlerte";
-            btnSupprimerAlerte.Size = new Size(76, 24);
+            btnSupprimerAlerte.Size = new Size(89, 24);
             btnSupprimerAlerte.TabIndex = 13;
-            btnSupprimerAlerte.Text = "button1";
+            btnSupprimerAlerte.Text = "Suprimer";
             btnSupprimerAlerte.UseVisualStyleBackColor = true;
             btnSupprimerAlerte.Click += BtnSupprimerAlerte_Click;
             // 
