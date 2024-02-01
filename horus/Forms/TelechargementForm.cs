@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Reflection.Metadata;
 using System.Windows.Forms;
 using horus.@class;
 
@@ -20,6 +21,7 @@ namespace horus.Forms
         {
             DateTime dateDebut = monthCalendarDebut.SelectionStart;
             DateTime dateFin = monthCalendarFin.SelectionStart;
+            dateFin = dateFin.Date.AddHours(23).AddMinutes(55).AddSeconds(0);
 
             if (dateDebut > dateFin)
             {
@@ -44,24 +46,28 @@ namespace horus.Forms
             }
         }
 
+        
         private void GenererEtSauvegarderDonnees(string filePath, DateTime dateDebut, DateTime dateFin)
         {
             Parametres parametres = new Parametres();
 
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-
                 writer.WriteLine("Date et heure ; nombre de personnes dans la pièce ; " + parametres.GetEvenementsAsString());
-
 
                 DateTime currentDate = dateDebut;
                 TimeSpan intervalle = TimeSpan.FromMinutes(5);
 
                 while (currentDate <= dateFin)
                 {
-                    string ligne = $"{currentDate.ToString("dd/MM/yyyy HH:mm:ss")};{parametres.Getnbpersonnes()}";
+                    // Récupérer le nombre de personnes du fichier de référence pour la date actuelle
+                    int nbPersonnesReference = GetNombrePersonnesReference(currentDate);
 
-                    foreach (Evenement evenement in parametres.getParametres())
+                    // Générer la ligne du nouveau fichier en utilisant le nombre de personnes
+                    string ligne = $"{currentDate.ToString("dd/MM/yyyy HH:mm:ss")};{nbPersonnesReference}";
+
+                    // Ajouter les états des événements
+                    foreach (Evenement evenement in parametres.ChargerEvenementsDepuisCSV())
                     {
                         ligne += $";{(evenement.isActif() ? "1" : "0")}";
                     }
@@ -73,6 +79,26 @@ namespace horus.Forms
             }
         }
 
-       
+        // Méthode pour obtenir le nombre de personnes du fichier de référence pour une date donnée
+        private int GetNombrePersonnesReference(DateTime currentDate)
+        {
+            // Charger les données depuis le fichier CSV de référence
+            List<string> referenceLines = File.ReadAllLines("../../../CSV/evenementss.csv").ToList();
+
+            // Rechercher la ligne correspondante dans le fichier de référence
+            string referenceLine = referenceLines.FirstOrDefault(line => line.StartsWith(currentDate.ToString("dd/MM/yyyy HH:mm:ss")));
+
+            if (referenceLine != null)
+            {
+                // Récupérer le nombre de personnes de la ligne de référence
+                return int.Parse(referenceLine.Split(';')[1]);
+            }
+
+            // Valeur par défaut si la ligne n'est pas trouvée
+            return 0;
+        }
+
+
+
     }
 }

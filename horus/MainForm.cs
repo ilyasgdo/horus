@@ -41,23 +41,26 @@ namespace horus
             int nbPersonnesPresentent = 0;
             if (listePersonnes.Count > 0)
             {
-                nbPersonnesPresentent = Convert.ToInt32(listePersonnes[0],10);
+                nbPersonnesPresentent = Convert.ToInt32(listePersonnes[0], 10);
             }
             parametre.Setnbpersonnes(nbPersonnesPresentent);
             parametre.SetNbEvenement(listeEvenements.Count);
-            for ( int i = 0; i < listeEvenements.Count; i++ )
+            for (int i = 0; i < listeEvenements.Count; i++)
             {
                 string[] ligne = listeEvenements[i].Split(';');
                 bool activite;
-                if (ligne[1]=="0") { activite = false; } else {  activite = true; }
+                if (ligne[1] == "0") { activite = false; } else { activite = true; }
                 Evenement evenementi = new Evenement(ligne[0], activite);
                 parametre.AjouterEvenement(evenementi);
             }
+            actualiser_label();
+
 
             // test!!!!!!!!!!!!!!!!!!!!!!!
             //Modification test1 = new Modification(3,parametre);
             //Modification test2 = new Modification(4,parametre);
         }
+
 
         private List<string> ChargerEvenements()
         {
@@ -90,19 +93,29 @@ namespace horus
                 Debug.WriteLine($"Erreur lors de la création ou vérification du fichier CSV : {ex.Message}");
                 return new List<string>();
             }
+
         }
 
         private void btnPersonneEntree_Click(object sender, EventArgs e)
         {
             PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(parametre.Getnbpersonnes(), true);
+            personneEntreeSortie.FormClosed += PersonneEntreeSortie_FormClosed; // Ajoutez cette ligne
             open_Click(personneEntreeSortie);
         }
 
         private void btnPersonneSortie_Click(object sender, EventArgs e)
         {
             PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(parametre.Getnbpersonnes(), false);
+            personneEntreeSortie.FormClosed += PersonneEntreeSortie_FormClosed; // Ajoutez cette ligne
             open_Click(personneEntreeSortie);
         }
+
+        private void PersonneEntreeSortie_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Appelé lorsque le formulaire PersonneEntreeSortieForm est fermé
+            actualiser_label();
+        }
+
 
         private void btnEvenementAjout_Click(object sender, EventArgs e)
         {
@@ -120,12 +133,14 @@ namespace horus
         {
             TelechargementForm telechargement = new TelechargementForm();
             open_Click(telechargement);
+            
         }
 
         private void picParametres_Click(object sender, EventArgs e)
         {
             ParametresForm parametres = new ParametresForm();
             open_Click(parametres);
+            
         }
 
         private void open_Click(Form form)
@@ -144,6 +159,54 @@ namespace horus
                 form.Show();
             }
         }
-        
+        // Méthode pour obtenir le nombre de personnes du fichier
+        private int GetNombrePersonnesReference()
+        {
+            try
+            {
+                string cheminFichierCSV = "../../../CSV/personnes.csv";
+
+                if (File.Exists(cheminFichierCSV))
+                {
+                    List<string> referenceLines = File.ReadAllLines(cheminFichierCSV).ToList();
+
+                    if (referenceLines.Count > 0)
+                    {
+                        return int.Parse(referenceLines[0].Split(';')[0]);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Le fichier CSV est vide.");
+                        return 0;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Le fichier CSV n'existe pas.");
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la lecture du fichier CSV : {ex.Message}");
+                return 0;
+            }
+        }
+
+
+
+
+        private void actualiser_label()
+        {
+
+            // Mise à jour du label avec le nombre de personnes du premier fichier CSV
+            int nbPersonnesPremierFichier = GetNombrePersonnesReference();
+            lblNbPersonnes.Text = $"Nombre de personnes : {nbPersonnesPremierFichier}";
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            actualiser_label();
+        }
     }
 }
