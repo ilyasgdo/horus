@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper;
 
 namespace horus.@class
 {
@@ -113,11 +114,11 @@ namespace horus.@class
             //récupère le contenu du fichier
             contenuCSV = ChargerContenu();
 
-            string ligne = "Date et heure ; nombre de personnes dans la pièce ; ";
+            string ligne = Convert.ToString(DateTime.Now)+";Date et heure ; nombre de personnes dans la pièce ;";
             List<Evenement> listeEvenements = param.getParametres();
             for (int i = 0; i < listeEvenements.Count; i++)
             {
-                ligne= ligne + listeEvenements[i].getNom()+" ; ";
+                ligne= ligne + listeEvenements[i].getNom()+" ;";
             }
             contenuCSV.Add(ligne);
             SauvegarderModifs();
