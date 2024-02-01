@@ -185,20 +185,23 @@
             // labelAlertes
             // 
             labelAlertes.AutoSize = true;
-            labelAlertes.Location = new Point(610, 546);
+            labelAlertes.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelAlertes.Location = new Point(589, 544);
             labelAlertes.Name = "labelAlertes";
-            labelAlertes.Size = new Size(50, 20);
+            labelAlertes.Size = new Size(51, 20);
             labelAlertes.TabIndex = 12;
             labelAlertes.Text = "label2";
             // 
             // btnSupprimerAlerte
             // 
+            btnSupprimerAlerte.BackColor = Color.Brown;
+            btnSupprimerAlerte.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnSupprimerAlerte.Location = new Point(494, 544);
             btnSupprimerAlerte.Name = "btnSupprimerAlerte";
-            btnSupprimerAlerte.Size = new Size(89, 24);
+            btnSupprimerAlerte.Size = new Size(89, 44);
             btnSupprimerAlerte.TabIndex = 13;
             btnSupprimerAlerte.Text = "Suprimer";
-            btnSupprimerAlerte.UseVisualStyleBackColor = true;
+            btnSupprimerAlerte.UseVisualStyleBackColor = false;
             btnSupprimerAlerte.Click += BtnSupprimerAlerte_Click;
             // 
             // MainForm
