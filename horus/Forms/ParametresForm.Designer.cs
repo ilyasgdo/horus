@@ -55,7 +55,7 @@
             btnSupprimer.Name = "btnSupprimer";
             btnSupprimer.Size = new Size(125, 38);
             btnSupprimer.TabIndex = 3;
-            btnSupprimer.Text = "suprimer";
+            btnSupprimer.Text = "supprimer";
             btnSupprimer.UseVisualStyleBackColor = false;
             btnSupprimer.Click += btnSupprimer_Click;
             // 
