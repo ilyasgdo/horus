@@ -75,23 +75,35 @@ namespace horus.Forms
                 List<string> listeNomEvenement = new List<string>();
                 List<bool> listeEtat = new List<bool>();
                 string ligne;
+                //bool test = true;
 
                 while (currentDate <= dateFin)
                 {
                     // Nina : methode "quelle est la ligne la plus proche" lapluus vielle mais 
                     ligneProche = LigneLaPlusProche(currentDate);
-                    //Debug.WriteLine( "76 - "+ligneProche );
+                    //if (test == true) { Debug.WriteLine("la ligne trouvé est - " + ligneProche+" pour la date "+currentDate); }
 
                     //on récupère le nombre de personnes
                     champsLigne = ligneProche.Split(';');
                     nbPersonnes = champsLigne[1];
-
+                    //if (test == true)
+                    //{
+                    //    Debug.Write("Ses champs sont :");
+                    //    for (int i = 0; i < champsLigne.Length-1; i++) { Debug.Write(champsLigne[i] + " ; "); } Debug.Write("\n");
+                    //}
                     //fonction pour trouver actuellement les evenements et leur etat (actif ou non)
                     listeNomEvenement.Clear();
                     listeEtat.Clear();
                     listeNomEvenement = ListeEvenements(currentDate); //Debug.WriteLine("85");
-                    for (int j=3; j<champsLigne.Length; j++)
+                    //if (test == true)
+                    //{
+                    //    Debug.Write("Ses evenements sont :");
+                    //    for (int i = 0; i < listeNomEvenement.Count-1; i++) { Debug.Write(listeNomEvenement[i] + " ; "); }
+                    //    Debug.Write("\n");
+                    //}
+                    for (int j=2; j<champsLigne.Length; j++)
                     {
+                        //if (test == true) { Debug.WriteLine("pour i = " + j + " on retrouve " + champsLigne[j]); }
                         if (champsLigne[j] == "1")
                         {
                             listeEtat.Add(true);
@@ -100,18 +112,29 @@ namespace horus.Forms
                             listeEtat.Add(false);
                         }
                     }
+                    //if (test == true)
+                    //{
+                    //    Debug.Write("Ses valeurs sont :");
+                    //    for (int i = 0; i < listeEtat.Count; i++) { Debug.Write(listeEtat[i] + " ; "); }
+                    //    Debug.Write("\n");
+                    //}
                     ligne = currentDate.ToString("dd/MM/yyyy HH:mm:ss")+";"+ nbPersonnes+";";
                     for (int i = 0; i < NomsEvenements.Count; i++)
                     {
-                        //Debug.WriteLine("\nchamp étudié" + NomsEvenements[i]);
+                        //if (test == true) { Debug.Write("\nEvenement " + NomsEvenements[i]); }
+
                         //Debug.WriteLine("champ étudié" + NomsEvenements[i]+" (" + Convert.ToInt32(NomsEvenements[i])+")");
                         //if (listeNomEvenement.Contains(NomsEvenements[i]))
+                        bool trouve = false;
                         for (int k = 0; k < listeNomEvenement.Count; k++)
                         {
-                            //Debug.Write("champ Comparé" + listeNomEvenement[k] + " ; ");
+                            //if (test == true) { Debug.Write("\n   " + listeNomEvenement[k]+" : "); }
+                            //Debug.Write("champ Comparé" +  + " ; ");
                             //Debug.Write("champ Comparé" + listeNomEvenement[k]+" (" + Convert.ToInt32(listeNomEvenement[k]) + ") ; ");
                             if (listeNomEvenement[k] == NomsEvenements[i])
                             {
+                                //if (test == true) { Debug.Write("C'est le même champs"); }
+                                trouve= true;
                                 //Debug.WriteLine("\nchamp trouvé");
                                 if (k<listeEtat.Count && listeEtat[k] == true)
                                 {
@@ -123,7 +146,9 @@ namespace horus.Forms
                                 }
                             }
                         }
+                        if (trouve == false) { ligne = ligne + "0;"; }
                     }
+                    //if (test == true) { Debug.WriteLine("la ligne totale est : " + ligne); test = false; }
                     //Debug.WriteLine("109");
                     //Ilyas 
 
@@ -177,7 +202,17 @@ namespace horus.Forms
         {
             List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
             contenuMemoire = Tri(contenuMemoire);
-            string dernierListeParametres=""; bool Fin = false; int i = 0;
+            string dernierListeParametres=""; bool Fin = false; int j = 0;
+            while (j < contenuMemoire.Count && Fin==false)
+            {
+                if (contenuMemoire[j].Split(';')[1] == "Date et heure ")
+                {
+                    dernierListeParametres = contenuMemoire[j];
+                    Fin= true;
+                }
+                j++;
+            }
+            Fin = false; int i = 0;
             while (i < contenuMemoire.Count && Fin==false)
             {
                 if (contenuMemoire[i].Split(';')[1] == "Date et heure ")
@@ -195,9 +230,9 @@ namespace horus.Forms
             }
             string[] contenuLigne = dernierListeParametres.Split(";");
             List<string> evenements = new List<string>();
-            for (int j=3; j<contenuLigne.Length; j++)
+            for (int k=3; k<contenuLigne.Length; k++)
             {
-                evenements.Add(contenuLigne[j]);
+                evenements.Add(contenuLigne[k]);
             }
             return (evenements);
         }
@@ -232,23 +267,28 @@ namespace horus.Forms
             contenuMemoire = Tri(contenuMemoire);
             //for(int i=0; i<contenuMemoire.Count; i++)
             //{
-            //    Debug.WriteLine(contenuMemoire[i]);
+            //if (test == true) { Debug.WriteLine("\n");}
             //}
 
             for (int i = 0; i < contenuMemoire.Count; i++)
             {
                 string dateligne = contenuMemoire[i].Split(';')[0];
+                //if (test == true) { Debug.Write("Comparaison " + DateTime.Parse(dateligne) + " et " + date + " = " + Convert.ToString(DateTime.Parse(dateligne) > date) + "  -  "); }
+                
                 if (DateTime.Parse(dateligne) > date)
                 {
-                    if(i != 0)
+                    //if (test == true) { Debug.Write("La ligne est plus tard " + dateligne + "  -  "); }
+                    if (i != 0)
                     {
+                        //if (test == true) { Debug.Write("La ligne d'avant " + contenuMemoire[i - 1].Split(';')[0] + "  -  "); }
+                        
                         //ligne d'avant
                         return contenuMemoire[i - 1];
                         
                     } else
                     {
-                        //////////////////////////////////////////////////////////// LE BUG VIENS D'ICI
-                        Debug.WriteLine("\na - "+contenuMemoire[i]);
+                        //if (test == true) { Debug.Write("La ligne d'avant " + contenuMemoire[i].Split(';')[0] + "  -  "); }
+                        
                         //ligne vide
                         return contenuMemoire[i];
                         
