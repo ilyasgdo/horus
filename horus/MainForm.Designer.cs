@@ -53,10 +53,9 @@
             btnPersonneEntree.BackColor = Color.PaleTurquoise;
             btnPersonneEntree.Font = new Font("Sans Serif Collection", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnPersonneEntree.ForeColor = SystemColors.ControlText;
-            btnPersonneEntree.Location = new Point(175, 196);
-            btnPersonneEntree.Margin = new Padding(3, 4, 3, 4);
+            btnPersonneEntree.Location = new Point(153, 147);
             btnPersonneEntree.Name = "btnPersonneEntree";
-            btnPersonneEntree.Size = new Size(171, 141);
+            btnPersonneEntree.Size = new Size(150, 106);
             btnPersonneEntree.TabIndex = 1;
             btnPersonneEntree.Text = "Personne ENTREE";
             btnPersonneEntree.UseVisualStyleBackColor = false;
@@ -66,10 +65,9 @@
             // 
             btnPersonneSortie.BackColor = Color.PaleTurquoise;
             btnPersonneSortie.Font = new Font("Sans Serif Collection", 9F);
-            btnPersonneSortie.Location = new Point(543, 196);
-            btnPersonneSortie.Margin = new Padding(3, 4, 3, 4);
+            btnPersonneSortie.Location = new Point(475, 147);
             btnPersonneSortie.Name = "btnPersonneSortie";
-            btnPersonneSortie.Size = new Size(171, 134);
+            btnPersonneSortie.Size = new Size(150, 100);
             btnPersonneSortie.TabIndex = 2;
             btnPersonneSortie.Text = "Personne SORTIE";
             btnPersonneSortie.UseVisualStyleBackColor = false;
@@ -79,10 +77,9 @@
             // 
             btnEvenementAjout.BackColor = Color.PaleTurquoise;
             btnEvenementAjout.Font = new Font("Sans Serif Collection", 9F);
-            btnEvenementAjout.Location = new Point(175, 396);
-            btnEvenementAjout.Margin = new Padding(3, 4, 3, 4);
+            btnEvenementAjout.Location = new Point(153, 297);
             btnEvenementAjout.Name = "btnEvenementAjout";
-            btnEvenementAjout.Size = new Size(171, 125);
+            btnEvenementAjout.Size = new Size(150, 94);
             btnEvenementAjout.TabIndex = 3;
             btnEvenementAjout.Text = "DEBUT  évènement";
             btnEvenementAjout.UseVisualStyleBackColor = false;
@@ -92,10 +89,9 @@
             // 
             btnEvenementSuppression.BackColor = Color.PaleTurquoise;
             btnEvenementSuppression.Font = new Font("Sans Serif Collection", 9F);
-            btnEvenementSuppression.Location = new Point(543, 396);
-            btnEvenementSuppression.Margin = new Padding(3, 4, 3, 4);
+            btnEvenementSuppression.Location = new Point(475, 297);
             btnEvenementSuppression.Name = "btnEvenementSuppression";
-            btnEvenementSuppression.Size = new Size(171, 125);
+            btnEvenementSuppression.Size = new Size(150, 94);
             btnEvenementSuppression.TabIndex = 4;
             btnEvenementSuppression.Text = " FIN évènement";
             btnEvenementSuppression.UseVisualStyleBackColor = false;
@@ -104,10 +100,9 @@
             // picLogo
             // 
             picLogo.Image = (Image)resources.GetObject("picLogo.Image");
-            picLogo.Location = new Point(34, 16);
-            picLogo.Margin = new Padding(3, 4, 3, 4);
+            picLogo.Location = new Point(30, 12);
             picLogo.Name = "picLogo";
-            picLogo.Size = new Size(175, 157);
+            picLogo.Size = new Size(153, 118);
             picLogo.TabIndex = 4;
             picLogo.TabStop = false;
             // 
@@ -115,10 +110,9 @@
             // 
             picParametres.BackColor = SystemColors.Control;
             picParametres.Image = (Image)resources.GetObject("picParametres.Image");
-            picParametres.Location = new Point(806, 39);
-            picParametres.Margin = new Padding(3, 4, 3, 4);
+            picParametres.Location = new Point(705, 29);
             picParametres.Name = "picParametres";
-            picParametres.Size = new Size(64, 68);
+            picParametres.Size = new Size(56, 51);
             picParametres.SizeMode = PictureBoxSizeMode.StretchImage;
             picParametres.TabIndex = 5;
             picParametres.TabStop = false;
@@ -128,10 +122,9 @@
             // 
             picTelechargement.BackColor = SystemColors.Control;
             picTelechargement.Image = (Image)resources.GetObject("picTelechargement.Image");
-            picTelechargement.Location = new Point(728, 39);
-            picTelechargement.Margin = new Padding(3, 4, 3, 4);
+            picTelechargement.Location = new Point(637, 29);
             picTelechargement.Name = "picTelechargement";
-            picTelechargement.Size = new Size(57, 68);
+            picTelechargement.Size = new Size(50, 51);
             picTelechargement.SizeMode = PictureBoxSizeMode.StretchImage;
             picTelechargement.TabIndex = 6;
             picTelechargement.TabStop = false;
@@ -140,27 +133,27 @@
             // lblDate
             // 
             lblDate.AutoSize = true;
-            lblDate.Location = new Point(403, 73);
+            lblDate.Location = new Point(353, 55);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(41, 20);
+            lblDate.Size = new Size(31, 15);
             lblDate.TabIndex = 7;
             lblDate.Text = "Date";
             // 
             // lblHeure
             // 
             lblHeure.AutoSize = true;
-            lblHeure.Location = new Point(482, 73);
+            lblHeure.Location = new Point(422, 55);
             lblHeure.Name = "lblHeure";
-            lblHeure.Size = new Size(49, 20);
+            lblHeure.Size = new Size(39, 15);
             lblHeure.TabIndex = 8;
             lblHeure.Text = "Heure";
             // 
             // lblNbPersonnes
             // 
             lblNbPersonnes.AutoSize = true;
-            lblNbPersonnes.Location = new Point(352, 253);
+            lblNbPersonnes.Location = new Point(308, 190);
             lblNbPersonnes.Name = "lblNbPersonnes";
-            lblNbPersonnes.Size = new Size(50, 20);
+            lblNbPersonnes.Size = new Size(38, 15);
             lblNbPersonnes.TabIndex = 9;
             lblNbPersonnes.Text = "label1";
             // 
@@ -169,16 +162,16 @@
             label1.AutoSize = true;
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(50, 20);
+            label1.Size = new Size(38, 15);
             label1.TabIndex = 10;
             label1.Text = "label1";
             // 
             // labelEvent
             // 
             labelEvent.AutoSize = true;
-            labelEvent.Location = new Point(378, 455);
+            labelEvent.Location = new Point(331, 341);
             labelEvent.Name = "labelEvent";
-            labelEvent.Size = new Size(50, 20);
+            labelEvent.Size = new Size(38, 15);
             labelEvent.TabIndex = 11;
             labelEvent.Text = "label2";
             // 
@@ -186,9 +179,9 @@
             // 
             labelAlertes.AutoSize = true;
             labelAlertes.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelAlertes.Location = new Point(589, 544);
+            labelAlertes.Location = new Point(515, 408);
             labelAlertes.Name = "labelAlertes";
-            labelAlertes.Size = new Size(51, 20);
+            labelAlertes.Size = new Size(40, 15);
             labelAlertes.TabIndex = 12;
             labelAlertes.Text = "label2";
             // 
@@ -196,20 +189,21 @@
             // 
             btnSupprimerAlerte.BackColor = Color.Brown;
             btnSupprimerAlerte.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnSupprimerAlerte.Location = new Point(494, 544);
+            btnSupprimerAlerte.Location = new Point(432, 408);
+            btnSupprimerAlerte.Margin = new Padding(3, 2, 3, 2);
             btnSupprimerAlerte.Name = "btnSupprimerAlerte";
-            btnSupprimerAlerte.Size = new Size(89, 44);
+            btnSupprimerAlerte.Size = new Size(78, 33);
             btnSupprimerAlerte.TabIndex = 13;
-            btnSupprimerAlerte.Text = "Suprimer";
+            btnSupprimerAlerte.Text = "Supprimer";
             btnSupprimerAlerte.UseVisualStyleBackColor = false;
             btnSupprimerAlerte.Click += BtnSupprimerAlerte_Click;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(800, 450);
             Controls.Add(btnSupprimerAlerte);
             Controls.Add(labelAlertes);
             Controls.Add(labelEvent);
@@ -224,7 +218,6 @@
             Controls.Add(btnEvenementAjout);
             Controls.Add(btnPersonneSortie);
             Controls.Add(btnPersonneEntree);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "MainForm";
             Text = "Main";
             Load += MainForm_Load;
