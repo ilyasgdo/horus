@@ -86,7 +86,7 @@
             label1.Name = "label1";
             label1.Size = new Size(119, 15);
             label1.TabIndex = 4;
-            label1.Text = "Liste des evenements";
+            label1.Text = "Liste des évènements";
             // 
             // label2
             // 
@@ -95,7 +95,7 @@
             label2.Name = "label2";
             label2.Size = new Size(102, 15);
             label2.TabIndex = 5;
-            label2.Text = "Saisir l'évenement";
+            label2.Text = "Saisir l'évènement";
             // 
             // label3
             // 
@@ -105,7 +105,7 @@
             label3.Name = "label3";
             label3.Size = new Size(369, 15);
             label3.TabIndex = 6;
-            label3.Text = "Pour supprimer, selectionner un evenement et cliquer sur supprimer ";
+            label3.Text = "Pour supprimer, sélectionner un évènement et cliquer sur supprimer ";
             // 
             // label4
             // 
@@ -113,9 +113,9 @@
             label4.BackColor = Color.LawnGreen;
             label4.Location = new Point(10, 7);
             label4.Name = "label4";
-            label4.Size = new Size(435, 15);
+            label4.Size = new Size(429, 15);
             label4.TabIndex = 7;
-            label4.Text = "Pour ajouter un évenements ecriver le nom de l'événement et cliquer sur ajouter  ";
+            label4.Text = "Pour ajouter un évènements écrire le nom de l'évènement et cliquer sur ajouter  ";
             // 
             // ParametresForm
             // 
