@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ParametresForm));
             comboBoxEvenements = new ComboBox();
             btnSupprimer = new Button();
             btnAjouter = new Button();
@@ -130,6 +131,7 @@
             Controls.Add(btnAjouter);
             Controls.Add(btnSupprimer);
             Controls.Add(comboBoxEvenements);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "ParametresForm";
             Text = "ParametresForm";

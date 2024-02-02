@@ -207,6 +207,7 @@
             Controls.Add(btnEvenementAjout);
             Controls.Add(btnPersonneSortie);
             Controls.Add(btnPersonneEntree);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
             Text = "Main";
             Load += MainForm_Load;

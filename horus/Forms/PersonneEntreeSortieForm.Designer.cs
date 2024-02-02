@@ -42,10 +42,9 @@
             // 
             lblHoraireEntreePersonne.AutoSize = true;
             lblHoraireEntreePersonne.Font = new Font("Sans Serif Collection", 8F);
-            lblHoraireEntreePersonne.Location = new Point(34, 58);
-            lblHoraireEntreePersonne.Margin = new Padding(4, 0, 4, 0);
+            lblHoraireEntreePersonne.Location = new Point(24, 35);
             lblHoraireEntreePersonne.Name = "lblHoraireEntreePersonne";
-            lblHoraireEntreePersonne.Size = new Size(114, 39);
+            lblHoraireEntreePersonne.Size = new Size(77, 27);
             lblHoraireEntreePersonne.TabIndex = 0;
             lblHoraireEntreePersonne.Text = "Horaire :";
             // 
@@ -53,30 +52,27 @@
             // 
             cbHeurePersonne.FormattingEnabled = true;
             cbHeurePersonne.Items.AddRange(new object[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" });
-            cbHeurePersonne.Location = new Point(89, 105);
-            cbHeurePersonne.Margin = new Padding(4, 5, 4, 5);
+            cbHeurePersonne.Location = new Point(62, 63);
             cbHeurePersonne.Name = "cbHeurePersonne";
-            cbHeurePersonne.Size = new Size(51, 33);
+            cbHeurePersonne.Size = new Size(37, 23);
             cbHeurePersonne.TabIndex = 2;
             // 
             // cbMinutePersonne
             // 
             cbMinutePersonne.FormattingEnabled = true;
             cbMinutePersonne.Items.AddRange(new object[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" });
-            cbMinutePersonne.Location = new Point(173, 105);
-            cbMinutePersonne.Margin = new Padding(4, 5, 4, 5);
+            cbMinutePersonne.Location = new Point(121, 63);
             cbMinutePersonne.Name = "cbMinutePersonne";
-            cbMinutePersonne.Size = new Size(51, 33);
+            cbMinutePersonne.Size = new Size(37, 23);
             cbMinutePersonne.TabIndex = 3;
             // 
             // lblDeuxPoints
             // 
             lblDeuxPoints.AutoSize = true;
             lblDeuxPoints.Font = new Font("Segoe UI", 11F);
-            lblDeuxPoints.Location = new Point(150, 110);
-            lblDeuxPoints.Margin = new Padding(4, 0, 4, 0);
+            lblDeuxPoints.Location = new Point(105, 66);
             lblDeuxPoints.Name = "lblDeuxPoints";
-            lblDeuxPoints.Size = new Size(18, 30);
+            lblDeuxPoints.Size = new Size(12, 20);
             lblDeuxPoints.TabIndex = 3;
             lblDeuxPoints.Text = ":";
             // 
@@ -84,10 +80,9 @@
             // 
             btnValiderPersonne.BackColor = Color.PaleTurquoise;
             btnValiderPersonne.Font = new Font("Sans Serif Collection", 9F);
-            btnValiderPersonne.Location = new Point(89, 177);
-            btnValiderPersonne.Margin = new Padding(4, 5, 4, 5);
+            btnValiderPersonne.Location = new Point(62, 106);
             btnValiderPersonne.Name = "btnValiderPersonne";
-            btnValiderPersonne.Size = new Size(137, 62);
+            btnValiderPersonne.Size = new Size(96, 37);
             btnValiderPersonne.TabIndex = 1;
             btnValiderPersonne.Text = "Valider";
             btnValiderPersonne.UseVisualStyleBackColor = false;
@@ -96,9 +91,10 @@
             // pctboxDate
             // 
             pctboxDate.Image = (Image)resources.GetObject("pctboxDate.Image");
-            pctboxDate.Location = new Point(246, 12);
+            pctboxDate.Location = new Point(172, 7);
+            pctboxDate.Margin = new Padding(2, 2, 2, 2);
             pctboxDate.Name = "pctboxDate";
-            pctboxDate.Size = new Size(63, 59);
+            pctboxDate.Size = new Size(44, 35);
             pctboxDate.SizeMode = PictureBoxSizeMode.Zoom;
             pctboxDate.TabIndex = 4;
             pctboxDate.TabStop = false;
@@ -106,17 +102,17 @@
             // 
             // PersonneEntreeSortieForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(321, 288);
+            ClientSize = new Size(225, 173);
             Controls.Add(pctboxDate);
             Controls.Add(btnValiderPersonne);
             Controls.Add(lblDeuxPoints);
             Controls.Add(cbMinutePersonne);
             Controls.Add(cbHeurePersonne);
             Controls.Add(lblHoraireEntreePersonne);
-            Margin = new Padding(4, 5, 4, 5);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "PersonneEntreeSortieForm";
             Text = "PersonneEntreeSortie";
             ((System.ComponentModel.ISupportInitialize)pctboxDate).EndInit();

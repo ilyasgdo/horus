@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Date));
             monthCalendar = new MonthCalendar();
             btnValider = new Button();
             SuspendLayout();
             // 
             // monthCalendar
             // 
-            monthCalendar.Location = new Point(32, 35);
-            monthCalendar.Margin = new Padding(12, 15, 12, 15);
+            monthCalendar.Location = new Point(22, 21);
+            monthCalendar.Margin = new Padding(8, 9, 8, 9);
             monthCalendar.Name = "monthCalendar";
             monthCalendar.ShowToday = false;
             monthCalendar.TabIndex = 4;
@@ -44,9 +45,10 @@
             // 
             btnValider.BackColor = Color.PaleTurquoise;
             btnValider.Font = new Font("Sans Serif Collection", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnValider.Location = new Point(120, 308);
+            btnValider.Location = new Point(84, 185);
+            btnValider.Margin = new Padding(2, 2, 2, 2);
             btnValider.Name = "btnValider";
-            btnValider.Size = new Size(134, 44);
+            btnValider.Size = new Size(94, 26);
             btnValider.TabIndex = 5;
             btnValider.Text = "Valider";
             btnValider.UseVisualStyleBackColor = false;
@@ -54,12 +56,14 @@
             // 
             // Date
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(376, 414);
+            ClientSize = new Size(263, 248);
             Controls.Add(btnValider);
             Controls.Add(monthCalendar);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(2, 2, 2, 2);
             Name = "Date";
             Text = "Date";
             ResumeLayout(false);

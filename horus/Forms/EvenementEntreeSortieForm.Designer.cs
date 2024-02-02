@@ -43,10 +43,9 @@
             // 
             btnValiderEvenement.BackColor = Color.PaleTurquoise;
             btnValiderEvenement.Font = new Font("Sans Serif Collection", 9F);
-            btnValiderEvenement.Location = new Point(93, 266);
-            btnValiderEvenement.Margin = new Padding(4, 5, 4, 5);
+            btnValiderEvenement.Location = new Point(65, 160);
             btnValiderEvenement.Name = "btnValiderEvenement";
-            btnValiderEvenement.Size = new Size(137, 62);
+            btnValiderEvenement.Size = new Size(96, 37);
             btnValiderEvenement.TabIndex = 2;
             btnValiderEvenement.Text = "Valider";
             btnValiderEvenement.UseVisualStyleBackColor = false;
@@ -56,10 +55,9 @@
             // 
             lblDeuxPoints.AutoSize = true;
             lblDeuxPoints.Font = new Font("Segoe UI", 11F);
-            lblDeuxPoints.Location = new Point(154, 202);
-            lblDeuxPoints.Margin = new Padding(4, 0, 4, 0);
+            lblDeuxPoints.Location = new Point(108, 121);
             lblDeuxPoints.Name = "lblDeuxPoints";
-            lblDeuxPoints.Size = new Size(18, 30);
+            lblDeuxPoints.Size = new Size(12, 20);
             lblDeuxPoints.TabIndex = 8;
             lblDeuxPoints.Text = ":";
             // 
@@ -67,30 +65,27 @@
             // 
             cbMinuteEvenement.FormattingEnabled = true;
             cbMinuteEvenement.Items.AddRange(new object[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" });
-            cbMinuteEvenement.Location = new Point(177, 197);
-            cbMinuteEvenement.Margin = new Padding(4, 5, 4, 5);
+            cbMinuteEvenement.Location = new Point(124, 118);
             cbMinuteEvenement.Name = "cbMinuteEvenement";
-            cbMinuteEvenement.Size = new Size(51, 33);
+            cbMinuteEvenement.Size = new Size(37, 23);
             cbMinuteEvenement.TabIndex = 4;
             // 
             // cbHeureEvenement
             // 
             cbHeureEvenement.FormattingEnabled = true;
             cbHeureEvenement.Items.AddRange(new object[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" });
-            cbHeureEvenement.Location = new Point(93, 197);
-            cbHeureEvenement.Margin = new Padding(4, 5, 4, 5);
+            cbHeureEvenement.Location = new Point(65, 118);
             cbHeureEvenement.Name = "cbHeureEvenement";
-            cbHeureEvenement.Size = new Size(51, 33);
+            cbHeureEvenement.Size = new Size(37, 23);
             cbHeureEvenement.TabIndex = 3;
             // 
             // lblHoraireEntreePersonne
             // 
             lblHoraireEntreePersonne.AutoSize = true;
             lblHoraireEntreePersonne.Font = new Font("Sans Serif Collection", 7F);
-            lblHoraireEntreePersonne.Location = new Point(47, 152);
-            lblHoraireEntreePersonne.Margin = new Padding(4, 0, 4, 0);
+            lblHoraireEntreePersonne.Location = new Point(33, 91);
             lblHoraireEntreePersonne.Name = "lblHoraireEntreePersonne";
-            lblHoraireEntreePersonne.Size = new Size(103, 35);
+            lblHoraireEntreePersonne.Size = new Size(65, 24);
             lblHoraireEntreePersonne.TabIndex = 5;
             lblHoraireEntreePersonne.Text = "Horaire :";
             // 
@@ -98,19 +93,19 @@
             // 
             comboBoxEvenements.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxEvenements.FormattingEnabled = true;
-            comboBoxEvenements.Location = new Point(71, 99);
-            comboBoxEvenements.Margin = new Padding(4, 5, 4, 5);
+            comboBoxEvenements.Location = new Point(50, 59);
             comboBoxEvenements.Name = "comboBoxEvenements";
-            comboBoxEvenements.Size = new Size(171, 33);
+            comboBoxEvenements.Size = new Size(121, 23);
             comboBoxEvenements.TabIndex = 1;
             comboBoxEvenements.UseWaitCursor = true;
             // 
             // pctboxDate
             // 
             pctboxDate.Image = (Image)resources.GetObject("pctboxDate.Image");
-            pctboxDate.Location = new Point(242, 12);
+            pctboxDate.Location = new Point(169, 7);
+            pctboxDate.Margin = new Padding(2, 2, 2, 2);
             pctboxDate.Name = "pctboxDate";
-            pctboxDate.Size = new Size(67, 56);
+            pctboxDate.Size = new Size(47, 34);
             pctboxDate.SizeMode = PictureBoxSizeMode.Zoom;
             pctboxDate.TabIndex = 9;
             pctboxDate.TabStop = false;
@@ -118,10 +113,10 @@
             // 
             // EvenementEntreeSortieForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(321, 364);
+            ClientSize = new Size(225, 218);
             Controls.Add(pctboxDate);
             Controls.Add(comboBoxEvenements);
             Controls.Add(btnValiderEvenement);
@@ -129,7 +124,7 @@
             Controls.Add(cbMinuteEvenement);
             Controls.Add(cbHeureEvenement);
             Controls.Add(lblHoraireEntreePersonne);
-            Margin = new Padding(4, 5, 4, 5);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "EvenementEntreeSortieForm";
             Text = "EvenementEntree";
             ((System.ComponentModel.ISupportInitialize)pctboxDate).EndInit();
