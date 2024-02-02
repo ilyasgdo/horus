@@ -277,7 +277,7 @@ namespace horus
                 List<string> evenementsActifs = GetEvenementsActifs();
 
 
-                labelEvent.Text = "Événements actifs :\n";
+                labelEvent.Text = "Évènements actifs :\n";
 
                 foreach (string evenement in evenementsActifs)
                 {
@@ -286,7 +286,7 @@ namespace horus
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erreur lors de la mise à jour du label des événements : {ex.Message}");
+                Console.WriteLine($"Erreur lors de la mise à jour du label des évènements : {ex.Message}");
             }
         }
 
