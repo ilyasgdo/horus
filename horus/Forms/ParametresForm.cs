@@ -20,7 +20,7 @@ namespace horus.Forms
         {
             InitializeComponent();
 
-            fichierCSV = "../../../CSV/evenementss.csv";
+            fichierCSV = "CSV/evenementss.csv";
 
             CreerFichierCSV(fichierCSV);
 

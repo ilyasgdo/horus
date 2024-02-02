@@ -16,7 +16,7 @@ namespace horus.Forms
     {
         int nombrePersonnes;
         private bool entree;
-        string fichierCSVPers = "../../../CSV/personnes.csv";
+        string fichierCSVPers = "CSV/personnes.csv";
         List<string> contenu;
         public bool DateModif;
 
