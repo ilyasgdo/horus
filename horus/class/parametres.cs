@@ -13,15 +13,21 @@ namespace horus.@class
     public class Parametres
     {
         private static List<Evenement> evenements;
+        private static List<Evenement> evenements2;
         public static int nbpersonnes;
         private static int NbEvenement;
         private static DateTime date;
+        public bool vide=false;
 
         public Parametres(Evenement evenement)
         {
             if (evenements == null)
             {
                 evenements = new List<Evenement>();
+            }
+            if (evenements2 == null)
+            {
+                evenements2 = new List<Evenement>();
             }
             evenements.Add(evenement);
         }
@@ -99,6 +105,11 @@ namespace horus.@class
             {
                 evenements = new List<Evenement>();
             }
+            if (evenements2 == null)
+            {
+                evenements2 = new List<Evenement>();
+            }
+            vide = true;
         }
 
         public void Setnbpersonnes(int nb)
@@ -126,9 +137,19 @@ namespace horus.@class
             return evenements;
         }
 
+        public List<Evenement> getParametresComp()
+        {
+            return evenements2;
+        }
+
         public void InitParametres(List<Evenement> liste)
         {
             evenements = liste;
+        }
+
+        public void InitParametresComp()
+        {
+            evenements2 = evenements;
         }
     }
 }

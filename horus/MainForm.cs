@@ -60,6 +60,9 @@ namespace horus
                 parametre.AjouterEvenement(evenementi);
             }
             actualiser_label();
+            parametre.InitParametresComp();
+            Modification modif = new Modification(nbPersonnesPresentent,parametre);
+
 
 
             // test!!!!!!!!!!!!!!!!!!!!!!!

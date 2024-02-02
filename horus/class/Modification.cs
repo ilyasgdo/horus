@@ -32,15 +32,9 @@ namespace horus.@class
             this.param = para;
             EcritureCSV();
         }
-
-        public void InitnbPersComparaison(int nb)
+        public Modification(int nb, Parametres para)
         {
-            nbPersComparaison = nb;
-        }
-
-        public bool PremiereModif()
-        {
-            return nbPersComparaison == 1000;
+            if (nbPersComparaison == 1000) { nbPersComparaison = nb; }
         }
 
         private void CreerFichierCSV(string fichier)
@@ -51,8 +45,10 @@ namespace horus.@class
                 if (!File.Exists(fichier))
                 {
                     File.WriteAllText(fichier, "");
-                    CreerLigneDebut();
-                    CreerLigne0();
+                    string premiereLigne=CreerLigneDebut();
+                    contenuCSV = ChargerContenu();
+                    contenuCSV.Add(premiereLigne);
+                    SauvegarderModifs();
                     Debug.WriteLine("Fichier CSV créé avec succès.");
                 }
                 else
@@ -64,20 +60,6 @@ namespace horus.@class
             {
                 Debug.WriteLine($"Erreur lors de la création ou vérification du fichier CSV : {ex.Message}");
             }
-        }
-
-        private void CreerLigne0()
-        {
-            contenuCSV = ChargerContenu();
-
-            string ligne = Convert.ToString(DateTime.Now) + "0";
-            List<Evenement> listeEvenements = param.getParametres();
-            for (int i = 0; i < listeEvenements.Count; i++)
-            {
-                ligne = ligne + "0;";
-            }
-            contenuCSV.Add(ligne);
-            SauvegarderModifs();
         }
 
         private List<string> ChargerContenu()
@@ -101,26 +83,40 @@ namespace horus.@class
         private string CreerLigneModification()
         {
             List<Evenement> listeEvenements = param.getParametres();
+            List<Evenement> listeEvenementsComparaison = param.getParametresComp();
+            string nvModification="";
             if (listeEvenements.Count != param.GetNbEvenement())
             {
-                CreerLigneDebut();
+                nvModification=CreerLigneDebut();
                 param.SetNbEvenement(listeEvenements.Count);
             }
-            string personnes = Convert.ToString(nbPersonnesPrésentes - nbPersComparaison);
-            nbPersComparaison = nbPersonnesPrésentes;
-            string nvModification = Convert.ToString(dateEtHeure) + ";" + personnes + ";";
-            for (int i = 0; i < listeEvenements.Count; i++)
+            else
             {
-                bool EveActif = listeEvenements[i].isActif();
-                if (EveActif == true)
+                string personnes = Convert.ToString(nbPersonnesPrésentes - nbPersComparaison);
+                nbPersComparaison = nbPersonnesPrésentes;
+                nvModification = Convert.ToString(dateEtHeure) + ";" + personnes + ";";
+                for (int i = 0; i < listeEvenements.Count; i++)
                 {
-                    nvModification = nvModification + "1;";
+                    bool EveActif = listeEvenements[i].isActif();
+                    bool EveActifComp = listeEvenementsComparaison[i].isActif();
+                    Debug.WriteLine("Comparatif " + EveActif + " l'etat de " + listeEvenements[i] + " et " + EveActifComp + " l'état de " + listeEvenementsComparaison[i]);
+                    if (EveActif == EveActifComp)
+                    {
+                        nvModification = nvModification + "0;";
+                    }
+                    else
+                    {
+                        if (EveActif==true && EveActifComp==false)
+                        {
+                            nvModification = nvModification + "1;";
+                        }
+                        else
+                        {
+                            nvModification = nvModification + "-1;";
+                        }
+                    }
                 }
-                else
-                {
-                    nvModification = nvModification + "0;";
-                }
-
+                param.InitParametresComp();
             }
             return nvModification;
         }
@@ -139,7 +135,7 @@ namespace horus.@class
             }
         }
 
-        private void CreerLigneDebut()
+        private string CreerLigneDebut()
         {
             //récupère le contenu du fichier
             contenuCSV = ChargerContenu();
@@ -150,8 +146,7 @@ namespace horus.@class
             {
                 ligne = ligne + listeEvenements[i].getNom() + " ;";
             }
-            contenuCSV.Add(ligne);
-            SauvegarderModifs();
+            return ligne;
         }
 
         private void EcritureCSV()

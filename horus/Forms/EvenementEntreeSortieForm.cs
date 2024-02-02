@@ -67,6 +67,7 @@ namespace horus.Forms
                 }
                 //enregistrements de la modificaion dans la mémoire 
                 Parametres param = new Parametres();
+                param.InitParametresComp();
                 List<Evenement> liste = new List<Evenement>();
                 for (int i = 0; i < evenements.Count; i++)
                 {

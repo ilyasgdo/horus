@@ -59,6 +59,7 @@ namespace horus.Forms
                     liste.Add(evenementi);
                 }
                 param.InitParametres(liste);
+                param.InitParametresComp();
                 Modification modif1 = new Modification(param);
                 ActualiserComboBox();
                 SauvegarderEvenements();
@@ -92,6 +93,7 @@ namespace horus.Forms
                 liste.Add(evenementi);
             }
             param.InitParametres(liste);
+            param.InitParametresComp();
             Modification modif1 = new Modification(param);
             ActualiserComboBox();
             SauvegarderEvenements();
