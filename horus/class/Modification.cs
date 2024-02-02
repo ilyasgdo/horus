@@ -11,6 +11,7 @@ namespace horus.@class
     public class Modification
     {
         private DateTime dateEtHeure;
+        private static int nbPersComparaison = 1000;
         private int nbPersonnesPrésentes;
         private Parametres param;
         private string fichierCSV = "../../../CSV/memoire.csv";
@@ -32,6 +33,16 @@ namespace horus.@class
             EcritureCSV();
         }
 
+        public void InitnbPersComparaison(int nb)
+        {
+            nbPersComparaison = nb;
+        }
+
+        public bool PremiereModif()
+        {
+            return nbPersComparaison == 1000;
+        }
+
         private void CreerFichierCSV(string fichier)
         {
             try
@@ -41,6 +52,7 @@ namespace horus.@class
                 {
                     File.WriteAllText(fichier, "");
                     CreerLigneDebut();
+                    CreerLigne0();
                     Debug.WriteLine("Fichier CSV créé avec succès.");
                 }
                 else
@@ -52,6 +64,20 @@ namespace horus.@class
             {
                 Debug.WriteLine($"Erreur lors de la création ou vérification du fichier CSV : {ex.Message}");
             }
+        }
+
+        private void CreerLigne0()
+        {
+            contenuCSV = ChargerContenu();
+
+            string ligne = Convert.ToString(DateTime.Now) + "0";
+            List<Evenement> listeEvenements = param.getParametres();
+            for (int i = 0; i < listeEvenements.Count; i++)
+            {
+                ligne = ligne + "0;";
+            }
+            contenuCSV.Add(ligne);
+            SauvegarderModifs();
         }
 
         private List<string> ChargerContenu()
@@ -80,7 +106,9 @@ namespace horus.@class
                 CreerLigneDebut();
                 param.SetNbEvenement(listeEvenements.Count);
             }
-            string nvModification = Convert.ToString(dateEtHeure) + ";" + Convert.ToString(nbPersonnesPrésentes) + ";";
+            string personnes = Convert.ToString(nbPersonnesPrésentes - nbPersComparaison);
+            nbPersComparaison = nbPersonnesPrésentes;
+            string nvModification = Convert.ToString(dateEtHeure) + ";" +personnes + ";";
             for (int i = 0; i < listeEvenements.Count; i++)
             {
                 bool EveActif = listeEvenements[i].isActif();

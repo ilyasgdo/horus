@@ -70,105 +70,156 @@ namespace horus.Forms
                 TimeSpan intervalle = TimeSpan.FromMinutes(5); //Debug.WriteLine("70");
 
                 string ligneProche;
+                string ligneProcheComparaison="";
                 string[] champsLigne;
-                string nbPersonnes;
+                string nbPersonnes="0";
                 List<string> listeNomEvenement = new List<string>();
                 List<bool> listeEtat = new List<bool>();
-                string ligne;
-                //bool test = true;
+                List<string> creaLigne= new List<string>();
+                bool ligne1 = true;
 
                 while (currentDate <= dateFin)
                 {
                     // Nina : methode "quelle est la ligne la plus proche" lapluus vielle mais 
+                    string ligne = "";
                     ligneProche = LigneLaPlusProche(currentDate);
-                    //if (test == true) { Debug.WriteLine("la ligne trouvé est - " + ligneProche+" pour la date "+currentDate); }
-
-                    //on récupère le nombre de personnes
-                    champsLigne = ligneProche.Split(';');
-                    nbPersonnes = champsLigne[1];
-                    //if (test == true)
-                    //{
-                    //    Debug.Write("Ses champs sont :");
-                    //    for (int i = 0; i < champsLigne.Length-1; i++) { Debug.Write(champsLigne[i] + " ; "); } Debug.Write("\n");
-                    //}
-                    //fonction pour trouver actuellement les evenements et leur etat (actif ou non)
-                    listeNomEvenement.Clear();
-                    listeEtat.Clear();
-                    listeNomEvenement = ListeEvenements(currentDate); //Debug.WriteLine("85");
-                    //if (test == true)
-                    //{
-                    //    Debug.Write("Ses evenements sont :");
-                    //    for (int i = 0; i < listeNomEvenement.Count-1; i++) { Debug.Write(listeNomEvenement[i] + " ; "); }
-                    //    Debug.Write("\n");
-                    //}
-                    for (int j=2; j<champsLigne.Length; j++)
+                    if (!ligne1)
                     {
-                        //if (test == true) { Debug.WriteLine("pour i = " + j + " on retrouve " + champsLigne[j]); }
-                        if (champsLigne[j] == "1")
+                        if (ligneProche == ligneProcheComparaison)
                         {
-                            listeEtat.Add(true);
-                        } else
-                        {
-                            listeEtat.Add(false);
+                            creaLigne[0] = currentDate.ToString("dd/MM/yyyy HH:mm:ss") + ";";
                         }
                     }
-                    //if (test == true)
-                    //{
-                    //    Debug.Write("Ses valeurs sont :");
-                    //    for (int i = 0; i < listeEtat.Count; i++) { Debug.Write(listeEtat[i] + " ; "); }
-                    //    Debug.Write("\n");
-                    //}
-                    ligne = currentDate.ToString("dd/MM/yyyy HH:mm:ss")+";"+ nbPersonnes+";";
-                    for (int i = 0; i < NomsEvenements.Count; i++)
+                    else
                     {
-                        //if (test == true) { Debug.Write("\nEvenement " + NomsEvenements[i]); }
+                        //if (test == true) { Debug.WriteLine("la ligne trouvé est - " + ligneProche+" pour la date "+currentDate); }
 
-                        //Debug.WriteLine("champ étudié" + NomsEvenements[i]+" (" + Convert.ToInt32(NomsEvenements[i])+")");
-                        //if (listeNomEvenement.Contains(NomsEvenements[i]))
-                        bool trouve = false;
-                        for (int k = 0; k < listeNomEvenement.Count; k++)
+                        //on récupère le nombre de personnes
+                        champsLigne = ligneProche.Split(';');
+                        if (ligne1) // ATTENTION SI PLUSIEUR MODIF DANS LA MEME PERIODE DE TEMPS
                         {
-                            //if (test == true) { Debug.Write("\n   " + listeNomEvenement[k]+" : "); }
-                            //Debug.Write("champ Comparé" +  + " ; ");
-                            //Debug.Write("champ Comparé" + listeNomEvenement[k]+" (" + Convert.ToInt32(listeNomEvenement[k]) + ") ; ");
-                            if (listeNomEvenement[k] == NomsEvenements[i])
+                            nbPersonnes = Convert.ToString(RecupInitPers(currentDate));
+                        }
+                        else
+                        {
+                            nbPersonnes = Convert.ToString(Convert.ToInt32(nbPersonnes) + champsLigne[1]);
+                            Debug.WriteLine("!!!! ERREUR DE CONVERSION ? " + nbPersonnes + " = " + Convert.ToInt32(nbPersonnes) + " ?");
+                        }
+                        //if (test == true)
+                        //{
+                        //    Debug.Write("Ses champs sont :");
+                        //    for (int i = 0; i < champsLigne.Length-1; i++) { Debug.Write(champsLigne[i] + " ; "); } Debug.Write("\n");
+                        //}
+                        //fonction pour trouver actuellement les evenements et leur etat (actif ou non)
+                        listeNomEvenement.Clear();
+                        listeEtat.Clear();
+                        listeNomEvenement = ListeEvenements(currentDate); //Debug.WriteLine("85");
+                                                                          //if (test == true)
+                                                                          //{
+                                                                          //    Debug.Write("Ses evenements sont :");
+                                                                          //    for (int i = 0; i < listeNomEvenement.Count-1; i++) { Debug.Write(listeNomEvenement[i] + " ; "); }
+                                                                          //    Debug.Write("\n");
+                                                                          //}
+                        for (int j = 2; j < champsLigne.Length; j++)
+                        {
+                            //if (test == true) { Debug.WriteLine("pour i = " + j + " on retrouve " + champsLigne[j]); }
+                            if (champsLigne[j] == "1")
                             {
-                                //if (test == true) { Debug.Write("C'est le même champs"); }
-                                trouve= true;
-                                //Debug.WriteLine("\nchamp trouvé");
-                                if (k<listeEtat.Count && listeEtat[k] == true)
-                                {
-                                    ligne = ligne + "1;";
-                                }
-                                else
-                                {
-                                    ligne = ligne + "0;";
-                                }
+                                listeEtat.Add(true);
+                            }
+                            else
+                            {
+                                listeEtat.Add(false);
                             }
                         }
-                        if (trouve == false) { ligne = ligne + "0;"; }
+                        //if (test == true)
+                        //{
+                        //    Debug.Write("Ses valeurs sont :");
+                        //    for (int i = 0; i < listeEtat.Count; i++) { Debug.Write(listeEtat[i] + " ; "); }
+                        //    Debug.Write("\n");
+                        //}
+                        creaLigne.Add(currentDate.ToString("dd/MM/yyyy HH:mm:ss") + ";");
+                        creaLigne.Add(nbPersonnes + ";");
+                        //ligne = currentDate.ToString("dd/MM/yyyy HH:mm:ss")+";"+ nbPersonnes+";";
+                        for (int i = 0; i < NomsEvenements.Count; i++)
+                        {
+                            //if (test == true) { Debug.Write("\nEvenement " + NomsEvenements[i]); }
+
+                            //Debug.WriteLine("champ étudié" + NomsEvenements[i]+" (" + Convert.ToInt32(NomsEvenements[i])+")");
+                            //if (listeNomEvenement.Contains(NomsEvenements[i]))
+                            bool trouve = false;
+                            for (int k = 0; k < listeNomEvenement.Count; k++)
+                            {
+                                //if (test == true) { Debug.Write("\n   " + listeNomEvenement[k]+" : "); }
+                                //Debug.Write("champ Comparé" +  + " ; ");
+                                //Debug.Write("champ Comparé" + listeNomEvenement[k]+" (" + Convert.ToInt32(listeNomEvenement[k]) + ") ; ");
+                                if (listeNomEvenement[k] == NomsEvenements[i])
+                                {
+                                    //if (test == true) { Debug.Write("C'est le même champs"); }
+                                    trouve = true;
+                                    //Debug.WriteLine("\nchamp trouvé");
+                                    if (k < listeEtat.Count && listeEtat[k] == true)
+                                    {
+                                        creaLigne.Add("1;");
+                                        //ligne = ligne + "1;";
+                                    }
+                                    else
+                                    {
+                                        creaLigne.Add("0;");
+                                        //ligne = ligne + "0;";
+                                    }
+                                }
+                            }
+                            if (trouve == false) { creaLigne.Add("0;"); }
+                        }
+                        //if (test == true) { Debug.WriteLine("la ligne totale est : " + ligne); test = false; }
+                        //Debug.WriteLine("109");
+                        //Ilyas 
+
+                        // Récupérer le nombre de personnes du fichier de référence pour la date actuelle
+                        /*int nbPersonnesReference = GetNombrePersonnesReference(currentDate);
+
+                        // Générer la ligne du nouveau fichier en utilisant le nombre de personnes
+                        string ligne = $"{currentDate.ToString("dd/MM/yyyy HH:mm:ss")};{nbPersonnesReference}";
+
+                        // Ajouter les états des événements
+                        foreach (Evenement evenement in parametres.ChargerEvenementsDepuisCSV())
+                        {
+                            ligne += $";{(evenement.isActif() ? "1" : "0")}";
+                        }
+                        */
                     }
-                    //if (test == true) { Debug.WriteLine("la ligne totale est : " + ligne); test = false; }
-                    //Debug.WriteLine("109");
-                    //Ilyas 
-
-                    // Récupérer le nombre de personnes du fichier de référence pour la date actuelle
-                    /*int nbPersonnesReference = GetNombrePersonnesReference(currentDate);
-
-                    // Générer la ligne du nouveau fichier en utilisant le nombre de personnes
-                    string ligne = $"{currentDate.ToString("dd/MM/yyyy HH:mm:ss")};{nbPersonnesReference}";
-
-                    // Ajouter les états des événements
-                    foreach (Evenement evenement in parametres.ChargerEvenementsDepuisCSV())
+                    for(int i=0;  i < creaLigne.Count; i++)
                     {
-                        ligne += $";{(evenement.isActif() ? "1" : "0")}";
+                        ligne = ligne + creaLigne[i];
                     }
-                    */
                     writer.WriteLine(ligne);
 
                     currentDate = currentDate.Add(intervalle);
+                    ligne1 = false;
+                    ligneProcheComparaison = ligneProche;
                 }
             }
+        }
+
+        private int RecupInitPers(DateTime currentDate)
+        {
+            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            contenuMemoire = EnleverParam(contenuMemoire);
+            contenuMemoire = Tri(contenuMemoire);
+            int i = 1; bool Fin = false; int total = Convert.ToInt32(contenuMemoire[0].Split(';')[1]);
+            while(i< contenuMemoire.Count && Fin==false) 
+            {
+                int nb = Convert.ToInt32(contenuMemoire[i].Split(';')[1]);
+                Debug.WriteLine("!!!!! nb = " + nb);
+                total += nb;
+                if (DateTime.Parse(contenuMemoire[i+1].Split(';')[1]) > currentDate)
+                {
+                    Fin= true;
+                }
+                i++;
+            }
+            return total;
         }
 
         private List<string> RecupEvenements()
