@@ -78,16 +78,16 @@ namespace horus.Forms
 
                 //recup des évènepents
                 string ligneP = LigneLaPlusProche(DateTime.Parse(strDateEtHeure));
-                List<string> evenements = ListeEvenements(ligneP);
+                List<string> Evenements = ListeEvenements(ligneP);
                 Debug.WriteLine("Les evenements sont : ");
-                for (int i = 0; i < evenements.Count; i++)
+                for (int i = 0; i < Evenements.Count; i++)
                 {
-                    int tailleEve = evenements[i].Length;
-                    evenements[i] = evenements[i].Substring(0, tailleEve - 1);
-                    Debug.Write(evenements[i]);
+                    int tailleEve = Evenements[i].Length;
+                    Evenements[i] = Evenements[i].Substring(0, tailleEve - 1);
+                    Debug.Write(Evenements[i]);
                 }
 
-                List<int> valeurs = RecupInitEve(DateTime.Parse(strDateEtHeure), evenements.Count);
+                List<int> valeurs = RecupInitEve(DateTime.Parse(strDateEtHeure), Evenements.Count);
                 Debug.WriteLine("\nLeur valeurs sont : ");
                 for (int i = 0; i < valeurs.Count; i++)
                 {
@@ -95,10 +95,10 @@ namespace horus.Forms
                 }
                 Debug.WriteLine("\nOn compare nos evenements :");
                 int j = 0; bool trouve = false;
-                while (j < evenements.Count && trouve == false)
+                while (j < Evenements.Count && trouve == false)
                 {
-                    Debug.Write(evenementSelectionne + " est comparé à " + evenements[j] + " ;  ");
-                    if (evenements[j] == evenementSelectionne)
+                    Debug.Write(evenementSelectionne + " est comparé à " + Evenements[j] + " ;  ");
+                    if (Evenements[j] == evenementSelectionne)
                     {
                         trouve = true; j--;
                     }
@@ -110,7 +110,13 @@ namespace horus.Forms
                 Debug.WriteLine("Ainsi l'action est-elle valide ? : " + Nonvalide + "   (true si non valide)");
                 if (Nonvalide)
                 {
-                    MessageBox.Show("L'évènement n'est pas en cours à ce moment", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (entree == false)
+                    {
+                        MessageBox.Show("L'évènement n'est pas en cours à ce moment", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    } else
+                    {
+                        MessageBox.Show("L'évènement est déjà en cours à ce moment", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
@@ -121,7 +127,6 @@ namespace horus.Forms
                     {
                         //on modifie 
                         evenements[indexEvenement] = $"{evenementSelectionne};{(entree ? "1" : "0")}";
-
                         SauvegarderEvenements();
                     }
                     //enregistrements de la modificaion dans la mémoire 
@@ -130,6 +135,7 @@ namespace horus.Forms
                     for (int i = 0; i < evenements.Count; i++)
                     {
                         string[] ligne = evenements[i].Split(';');
+                        Debug.WriteLine("Cette ligne est : " + evenements[i]);
                         bool activite;
                         if (ligne[1] == "0") { activite = false; } else { activite = true; }
                         Evenement evenementi = new Evenement(ligne[0], activite);
@@ -292,6 +298,7 @@ namespace horus.Forms
         private void ActualiserComboBoxEntree()
         {
             // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
+            EvenementNonActif.Clear();
             for (int i = 0; i < evenements.Count; i++)
             {
                 string[] ligne = evenements[i].Split(';');
@@ -307,6 +314,7 @@ namespace horus.Forms
         private void ActualiserComboBoxSortie()
         {
             // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
+            EvenementActif.Clear();
             for (int i = 0; i < evenements.Count; i++)
             {
                 string[] ligne = evenements[i].Split(';');

@@ -67,37 +67,65 @@ namespace horus.Forms
             {
                 dateDuJour = DateTime.Now.ToString("dd/MM/yyyy");
             }
-            if (entree)
+            string strDateEtHeure = dateDuJour + " " + cbHeurePersonne.SelectedItem + ":" + cbMinutePersonne.SelectedItem;
+            DateTime DateEtHeure = DateTime.Parse(strDateEtHeure);
+            int nbPersonnes = RecupInitPers(DateEtHeure);
+            bool NonValide = entree == false && nbPersonnes == 0;
+            if (NonValide)
             {
-                nombrePersonnes++;
-                //changer le contenu du csv
-                contenu.Clear(); contenu.Add(nombrePersonnes.ToString());
-                Sauvegarder();
-                parametres.Setnbpersonnes(nombrePersonnes);
-                string strDateEtHeure = dateDuJour + " " + cbHeurePersonne.SelectedItem + ":" + cbMinutePersonne.SelectedItem;
-                DateTime DateEtHeure = DateTime.Parse(strDateEtHeure);
-                Modification modif = new Modification(DateEtHeure, parametres);
-
+                MessageBox.Show("Il n'y a personne de présent à ce moment", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                if (nombrePersonnes > 0)
+                if (entree)
                 {
-                    nombrePersonnes--;
+                    nombrePersonnes++;
+                    //changer le contenu du csv
                     contenu.Clear(); contenu.Add(nombrePersonnes.ToString());
                     Sauvegarder();
                     parametres.Setnbpersonnes(nombrePersonnes);
-                    string strDateEtHeure = dateDuJour + " " + cbHeurePersonne.SelectedItem + ":" + cbMinutePersonne.SelectedItem;
-                    DateTime DateEtHeure = DateTime.Parse(strDateEtHeure);
                     Modification modif = new Modification(DateEtHeure, parametres);
+
                 }
                 else
                 {
-                    MessageBox.Show("Il n'y a personne à faire sortir", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (nombrePersonnes > 0)
+                    {
+                        nombrePersonnes--;
+                        contenu.Clear(); contenu.Add(nombrePersonnes.ToString());
+                        Sauvegarder();
+                        parametres.Setnbpersonnes(nombrePersonnes);
+                        Modification modif = new Modification(DateEtHeure, parametres);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Il n'y a personne à faire sortir", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
-
             this.Close();
+        }
+
+        private int RecupInitPers(DateTime currentDate)
+        {
+            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
+            contenuMemoire = EnleverParam(contenuMemoire);
+            contenuMemoire = Tri(contenuMemoire);
+            int i = 1; bool Fin = false; int total = 0;
+            if (contenuMemoire.Count!=0) { total = Convert.ToInt32(contenuMemoire[0].Split(';')[1]); } 
+            while (i < contenuMemoire.Count && Fin == false)
+            {
+                Debug.WriteLine("A la ligne " + contenuMemoire[i]);
+                int nb = Convert.ToInt32(contenuMemoire[i].Split(';')[1]);
+                Debug.WriteLine("!!!!! nb = " + nb);
+                total += nb;
+                if (i+1 >= contenuMemoire.Count || DateTime.Parse(contenuMemoire[i + 1].Split(';')[0]) > currentDate)
+                {
+                    Fin = true;
+                }
+                i++;
+            }
+            return total;
         }
 
         private void Sauvegarder()
@@ -133,6 +161,42 @@ namespace horus.Forms
             {
                 Debug.WriteLine($"Erreur lors de la création ou vérification du fichier CSV : {ex.Message}");
             }
+        }
+
+        private List<string> EnleverParam(List<string> lignes)
+        {
+            List<string> listModification = new List<string>();
+            int nbligne = lignes.Count;
+            //enleve les ligne qui ne servent pas 
+            for (int i = 0; i < nbligne; i++)
+            {
+                if (lignes[i].Split(';')[1] != "Date et heure ")
+                {
+                    listModification.Add(lignes[i]);
+                }
+
+            }
+            return listModification;
+        }
+
+        private List<string> Tri(List<string> lignes)
+        {
+            //tri par date
+            for (int i = lignes.Count - 1; i > 0; i--)
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    DateTime date1 = DateTime.Parse(lignes[j].Split(';')[0]);
+                    DateTime date2 = DateTime.Parse(lignes[j + 1].Split(';')[0]);
+                    if (date1 > date2)
+                    {
+                        string intermediaire = lignes[j];
+                        lignes[j] = lignes[j + 1];
+                        lignes[j + 1] = intermediaire;
+                    }
+                }
+            }
+            return lignes;
         }
 
         private void pctboxDate_Click(object sender, EventArgs e)
