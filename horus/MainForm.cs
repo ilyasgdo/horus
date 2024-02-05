@@ -18,8 +18,8 @@ namespace horus
 {
     public partial class MainForm : Form
     {
-        private const string fichierCSVEve = "../../../CSV/evenementss.csv";
-        private const string fichierCSVPers = "../../../CSV/personnes.csv";
+        private const string fichierCSVEve = "CSV/evenementss.csv";
+        private const string fichierCSVPers = "CSV/personnes.csv";
         public Parametres parametre = new Parametres();
 
         public MainForm()
@@ -185,7 +185,7 @@ namespace horus
         {
             try
             {
-                string cheminFichierCSV = "../../../CSV/personnes.csv";
+                string cheminFichierCSV = "CSV/personnes.csv";
 
                 if (File.Exists(cheminFichierCSV))
                 {
@@ -233,7 +233,7 @@ namespace horus
 
             try
             {
-                string cheminFichierCSV = "../../../CSV/evenementss.csv";
+                string cheminFichierCSV = "CSV/evenementss.csv";
 
                 if (File.Exists(cheminFichierCSV))
                 {
@@ -305,7 +305,7 @@ namespace horus
         {
             try
             {
-                string cheminFichierAvertissements = "../../../CSV/avertissements.csv";
+                string cheminFichierAvertissements = "CSV/avertissements.csv";
 
                 // Charger les alertes existantes
                 List<string> alertes = ChargerAlertes();
@@ -380,7 +380,7 @@ namespace horus
         {
             try
             {
-                string cheminFichierAvertissements = "../../../CSV/avertissements.csv";
+                string cheminFichierAvertissements = "CSV/avertissements.csv";
 
                 if (File.Exists(cheminFichierAvertissements))
                 {
@@ -425,8 +425,8 @@ namespace horus
         {
             try
             {
-                string cheminFichierAvertissements = "../../../CSV/avertissements.csv";
-
+                string cheminFichierAvertissements = "CSV/avertissements.csv";
+                    
               
                 File.WriteAllText(cheminFichierAvertissements, string.Empty);
 

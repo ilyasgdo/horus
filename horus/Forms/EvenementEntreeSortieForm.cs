@@ -29,7 +29,7 @@ namespace horus.Forms
             InitializeComponent();
 
             // Chemin complet du fichier CSV
-            fichierCSV = "../../../CSV/evenementss.csv";
+            fichierCSV = "CSV/evenementss.csv";
 
             // Chargement des événements à partir du fichier CSV
             evenements = ChargerEvenements();

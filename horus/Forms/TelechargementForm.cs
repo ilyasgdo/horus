@@ -205,7 +205,7 @@ namespace horus.Forms
 
         private int RecupInitPers(DateTime currentDate)
         {
-            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             contenuMemoire = EnleverParam(contenuMemoire);
             contenuMemoire = Tri(contenuMemoire);
             int i = 0; bool Fin = false; int total = 0;
@@ -225,7 +225,7 @@ namespace horus.Forms
 
         private List<int> RecupInitEve(DateTime currentDate, int taille)
         {
-            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             contenuMemoire = EnleverParam(contenuMemoire);
             contenuMemoire = Tri(contenuMemoire);
             int i = 0; bool Fin = false; List<int> total=new List<int>(); 
@@ -249,7 +249,7 @@ namespace horus.Forms
 
         private List<string> RecupEvenements()
         {
-            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             List<string> listeEve = new List<string>();
             for (int i = 0; i < contenuMemoire.Count; i++)
             {
@@ -276,7 +276,7 @@ namespace horus.Forms
 
         private List<string> ListeEvenements(string ligneProche)
         {
-            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             string dernierListeParametres = ""; bool Fin = false; int j = 0;
             while (j < contenuMemoire.Count && Fin == false)
             {
@@ -320,7 +320,7 @@ namespace horus.Forms
         private int GetNombrePersonnesReference(DateTime currentDate)
         {
             // Charger les données depuis le fichier CSV de référence
-            List<string> referenceLines = File.ReadAllLines("../../../CSV/evenementss.csv").ToList();
+            List<string> referenceLines = File.ReadAllLines("CSV/evenementss.csv").ToList();
 
             // Rechercher la ligne correspondante dans le fichier de référence
             string referenceLine = referenceLines.FirstOrDefault(line => line.StartsWith(currentDate.ToString("dd/MM/yyyy HH:mm:ss")));
@@ -339,7 +339,7 @@ namespace horus.Forms
         private string LigneLaPlusProche(DateTime date)
         {
             //récupération de la mémoire
-            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             contenuMemoire = EnleverParam(contenuMemoire);
             contenuMemoire = Tri(contenuMemoire);
             //for(int i=0; i<contenuMemoire.Count; i++)
