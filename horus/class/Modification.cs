@@ -14,7 +14,7 @@ namespace horus.@class
         private static int nbPersComparaison = 1000;
         private int nbPersonnesPrésentes;
         private Parametres param;
-        private string fichierCSV = "../../../CSV/memoire.csv";
+        private string fichierCSV = "CSV/memoire.csv";
         private List<string> contenuCSV = new List<string>();
 
         public Modification(Parametres para)

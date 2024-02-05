@@ -58,7 +58,7 @@ namespace horus.Forms
             if (!string.IsNullOrEmpty(evenementSelectionne))
             {
                 //récup contenu mémoire dans l'ordre
-                List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+                List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
                 contenuMemoire = EnleverParam(contenuMemoire);
                 contenuMemoire = Tri(contenuMemoire);
 
@@ -145,7 +145,7 @@ namespace horus.Forms
 
         private List<int> RecupInitEve(DateTime currentDate, int taille)
         {
-            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             contenuMemoire = EnleverParam(contenuMemoire);
             contenuMemoire = Tri(contenuMemoire);
             int i = 0; bool Fin = false; List<int> total = new List<int>();
@@ -178,7 +178,7 @@ namespace horus.Forms
         private string LigneLaPlusProche(DateTime date)
         {
             //récupération de la mémoire
-            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             contenuMemoire = EnleverParam(contenuMemoire);
             contenuMemoire = Tri(contenuMemoire);
             //for(int i=0; i<contenuMemoire.Count; i++)
@@ -218,7 +218,7 @@ namespace horus.Forms
 
         private List<string> ListeEvenements(string ligneProche)
         {
-            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             string dernierListeParametres = ""; bool Fin = false; int j = 0;
             while (j < contenuMemoire.Count && Fin == false)
             {

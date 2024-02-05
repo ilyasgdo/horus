@@ -54,7 +54,7 @@ namespace horus.@class
 
         public List<Evenement> ChargerEvenementsDepuisCSV()
         {
-            string cheminFichierCSV = "../../../CSV/evenementss.csv";
+            string cheminFichierCSV = "CSV/evenementss.csv";
             List<Evenement> listeEvenements = new List<Evenement>();
 
             try
