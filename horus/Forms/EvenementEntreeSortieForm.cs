@@ -21,6 +21,8 @@ namespace horus.Forms
 
         public bool entree;
         public bool DateModif;
+        public static List<string> EvenementNonActif = new List<string>();
+        public static List<string> EvenementActif = new List<string>();
 
         public EvenementEntreeSortieForm(int nbGens, bool entree)
         {
@@ -55,49 +57,241 @@ namespace horus.Forms
 
             if (!string.IsNullOrEmpty(evenementSelectionne))
             {
-                //on cherche lma ligne ou la premier aveleurs de la ligne = le non selectionner dans la combo
-                int indexEvenement = evenements.FindIndex(ev => ev.Split(';')[0] == evenementSelectionne);
+                //récup contenu mémoire dans l'ordre
+                List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+                contenuMemoire = EnleverParam(contenuMemoire);
+                contenuMemoire = Tri(contenuMemoire);
 
-                if (indexEvenement != -1)
-                {
-                    //on modifie 
-                    evenements[indexEvenement] = $"{evenementSelectionne};{(entree ? "1" : "0")}";
-
-                    SauvegarderEvenements();
-                }
-                //enregistrements de la modificaion dans la mémoire 
-                Parametres param = new Parametres();
-                param.InitParametresComp();
-                List<Evenement> liste = new List<Evenement>();
-                for (int i = 0; i < evenements.Count; i++)
-                {
-                    string[] ligne = evenements[i].Split(';');
-                    bool activite;
-                    if (ligne[1] == "0") { activite = false; } else { activite = true; }
-                    Evenement evenementi = new Evenement(ligne[0], activite);
-                    liste.Add(evenementi);
-                }
-                param.InitParametres(liste);
+                //récupère la date et l'heure selectionné
                 string dateDuJour;
+                Parametres param = new Parametres();
                 if (DateModif == true)
                 {
                     dateDuJour = param.GetDate().ToString("dd/MM/yyyy");
-                } else
+                }
+                else
                 {
                     dateDuJour = DateTime.Now.ToString("dd/MM/yyyy");
                 }
                 string strDateEtHeure = dateDuJour + " " + cbHeureEvenement.SelectedItem + ":" + cbMinuteEvenement.SelectedItem;
-                DateTime DateEtHeure = DateTime.Parse(strDateEtHeure);
-                Modification modif = new Modification(DateEtHeure, param);
-            }
+                Debug.WriteLine("la date et l'heure choisi est : "+strDateEtHeure);
 
+                //recup des évènepents
+                string ligneP = LigneLaPlusProche(DateTime.Parse(strDateEtHeure));
+                List<string> evenements = ListeEvenements(ligneP);
+                Debug.WriteLine("Les evenements sont : ");
+                for (int i = 0; i < evenements.Count; i++)
+                {
+                    int tailleEve = evenements[i].Length;
+                    evenements[i] = evenements[i].Substring(0, tailleEve - 1);
+                    Debug.Write(evenements[i]);
+                }
+
+                List<int> valeurs = RecupInitEve(DateTime.Parse(strDateEtHeure), evenements.Count);
+                Debug.WriteLine("\nLeur valeurs sont : ");
+                for (int i = 0; i < valeurs.Count; i++)
+                {
+                    Debug.Write(valeurs[i]);
+                }
+                Debug.WriteLine("\nOn compare nos evenements :");
+                int j = 0; bool trouve = false;
+                while (j < evenements.Count && trouve == false)
+                {
+                    Debug.Write(evenementSelectionne + " est comparé à " + evenements[j] + " ;  ");
+                    if (evenements[j] == evenementSelectionne)
+                    {
+                        trouve = true; j--;
+                    }
+                    j++;
+                }
+                Debug.WriteLine("\nL'élement sélectionné est celui numéro " + j + 1);
+
+                bool Nonvalide = (entree == false && valeurs[j] != 1) || (entree == true && valeurs[j] != 0);
+                Debug.WriteLine("Ainsi l'action est-elle valide ? : " + Nonvalide + "   (true si non valide)");
+                if (Nonvalide)
+                {
+                    MessageBox.Show("L'évènement n'est pas en cours à ce moment", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    //on cherche lma ligne ou la premier aveleurs de la ligne = le non selectionner dans la combo
+                    int indexEvenement = evenements.FindIndex(ev => ev.Split(';')[0] == evenementSelectionne);
+
+                    if (indexEvenement != -1)
+                    {
+                        //on modifie 
+                        evenements[indexEvenement] = $"{evenementSelectionne};{(entree ? "1" : "0")}";
+
+                        SauvegarderEvenements();
+                    }
+                    //enregistrements de la modificaion dans la mémoire 
+                    param.InitParametresComp();
+                    List<Evenement> liste = new List<Evenement>();
+                    for (int i = 0; i < evenements.Count; i++)
+                    {
+                        string[] ligne = evenements[i].Split(';');
+                        bool activite;
+                        if (ligne[1] == "0") { activite = false; } else { activite = true; }
+                        Evenement evenementi = new Evenement(ligne[0], activite);
+                        liste.Add(evenementi);
+                    }
+                    param.InitParametres(liste);
+                    DateTime DateEtHeure = DateTime.Parse(strDateEtHeure);
+                    Modification modif = new Modification(DateEtHeure, param);
+                }
+            }
             this.Close();
+        }
+
+        private List<int> RecupInitEve(DateTime currentDate, int taille)
+        {
+            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            contenuMemoire = EnleverParam(contenuMemoire);
+            contenuMemoire = Tri(contenuMemoire);
+            int i = 0; bool Fin = false; List<int> total = new List<int>();
+            for (int j = 0; j < taille; j++) { total.Add(0); }
+            while (i < contenuMemoire.Count && Fin == false)
+            {
+                Debug.WriteLine("taille = " + taille);
+                for (int j = 0; j < taille; j++)
+                {
+                    string[] test = contenuMemoire[i].Split(';');
+                    Debug.WriteLine("On test la ligne " + contenuMemoire[i]);
+                    for (int k = 0; k<test.Length; k++)
+                    {
+                        Debug.Write("L'élement numéro " + k + " est " + test[k]+"  ;  ");
+                    }
+                    Debug.WriteLine("\n");
+                    int nb = Convert.ToInt32(contenuMemoire[i].Split(';')[2 + j]);
+                    total[j] = total[j] + nb;
+                    if (total[j] != 0 && total[j] != 1) { total[j] = 0; Debug.WriteLine("Bug incohérence dans la mémoire"); }
+                }
+                if (i + 1 < contenuMemoire.Count && DateTime.Parse(contenuMemoire[i + 1].Split(';')[0]) > currentDate)
+                {
+                    Fin = true;
+                }
+                i++;
+            }
+            return total;
+        }
+
+        private string LigneLaPlusProche(DateTime date)
+        {
+            //récupération de la mémoire
+            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            contenuMemoire = EnleverParam(contenuMemoire);
+            contenuMemoire = Tri(contenuMemoire);
+            //for(int i=0; i<contenuMemoire.Count; i++)
+            //{
+            //if (test == true) { Debug.WriteLine("\n");}
+            //}
+
+            for (int i = 0; i < contenuMemoire.Count; i++)
+            {
+                string dateligne = contenuMemoire[i].Split(';')[0];
+                //if (test == true) { Debug.Write("Comparaison " + DateTime.Parse(dateligne) + " et " + date + " = " + Convert.ToString(DateTime.Parse(dateligne) > date) + "  -  "); }
+
+                if (DateTime.Parse(dateligne) > date)
+                {
+                    //if (test == true) { Debug.Write("La ligne est plus tard " + dateligne + "  -  "); }
+                    if (i != 0)
+                    {
+                        //if (test == true) { Debug.Write("La ligne d'avant " + contenuMemoire[i - 1].Split(';')[0] + "  -  "); }
+
+                        //ligne d'avant
+                        return contenuMemoire[i - 1];
+
+                    }
+                    else
+                    {
+                        //if (test == true) { Debug.Write("La ligne d'avant " + contenuMemoire[i].Split(';')[0] + "  -  "); }
+
+                        //ligne vide
+                        return contenuMemoire[i];
+
+                    }
+                }
+            }
+            //dernière ligne
+            return contenuMemoire[contenuMemoire.Count - 1];
+        }
+
+        private List<string> ListeEvenements(string ligneProche)
+        {
+            List<string> contenuMemoire = File.ReadAllLines("../../../CSV/memoire.csv").ToList();
+            string dernierListeParametres = ""; bool Fin = false; int j = 0;
+            while (j < contenuMemoire.Count && Fin == false)
+            {
+                if (contenuMemoire[j].Split(';')[1] == "Date et heure ")
+                {
+                    dernierListeParametres = contenuMemoire[j];
+                    Fin = true;
+                }
+                j++;
+            }
+            Fin = false; int i = 0;
+            while (i < contenuMemoire.Count && Fin == false)
+            {
+                if (contenuMemoire[i].Split(';')[1] == "Date et heure ")
+                {
+                    dernierListeParametres = contenuMemoire[i];
+                }
+                else
+                {
+                    if (contenuMemoire[i] == ligneProche)
+                    {
+                        Fin = true;
+                    }
+                }
+                i++;
+            }
+            string[] contenuLigne = dernierListeParametres.Split(";");
+            List<string> evenements = new List<string>();
+            for (int k = 3; k < contenuLigne.Length-1; k++)
+            {
+                evenements.Add(contenuLigne[k]);
+            }
+            return (evenements);
+        }
+
+        private List<string> EnleverParam(List<string> lignes)
+        {
+            List<string> res = new List<string>();
+            //enleve les ligne qui ne servent pas 
+            for (int i = 0; i < lignes.Count; i++)
+            {
+                if (lignes[i].Split(';')[1] != "Date et heure ")
+                {
+                    res.Add(lignes[i]);
+                }
+
+            }
+            return res;
+        }
+
+        private List<string> Tri(List<string> lignes)
+        {
+            //tri par date
+            for (int i = lignes.Count - 1; i > 0; i--)
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    DateTime date1 = DateTime.Parse(lignes[j].Split(';')[0]);
+                    DateTime date2 = DateTime.Parse(lignes[j + 1].Split(';')[0]);
+                    if (date1 > date2)
+                    {
+                        string intermediaire = lignes[j];
+                        lignes[j] = lignes[j + 1];
+                        lignes[j + 1] = intermediaire;
+                    }
+                }
+            }
+            return lignes;
         }
 
         private void ActualiserComboBoxEntree()
         {
             // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
-            List<string> EvenementNonActif = new List<string>();
             for (int i = 0; i < evenements.Count; i++)
             {
                 string[] ligne = evenements[i].Split(';');
@@ -113,7 +307,6 @@ namespace horus.Forms
         private void ActualiserComboBoxSortie()
         {
             // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
-            List<string> EvenementActif = new List<string>();
             for (int i = 0; i < evenements.Count; i++)
             {
                 string[] ligne = evenements[i].Split(';');
