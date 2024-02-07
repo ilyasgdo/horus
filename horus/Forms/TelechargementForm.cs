@@ -83,7 +83,6 @@ namespace horus.Forms
 
                 while (currentDate <= dateFin)
                 {
-                    // Nina : methode "quelle est la ligne la plus proche" lapluus vielle mais 
                     (ligneProche, PasDeLigneAvant) = LigneLaPlusProche(currentDate);
                     if (PasDeLigneAvant == false) { PremiereLigneTrouve++; }
                     if (!ligne1 && PremiereLigneTrouve!=1 && ligneProche == ligneProcheComparaison)
@@ -172,21 +171,7 @@ namespace horus.Forms
                             }
                             if (trouve == false) { creaLigne.Add("0;"); }
                         }
-                        //Debug.WriteLine("109");
-                        //Ilyas 
-
-                        // Récupérer le nombre de personnes du fichier de référence pour la date actuelle
-                        /*int nbPersonnesReference = GetNombrePersonnesReference(currentDate);
-
-                        // Générer la ligne du nouveau fichier en utilisant le nombre de personnes
-                        string ligne = $"{currentDate.ToString("dd/MM/yyyy HH:mm:ss")};{nbPersonnesReference}";
-
-                        // Ajouter les états des événements
-                        foreach (Evenement evenement in parametres.ChargerEvenementsDepuisCSV())
-                        {
-                            ligne += $";{(evenement.isActif() ? "1" : "0")}";
-                        }
-                        */
+                        
                     }
                     string ligne = "";
                     for (int i = 0; i < creaLigne.Count; i++)
@@ -226,9 +211,9 @@ namespace horus.Forms
             List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             contenuMemoire = EnleverParam(contenuMemoire);
             contenuMemoire = Tri(contenuMemoire);
-            int i = 0; bool Fin = false; List<int> total=new List<int>(); 
+            int i = 0; List<int> total=new List<int>(); 
             for (int j=0; j<taille; j++) { total.Add(0); }
-            while (i < contenuMemoire.Count && Fin == false)
+            while (i < contenuMemoire.Count && DateTime.Parse(contenuMemoire[i].Split(';')[0]) < currentDate)
             {
                 for (int j = 0; j < taille; j++)
                 {
@@ -239,10 +224,6 @@ namespace horus.Forms
                         total[j] = total[j] + nb;
                         if (total[j] != 0 && total[j] != 1) { total[j] = 0; }
                     }
-                }
-                if (i + 1 < contenuMemoire.Count && DateTime.Parse(contenuMemoire[i + 1].Split(';')[0]) > currentDate)
-                {
-                    Fin = true;
                 }
                 i++;
             }

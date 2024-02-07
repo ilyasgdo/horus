@@ -162,9 +162,9 @@ namespace horus.Forms
             List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             contenuMemoire = EnleverParam(contenuMemoire);
             contenuMemoire = Tri(contenuMemoire);
-            int i = 0; bool Fin = false; List<int> total = new List<int>();
+            int i = 0; List<int> total = new List<int>();
             for (int j = 0; j < taille; j++) { total.Add(0); }
-            while (i < contenuMemoire.Count && Fin == false)
+            while (i < contenuMemoire.Count && DateTime.Parse(contenuMemoire[i].Split(';')[0]) < currentDate)
             {
                 for (int j = 0; j < taille; j++)
                 {
@@ -175,10 +175,6 @@ namespace horus.Forms
                         total[j] = total[j] + nb;
                         if (total[j] != 0 && total[j] != 1) { total[j] = 0; }
                     }
-                }
-                if (i + 1 < contenuMemoire.Count && DateTime.Parse(contenuMemoire[i + 1].Split(';')[0]) > currentDate)
-                {
-                    Fin = true;
                 }
                 i++;
             }
