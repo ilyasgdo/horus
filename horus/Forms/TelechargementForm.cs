@@ -77,14 +77,16 @@ namespace horus.Forms
                 List<int> listeEtat = new List<int>();
                 List<string> creaLigne = new List<string>();
                 bool ligne1 = true;
-                bool test = false;
+                bool test = true;
+                bool PasDeLigneAvant = false;
+                int PremiereLigneTrouve = 0;
 
                 while (currentDate <= dateFin)
                 {
                     // Nina : methode "quelle est la ligne la plus proche" lapluus vielle mais 
-                    if (currentDate == DateTime.Parse("02/02/2024 5:50:00")) { test = true; }
-                    ligneProche = LigneLaPlusProche(currentDate);
-                    if (!ligne1 && ligneProche == ligneProcheComparaison)
+                    (ligneProche, PasDeLigneAvant) = LigneLaPlusProche(currentDate);
+                    if (PasDeLigneAvant == false) { PremiereLigneTrouve++; }
+                    if (!ligne1 && PremiereLigneTrouve!=1 && ligneProche == ligneProcheComparaison)
                     {
                         creaLigne[0] = currentDate.ToString("dd/MM/yyyy HH:mm:ss") + ";";
                     }
@@ -208,16 +210,12 @@ namespace horus.Forms
             List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             contenuMemoire = EnleverParam(contenuMemoire);
             contenuMemoire = Tri(contenuMemoire);
-            int i = 0; bool Fin = false; int total = 0;
-            while (i < contenuMemoire.Count && Fin == false)
+            int i = 0; int total = 0;
+            while (i < contenuMemoire.Count && DateTime.Parse(contenuMemoire[i].Split(';')[0]) <= currentDate)
             {
                 int nb = Convert.ToInt32(contenuMemoire[i].Split(';')[1]);
                 //Debug.WriteLine("!!!!! nb = " + nb);
                 total += nb;
-                if (i + 1< contenuMemoire.Count && DateTime.Parse(contenuMemoire[i + 1].Split(';')[0]) > currentDate)
-                {
-                    Fin = true;
-                }
                 i++;
             }
             return total;
@@ -234,9 +232,13 @@ namespace horus.Forms
             {
                 for (int j = 0; j < taille; j++)
                 {
-                    int nb = Convert.ToInt32(contenuMemoire[i].Split(';')[2+j]);
-                    total[j] = total[j] + nb;
-                    if (total[j]!=0 && total[j] != 1) { total[j] = 0; Debug.WriteLine("Bug incohérence dans la mémoire"); }
+                    string[] ligne = contenuMemoire[i].Split(';');
+                    if ((2 + j) < ligne.Length - 1)
+                    {
+                        int nb = Convert.ToInt32(ligne[2 + j]);
+                        total[j] = total[j] + nb;
+                        if (total[j] != 0 && total[j] != 1) { total[j] = 0; }
+                    }
                 }
                 if (i + 1 < contenuMemoire.Count && DateTime.Parse(contenuMemoire[i + 1].Split(';')[0]) > currentDate)
                 {
@@ -336,7 +338,7 @@ namespace horus.Forms
         }
         */
 
-        private string LigneLaPlusProche(DateTime date)
+        private (string,bool) LigneLaPlusProche(DateTime date)
         {
             //récupération de la mémoire
             List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
@@ -360,7 +362,7 @@ namespace horus.Forms
                         //if (test == true) { Debug.Write("La ligne d'avant " + contenuMemoire[i - 1].Split(';')[0] + "  -  "); }
 
                         //ligne d'avant
-                        return contenuMemoire[i - 1];
+                        return (contenuMemoire[i - 1],false);
 
                     }
                     else
@@ -368,13 +370,13 @@ namespace horus.Forms
                         //if (test == true) { Debug.Write("La ligne d'avant " + contenuMemoire[i].Split(';')[0] + "  -  "); }
 
                         //ligne vide
-                        return contenuMemoire[i];
+                        return (contenuMemoire[i],true);
 
                     }
                 }
             }
             //dernière ligne
-            return contenuMemoire[contenuMemoire.Count - 1];
+            return (contenuMemoire[contenuMemoire.Count - 1],false);
         }
 
         private List<string> EnleverParam(List<string> lignes)

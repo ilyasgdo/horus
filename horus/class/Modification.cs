@@ -35,6 +35,8 @@ namespace horus.@class
         public Modification(int nb, Parametres para)
         {
             if (nbPersComparaison == 1000) { nbPersComparaison = nb; }
+            param = para;
+            CreerFichierCSV(fichierCSV);
         }
 
         private void CreerFichierCSV(string fichier)

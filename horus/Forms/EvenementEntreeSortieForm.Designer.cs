@@ -103,7 +103,7 @@
             // 
             pctboxDate.Image = (Image)resources.GetObject("pctboxDate.Image");
             pctboxDate.Location = new Point(169, 7);
-            pctboxDate.Margin = new Padding(2, 2, 2, 2);
+            pctboxDate.Margin = new Padding(2);
             pctboxDate.Name = "pctboxDate";
             pctboxDate.Size = new Size(47, 34);
             pctboxDate.SizeMode = PictureBoxSizeMode.Zoom;
@@ -116,7 +116,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(225, 218);
+            ClientSize = new Size(231, 218);
             Controls.Add(pctboxDate);
             Controls.Add(comboBoxEvenements);
             Controls.Add(btnValiderEvenement);

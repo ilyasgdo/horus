@@ -77,35 +77,27 @@ namespace horus.Forms
                 Debug.WriteLine("la date et l'heure choisi est : "+strDateEtHeure);
 
                 //recup des évènepents
-                string ligneP = LigneLaPlusProche(DateTime.Parse(strDateEtHeure));
-                List<string> Evenements = ListeEvenements(ligneP);
-                Debug.WriteLine("Les evenements sont : ");
-                for (int i = 0; i < Evenements.Count; i++)
+                string ligneParametre = ligneParametreProche();
+                //string ligneProche = LigneLaPlusProche(DateTime.Parse(strDateEtHeure));
+                //List<string> Evenements = ListeEvenements(ligneProche);
+                List<string> Evenements = new List<string>();
+                string[] contenuLigne = ligneParametre.Split(';');
+                for (int k = 3; k < contenuLigne.Length - 1; k++)
                 {
-                    int tailleEve = Evenements[i].Length;
-                    Evenements[i] = Evenements[i].Substring(0, tailleEve - 1);
-                    Debug.Write(Evenements[i]);
+                    string ev = contenuLigne[k].Substring(0, contenuLigne[k].Length - 1);
+                    Evenements.Add(ev);
                 }
-
                 List<int> valeurs = RecupInitEve(DateTime.Parse(strDateEtHeure), Evenements.Count);
-                Debug.WriteLine("\nLeur valeurs sont : ");
-                for (int i = 0; i < valeurs.Count; i++)
-                {
-                    Debug.Write(valeurs[i]);
-                }
-                Debug.WriteLine("\nOn compare nos evenements :");
                 int j = 0; bool trouve = false;
                 while (j < Evenements.Count && trouve == false)
                 {
-                    Debug.Write(evenementSelectionne + " est comparé à " + Evenements[j] + " ;  ");
+                    //Debug.Write(evenementSelectionne + " est comparé à " + Evenements[j] + " ;  ");
                     if (Evenements[j] == evenementSelectionne)
                     {
                         trouve = true; j--;
                     }
                     j++;
                 }
-                Debug.WriteLine("\nL'élement sélectionné est celui numéro " + j + 1);
-
                 bool Nonvalide = (entree == false && valeurs[j] != 1) || (entree == true && valeurs[j] != 0);
                 Debug.WriteLine("Ainsi l'action est-elle valide ? : " + Nonvalide + "   (true si non valide)");
                 if (Nonvalide)
@@ -113,7 +105,8 @@ namespace horus.Forms
                     if (entree == false)
                     {
                         MessageBox.Show("L'évènement n'est pas en cours à ce moment", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    } else
+                    }
+                    else
                     {
                         MessageBox.Show("L'évènement est déjà en cours à ce moment", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -149,6 +142,21 @@ namespace horus.Forms
             this.Close();
         }
 
+        private string ligneParametreProche()
+        {
+            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
+            string ligneparametre="";
+            for (int i=0; i<contenuMemoire.Count; i++)
+            {
+                string[] ligne = contenuMemoire[i].Split(';');
+                if (ligne[1] == "Date et heure ")
+                {
+                    ligneparametre = contenuMemoire[i];
+                }
+            }
+            return ligneparametre;
+        }
+
         private List<int> RecupInitEve(DateTime currentDate, int taille)
         {
             List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
@@ -158,19 +166,15 @@ namespace horus.Forms
             for (int j = 0; j < taille; j++) { total.Add(0); }
             while (i < contenuMemoire.Count && Fin == false)
             {
-                Debug.WriteLine("taille = " + taille);
                 for (int j = 0; j < taille; j++)
                 {
-                    string[] test = contenuMemoire[i].Split(';');
-                    Debug.WriteLine("On test la ligne " + contenuMemoire[i]);
-                    for (int k = 0; k<test.Length; k++)
+                    string[] ligne = contenuMemoire[i].Split(';');
+                    if ((2 + j) < ligne.Length-1)
                     {
-                        Debug.Write("L'élement numéro " + k + " est " + test[k]+"  ;  ");
+                        int nb = Convert.ToInt32(ligne[2 + j]);
+                        total[j] = total[j] + nb;
+                        if (total[j] != 0 && total[j] != 1) { total[j] = 0; }
                     }
-                    Debug.WriteLine("\n");
-                    int nb = Convert.ToInt32(contenuMemoire[i].Split(';')[2 + j]);
-                    total[j] = total[j] + nb;
-                    if (total[j] != 0 && total[j] != 1) { total[j] = 0; Debug.WriteLine("Bug incohérence dans la mémoire"); }
                 }
                 if (i + 1 < contenuMemoire.Count && DateTime.Parse(contenuMemoire[i + 1].Split(';')[0]) > currentDate)
                 {
@@ -187,11 +191,6 @@ namespace horus.Forms
             List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
             contenuMemoire = EnleverParam(contenuMemoire);
             contenuMemoire = Tri(contenuMemoire);
-            //for(int i=0; i<contenuMemoire.Count; i++)
-            //{
-            //if (test == true) { Debug.WriteLine("\n");}
-            //}
-
             for (int i = 0; i < contenuMemoire.Count; i++)
             {
                 string dateligne = contenuMemoire[i].Split(';')[0];
@@ -225,6 +224,7 @@ namespace horus.Forms
         private List<string> ListeEvenements(string ligneProche)
         {
             List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
+            contenuMemoire=Tri(contenuMemoire);
             string dernierListeParametres = ""; bool Fin = false; int j = 0;
             while (j < contenuMemoire.Count && Fin == false)
             {
@@ -251,6 +251,12 @@ namespace horus.Forms
                 }
                 i++;
             }
+            string message = "";
+            for (int k = 0; k < contenuMemoire.Count; k++)
+            {
+                message = message + "\n" + contenuMemoire[k];
+            }
+            MessageBox.Show("La ligne de parametre prise en compte est "+dernierListeParametres, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             string[] contenuLigne = dernierListeParametres.Split(";");
             List<string> evenements = new List<string>();
             for (int k = 3; k < contenuLigne.Length-1; k++)
