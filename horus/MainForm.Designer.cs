@@ -208,6 +208,9 @@
             Controls.Add(btnPersonneSortie);
             Controls.Add(btnPersonneEntree);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MaximumSize = new Size(816, 489);
+            MinimumSize = new Size(816, 489);
             Name = "MainForm";
             Text = "Main";
             Load += MainForm_Load;
