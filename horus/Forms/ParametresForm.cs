@@ -29,6 +29,7 @@ namespace horus.Forms
             ActualiserComboBox();
         }
 
+
         private void ParametresForm_Load(object sender, EventArgs e)
         {
            
@@ -67,6 +68,7 @@ namespace horus.Forms
             }
         }
 
+
         private void btnAjouter_Click(object sender, EventArgs e)
         {
             // Ajouter un nouvel événement
@@ -99,6 +101,18 @@ namespace horus.Forms
             SauvegarderEvenements();
             textBoxNouvelEvenement.Text = "";
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            // Appeler la méthode de sauvegarde des événements lors de la fermeture du formulaire
+            SauvegarderEvenements();
+
+            base.OnFormClosing(e);
+        }
+
+
+        // ---------------------------------------------------------- Fonctions écrites en dehors des évènements basiques ----------------------------------------------------------//
+
 
         private List<string[]> ChargerEvenements()
         {
@@ -141,6 +155,7 @@ namespace horus.Forms
             comboBoxEvenements.DataSource = evenements.Select(ev => $"{ev[0]}").ToList();
         }
 
+
         private void CreerFichierCSV(string cheminFichier)
         {
             try
@@ -160,14 +175,6 @@ namespace horus.Forms
             {
                 Debug.WriteLine($"Erreur lors de la création ou vérification du fichier CSV : {ex.Message}");
             }
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            // Appeler la méthode de sauvegarde des événements lors de la fermeture du formulaire
-            SauvegarderEvenements();
-
-            base.OnFormClosing(e);
         }
     }
 }

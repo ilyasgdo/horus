@@ -35,25 +35,6 @@ namespace horus.Forms
             contenu = ChargerFichier();
         }
 
-        private List<string> ChargerFichier()
-        {
-            // Charger la liste d'événements depuis le fichier CSV
-            try
-            {
-                if (File.Exists(fichierCSVPers))
-                {
-                    return File.ReadAllLines(fichierCSVPers)
-                        .Select(line => line.Split(';')[0])
-                        .ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Erreur lors du chargement des événements : {ex.Message}");
-            }
-
-            return new List<string>();
-        }
 
         private void btnValiderPersonne_Click(object sender, EventArgs e)
         {
@@ -106,6 +87,30 @@ namespace horus.Forms
             this.Close();
         }
 
+
+        // ---------------------------------------------------------- Fonctions écrites en dehors des évènements basiques ----------------------------------------------------------//
+
+
+        private List<string> ChargerFichier()
+        {
+            // Charger la liste d'événements depuis le fichier CSV
+            try
+            {
+                if (File.Exists(fichierCSVPers))
+                {
+                    return File.ReadAllLines(fichierCSVPers)
+                        .Select(line => line.Split(';')[0])
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur lors du chargement des événements : {ex.Message}");
+            }
+
+            return new List<string>();
+        }
+
         private int RecupInitPers(DateTime currentDate)
         {
             List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
@@ -127,6 +132,7 @@ namespace horus.Forms
             }
             return total;
         }
+
 
         private void Sauvegarder()
         {
@@ -199,12 +205,14 @@ namespace horus.Forms
             return lignes;
         }
 
+
         private void pctboxDate_Click(object sender, EventArgs e)
         {
             DateModif = true;
             Date formDate = new Date();
             open_Click(formDate);
         }
+
 
         private void open_Click(Form form)
         {

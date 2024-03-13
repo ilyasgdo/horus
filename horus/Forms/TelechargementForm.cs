@@ -20,6 +20,7 @@ namespace horus.Forms
             // monthCalendarFin.MaxDate = DateTime.Now;
         }
 
+
         private void btnValiderTelechargement_Click(object sender, EventArgs e)
         {
             DateTime dateDebut = monthCalendarDebut.SelectionStart;
@@ -190,6 +191,10 @@ namespace horus.Forms
             }
         }
 
+
+// ---------------------------------------------------------- Fonctions écrites en dehors des évènements basiques ----------------------------------------------------------//
+
+
         private int RecupInitPers(DateTime currentDate)
         {
             List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
@@ -298,27 +303,6 @@ namespace horus.Forms
         }
 
 
-        /*
-        // Méthode pour obtenir le nombre de personnes du fichier de référence pour une date donnée
-        private int GetNombrePersonnesReference(DateTime currentDate)
-        {
-            // Charger les données depuis le fichier CSV de référence
-            List<string> referenceLines = File.ReadAllLines("CSV/evenementss.csv").ToList();
-
-            // Rechercher la ligne correspondante dans le fichier de référence
-            string referenceLine = referenceLines.FirstOrDefault(line => line.StartsWith(currentDate.ToString("dd/MM/yyyy HH:mm:ss")));
-
-            if (referenceLine != null)
-            {
-                // Récupérer le nombre de personnes de la ligne de référence
-                return int.Parse(referenceLine.Split(';')[1]);
-            }
-
-            // Valeur par défaut si la ligne n'est pas trouvée
-            return 0;
-        }
-        */
-
         private (string,bool) LigneLaPlusProche(DateTime date)
         {
             //récupération de la mémoire
@@ -375,6 +359,7 @@ namespace horus.Forms
             return res;
         }
 
+
         private List<string> Tri(List<string> lignes)
         {
             //tri par date
@@ -394,6 +379,5 @@ namespace horus.Forms
             }
             return lignes;
         }
-
     }
 }

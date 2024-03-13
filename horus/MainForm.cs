@@ -63,11 +63,6 @@ namespace horus
             parametre.InitParametresComp();
             Modification modif = new Modification(nbPersonnesPresentent,parametre);
 
-
-
-            // test!!!!!!!!!!!!!!!!!!!!!!!
-            //Modification test1 = new Modification(3,parametre);
-            //Modification test2 = new Modification(4,parametre);
         }
 
 
@@ -80,6 +75,7 @@ namespace horus
             }
             return new List<string>();
         }
+
 
         private List<string> ChargerPersonnes()
         {
@@ -135,12 +131,14 @@ namespace horus
             open_Click(evenementEntreeSortie);
         }
 
+
         private void btnEvenementSuppression_Click(object sender, EventArgs e)
         {
             EvenementEntreeSortieForm evenementEntreeSortie = new EvenementEntreeSortieForm(parametre.Getnbpersonnes(), false);
             evenementEntreeSortie.FormClosed += evenementEntreeSortie_FormClosed;
             open_Click(evenementEntreeSortie);
         }
+
 
         private void evenementEntreeSortie_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -164,6 +162,32 @@ namespace horus
 
         }
 
+
+        private void BtnSupprimerAlerte_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string cheminFichierAvertissements = "CSV/avertissements.csv";
+
+
+                File.WriteAllText(cheminFichierAvertissements, string.Empty);
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la suppression du contenu du fichier CSV d'alertes : {ex.Message}");
+            }
+        }
+
+
+// ---------------------------------------------------------- Fonctions écrites en dehors des évènements basiques ----------------------------------------------------------//
+
+
+        /// <summary>
+        /// Ouvre n'importe quel forme en fonction du bouton utilisé
+        /// </summary>
+        /// <param name="form"></param>
         private void open_Click(Form form)
         {
             bool isOpen = false;
@@ -180,7 +204,9 @@ namespace horus
                 form.Show();
             }
         }
-        // Méthode pour obtenir le nombre de personnes du fichier
+
+
+        // Méthode pour obtenir le nombre de personnes dans le fichier
         private int GetNombrePersonnesReference()
         {
             try
@@ -214,19 +240,20 @@ namespace horus
             }
         }
 
-
-
-
+        /// <summary>
+        /// actualise le nombre de personnes entrées et sorties directement sur le form
+        /// </summary>
         private void actualiser_label()
         {
-
-
             int nbPersonnesPremierFichier = GetNombrePersonnesReference();
             lblNbPersonnes.Text = $"Nombre de personnes : {nbPersonnesPremierFichier}";
             CheckAndRecordWarnings();
 
         }
 
+        /// <summary>
+        /// Récupère les évènements actifs
+        /// </summary>
         public List<string> GetEvenementsActifs()
         {
             List<string> evenementsActifs = new List<string>();
@@ -269,7 +296,9 @@ namespace horus
             return evenementsActifs;
         }
 
-        
+        /// <summary>
+        /// actualise les évènements actifs et inactifs directement sur le form
+        /// </summary>
         public void UpdateLabelEvenement()
         {
             CheckAndRecordWarnings();
@@ -293,14 +322,20 @@ namespace horus
             }
         }
 
-
-
+        /// <summary>
+        /// est utilisé dès le lancement du form.
+        ///     actualise les labels du nombre de personnes et les évènements actifs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
             actualiser_label();
             UpdateLabelEvenement();
             CheckAndRecordWarnings();
         }
+
+
         private void RecordOrUpdateWarning(DateTime dateTime, int nbPersonnes)
         {
             try
@@ -420,25 +455,5 @@ namespace horus
             labelAlertes.ForeColor = Color.Red;
             labelAlertes.Text = alertesText.ToString();
         }
-
-        private void BtnSupprimerAlerte_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string cheminFichierAvertissements = "CSV/avertissements.csv";
-                    
-              
-                File.WriteAllText(cheminFichierAvertissements, string.Empty);
-
-               
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erreur lors de la suppression du contenu du fichier CSV d'alertes : {ex.Message}");
-            }
-        }
-
-
-
     }
 }

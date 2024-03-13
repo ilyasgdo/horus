@@ -49,6 +49,7 @@ namespace horus.Forms
             cbMinuteEvenement.SelectedItem = now.ToString("mm");
         }
 
+
         private void btnValiderEvenement_Click(object sender, EventArgs e)
         {
 
@@ -142,6 +143,36 @@ namespace horus.Forms
             this.Close();
         }
 
+
+        private void pctboxDate_Click(object sender, EventArgs e)
+        {
+            DateModif = true;
+            Date formDate = new Date();
+            open_Click(formDate);
+        }
+
+
+        private void open_Click(Form form)
+        {
+            bool isOpen = false;
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Text == form.Text)
+                {
+                    isOpen = true;
+                    f.Focus();
+                }
+            }
+            if (!isOpen)
+            {
+                form.Show();
+            }
+        }
+
+
+// ---------------------------------------------------------- Fonctions écrites en dehors des évènements basiques ----------------------------------------------------------//
+
+
         private string ligneParametreProche()
         {
             List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
@@ -156,6 +187,7 @@ namespace horus.Forms
             }
             return ligneparametre;
         }
+
 
         private List<int> RecupInitEve(DateTime currentDate, int taille)
         {
@@ -181,86 +213,6 @@ namespace horus.Forms
             return total;
         }
 
-        private string LigneLaPlusProche(DateTime date)
-        {
-            //récupération de la mémoire
-            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
-            contenuMemoire = EnleverParam(contenuMemoire);
-            contenuMemoire = Tri(contenuMemoire);
-            for (int i = 0; i < contenuMemoire.Count; i++)
-            {
-                string dateligne = contenuMemoire[i].Split(';')[0];
-                //if (test == true) { Debug.Write("Comparaison " + DateTime.Parse(dateligne) + " et " + date + " = " + Convert.ToString(DateTime.Parse(dateligne) > date) + "  -  "); }
-
-                if (DateTime.Parse(dateligne) > date)
-                {
-                    //if (test == true) { Debug.Write("La ligne est plus tard " + dateligne + "  -  "); }
-                    if (i != 0)
-                    {
-                        //if (test == true) { Debug.Write("La ligne d'avant " + contenuMemoire[i - 1].Split(';')[0] + "  -  "); }
-
-                        //ligne d'avant
-                        return contenuMemoire[i - 1];
-
-                    }
-                    else
-                    {
-                        //if (test == true) { Debug.Write("La ligne d'avant " + contenuMemoire[i].Split(';')[0] + "  -  "); }
-
-                        //ligne vide
-                        return contenuMemoire[i];
-
-                    }
-                }
-            }
-            //dernière ligne
-            return contenuMemoire[contenuMemoire.Count - 1];
-        }
-
-        private List<string> ListeEvenements(string ligneProche)
-        {
-            List<string> contenuMemoire = File.ReadAllLines("CSV/memoire.csv").ToList();
-            contenuMemoire=Tri(contenuMemoire);
-            string dernierListeParametres = ""; bool Fin = false; int j = 0;
-            while (j < contenuMemoire.Count && Fin == false)
-            {
-                if (contenuMemoire[j].Split(';')[1] == "Date et heure ")
-                {
-                    dernierListeParametres = contenuMemoire[j];
-                    Fin = true;
-                }
-                j++;
-            }
-            Fin = false; int i = 0;
-            while (i < contenuMemoire.Count && Fin == false)
-            {
-                if (contenuMemoire[i].Split(';')[1] == "Date et heure ")
-                {
-                    dernierListeParametres = contenuMemoire[i];
-                }
-                else
-                {
-                    if (contenuMemoire[i] == ligneProche)
-                    {
-                        Fin = true;
-                    }
-                }
-                i++;
-            }
-            string message = "";
-            for (int k = 0; k < contenuMemoire.Count; k++)
-            {
-                message = message + "\n" + contenuMemoire[k];
-            }
-            MessageBox.Show("La ligne de parametre prise en compte est "+dernierListeParametres, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            string[] contenuLigne = dernierListeParametres.Split(";");
-            List<string> evenements = new List<string>();
-            for (int k = 3; k < contenuLigne.Length-1; k++)
-            {
-                evenements.Add(contenuLigne[k]);
-            }
-            return (evenements);
-        }
 
         private List<string> EnleverParam(List<string> lignes)
         {
@@ -276,6 +228,7 @@ namespace horus.Forms
             }
             return res;
         }
+
 
         private List<string> Tri(List<string> lignes)
         {
@@ -297,6 +250,7 @@ namespace horus.Forms
             return lignes;
         }
 
+
         private void ActualiserComboBoxEntree()
         {
             // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
@@ -312,6 +266,7 @@ namespace horus.Forms
             comboBoxEvenements.DataSource = null;
             comboBoxEvenements.DataSource = EvenementNonActif;
         }
+
 
         private void ActualiserComboBoxSortie()
         {
@@ -330,9 +285,12 @@ namespace horus.Forms
 
         }
 
+        /// <summary>
+        /// Charger la liste d'événements depuis le fichier CSV
+        /// </summary>
+        /// <returns></returns>
         private List<string> ChargerEvenements()
         {
-            // Charger la liste d'événements depuis le fichier CSV
             try
             {
                 if (File.Exists(fichierCSV))
@@ -348,7 +306,10 @@ namespace horus.Forms
             return new List<string>();
         }
 
-        //methode pour enregistrer les modification dans le evenemnts.csv
+
+        /// <summary>
+        /// methode pour enregistrer les modification dans le evenemnts.csv
+        /// </summary>
         private void SauvegarderEvenements()
         {
             try
@@ -360,30 +321,6 @@ namespace horus.Forms
             catch (Exception ex)
             {
                 Debug.WriteLine($"Erreur sauvegarde des event : {ex.Message}");
-            }
-        }
-
-        private void pctboxDate_Click(object sender, EventArgs e)
-        {
-            DateModif = true;
-            Date formDate = new Date();
-            open_Click(formDate);
-        }
-
-        private void open_Click(Form form)
-        {
-            bool isOpen = false;
-            foreach (Form f in Application.OpenForms)
-            {
-                if (f.Text == form.Text)
-                {
-                    isOpen = true;
-                    f.Focus();
-                }
-            }
-            if (!isOpen)
-            {
-                form.Show();
             }
         }
     }
