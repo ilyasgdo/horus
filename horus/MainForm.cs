@@ -65,42 +65,6 @@ namespace horus
 
         }
 
-
-        private List<string> ChargerEvenements()
-        {
-            // Charger la liste d'événements depuis le fichier CSV
-            if (File.Exists(fichierCSVEve))
-            {
-                return File.ReadAllLines(fichierCSVEve).ToList();
-            }
-            return new List<string>();
-        }
-
-
-        private List<string> ChargerPersonnes()
-        {
-            try
-            {
-                // Crée le fichier s'il n'existe pas
-                if (!File.Exists(fichierCSVPers))
-                {
-                    File.WriteAllText(fichierCSVPers, "");
-                    Debug.WriteLine("Fichier CSV créé avec succès.");
-                }
-                else
-                {
-                    Debug.WriteLine("Le fichier CSV existe déjà.");
-                }
-                return File.ReadAllLines(fichierCSVPers).ToList();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Erreur lors de la création ou vérification du fichier CSV : {ex.Message}");
-                return new List<string>();
-            }
-
-        }
-
         private void btnPersonneEntree_Click(object sender, EventArgs e)
         {
             PersonneEntreeSortieForm personneEntreeSortie = new PersonneEntreeSortieForm(parametre.Getnbpersonnes(), true);
@@ -202,6 +166,46 @@ namespace horus
             if (!isOpen)
             {
                 form.Show();
+            }
+        }
+
+        /// <summary>
+        /// Charger la liste d'événements depuis le fichier CSV
+        /// </summary>
+        /// <returns></returns>
+        private List<string> ChargerEvenements()
+        {
+            if (File.Exists(fichierCSVEve))
+            {
+                return File.ReadAllLines(fichierCSVEve).ToList();
+            }
+            return new List<string>();
+        }
+
+        /// <summary>
+        /// Lit le fichier CSV s'il existe. Le crée si ce n'est pas le cas
+        /// </summary>
+        /// <returns></returns>
+        private List<string> ChargerPersonnes()
+        {
+            try
+            {
+                // Crée le fichier s'il n'existe pas
+                if (!File.Exists(fichierCSVPers))
+                {
+                    File.WriteAllText(fichierCSVPers, "");
+                    Debug.WriteLine("Fichier CSV créé avec succès.");
+                }
+                else
+                {
+                    Debug.WriteLine("Le fichier CSV existe déjà.");
+                }
+                return File.ReadAllLines(fichierCSVPers).ToList();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur lors de la création ou vérification du fichier CSV : {ex.Message}");
+                return new List<string>();
             }
         }
 
@@ -383,7 +387,9 @@ namespace horus
             }
         }
 
-        // Utilisez cette méthode dans votre code pour enregistrer ou mettre à jour une alerte
+        /// <summary>
+        /// Utiliser cette méthode dans votre code pour enregistrer ou mettre à jour une alerte
+        /// </summary>
         private void CheckAndRecordWarnings()
         {
             DateTime currentDateTime = DateTime.Now;

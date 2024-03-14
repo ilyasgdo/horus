@@ -16,8 +16,6 @@ namespace horus.Forms
         public TelechargementForm()
         {
             InitializeComponent();
-            //monthCalendarDebut.MaxDate = DateTime.Now;
-            // monthCalendarFin.MaxDate = DateTime.Now;
         }
 
 
@@ -49,6 +47,9 @@ namespace horus.Forms
                 MessageBox.Show($"Les données ont été enregistrées dans {filePath}.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+
+        // ---------------------------------------------------------- Fonctions écrites en dehors des évènements basiques ----------------------------------------------------------//
 
 
         private void GenererEtSauvegarderDonnees(string filePath, DateTime dateDebut, DateTime dateFin)
@@ -86,24 +87,27 @@ namespace horus.Forms
                 {
                     (ligneProche, PasDeLigneAvant) = LigneLaPlusProche(currentDate);
                     if (PasDeLigneAvant == false) { PremiereLigneTrouve++; }
-                    if (!ligne1 && PremiereLigneTrouve!=1 && ligneProche == ligneProcheComparaison)
+                    if (!ligne1 && PremiereLigneTrouve != 1 && ligneProche == ligneProcheComparaison)
                     {
                         creaLigne[0] = currentDate.ToString("dd/MM/yyyy HH:mm:ss") + ";";
                     }
                     else
                     {
                         creaLigne.Clear();
-                        if (test == true) { 
-                        Debug.WriteLine("la ligne trouvé est - " + ligneProche+" pour la date "+currentDate); }
+                        if (test == true)
+                        {
+                            Debug.WriteLine("la ligne trouvé est - " + ligneProche + " pour la date " + currentDate);
+                        }
 
                         //on récupère le nombre de personnes
                         champsLigne = ligneProche.Split(';');
-                        
+
                         nbPersonnes = Convert.ToString(RecupInitPers(currentDate));
                         if (test == true)
                         {
                             Debug.Write("Ses champs sont :");
-                            for (int i = 0; i < champsLigne.Length-1; i++) { Debug.Write(champsLigne[i] + " ; "); } Debug.Write("\n");
+                            for (int i = 0; i < champsLigne.Length - 1; i++) { Debug.Write(champsLigne[i] + " ; "); }
+                            Debug.Write("\n");
                         }
                         //fonction pour trouver actuellement les evenements et leur etat (actif ou non)
                         listeNomEvenement.Clear();
@@ -111,15 +115,15 @@ namespace horus.Forms
                         listeNomEvenement = ListeEvenements(ligneProche);
                         if (test == true)
                         {
-                        Debug.Write("Ses evenements sont :");
-                        for (int i = 0; i < listeNomEvenement.Count-1; i++) { Debug.Write(listeNomEvenement[i] + " ; "); }
-                        Debug.Write("\n");
+                            Debug.Write("Ses evenements sont :");
+                            for (int i = 0; i < listeNomEvenement.Count - 1; i++) { Debug.Write(listeNomEvenement[i] + " ; "); }
+                            Debug.Write("\n");
                         }
-        
+
                         listeEtat = RecupInitEve(currentDate, NomsEvenements.Count);
                         if (test == true)
                         {
-                        Debug.Write("Ses valeurs sont :");
+                            Debug.Write("Ses valeurs sont :");
                             for (int i = 0; i < listeEtat.Count; i++) { Debug.Write(listeEtat[i] + " ; "); }
                             Debug.Write("\n");
                         }
@@ -127,18 +131,24 @@ namespace horus.Forms
                         creaLigne.Add(nbPersonnes + ";");
                         for (int i = 0; i < NomsEvenements.Count; i++)
                         {
-                            if (test == true) {
-                            Debug.Write("\nEvenement " + NomsEvenements[i]); }
+                            if (test == true)
+                            {
+                                Debug.Write("\nEvenement " + NomsEvenements[i]);
+                            }
 
                             bool trouve = false;
                             for (int k = 0; k < listeNomEvenement.Count; k++)
                             {
-                                if (test == true) {
-                                Debug.Write("\n   " + listeNomEvenement[k]+" : "); }
+                                if (test == true)
+                                {
+                                    Debug.Write("\n   " + listeNomEvenement[k] + " : ");
+                                }
                                 if (listeNomEvenement[k] == NomsEvenements[i])
                                 {
-                                    if (test == true) {
-                                    Debug.Write("C'est le même champs"); }
+                                    if (test == true)
+                                    {
+                                        Debug.Write("C'est le même champs");
+                                    }
                                     trouve = true;
 
                                     if (k < listeEtat.Count && listeEtat[k] == 1)
@@ -153,7 +163,7 @@ namespace horus.Forms
                             }
                             if (trouve == false) { creaLigne.Add("0;"); }
                         }
-                        
+
                     }
                     string ligne = "";
                     for (int i = 0; i < creaLigne.Count; i++)
@@ -171,9 +181,6 @@ namespace horus.Forms
                 }
             }
         }
-
-
-// ---------------------------------------------------------- Fonctions écrites en dehors des évènements basiques ----------------------------------------------------------//
 
 
         private int RecupInitPers(DateTime currentDate)
@@ -327,10 +334,13 @@ namespace horus.Forms
             return res;
         }
 
-
+        /// <summary>
+        /// tri par date
+        /// </summary>
+        /// <param name="lignes"></param>
+        /// <returns></returns>
         private List<string> Tri(List<string> lignes)
         {
-            //tri par date
             for (int i = lignes.Count - 1; i > 0; i--)
             {
                 for (int j = 0; j < i; j++)

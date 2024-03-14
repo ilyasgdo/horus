@@ -133,12 +133,13 @@ namespace horus.Forms
             return total;
         }
 
-
+        /// <summary>
+        /// Enregistrer la liste d'événements dans le fichier CSV
+        /// </summary>
         private void Sauvegarder()
         {
             try
             {
-                // Enregistrer la liste d'événements dans le fichier CSV
                 File.WriteAllLines(fichierCSVPers, contenu.Select(ev => $"{ev}"));
                 Debug.WriteLine("Événements sauvegardés avec succès dans le fichier CSV.");
             }
@@ -148,11 +149,14 @@ namespace horus.Forms
             }
         }
 
+        /// <summary>
+        /// Lit le fichier CSV. Crée le fichier s'il n'existe pas
+        /// </summary>
+        /// <param name="cheminFichier"></param>
         private void CreerFichierCSV(string cheminFichier)
         {
             try
             {
-                // Crée le fichier s'il n'existe pas
                 if (!File.Exists(cheminFichier))
                 {
                     File.WriteAllText(cheminFichier, "");
@@ -169,11 +173,15 @@ namespace horus.Forms
             }
         }
 
+        /// <summary>
+        /// enleve les ligne qui ne servent pas 
+        /// </summary>
+        /// <param name="lignes"></param>
+        /// <returns></returns>
         private List<string> EnleverParam(List<string> lignes)
         {
             List<string> listModification = new List<string>();
             int nbligne = lignes.Count;
-            //enleve les ligne qui ne servent pas 
             for (int i = 0; i < nbligne; i++)
             {
                 if (lignes[i].Split(';')[1] != "Date et heure ")
@@ -185,9 +193,13 @@ namespace horus.Forms
             return listModification;
         }
 
+        /// <summary>
+        /// tri par date
+        /// </summary>
+        /// <param name="lignes"></param>
+        /// <returns></returns>
         private List<string> Tri(List<string> lignes)
         {
-            //tri par date
             for (int i = lignes.Count - 1; i > 0; i--)
             {
                 for (int j = 0; j < i; j++)

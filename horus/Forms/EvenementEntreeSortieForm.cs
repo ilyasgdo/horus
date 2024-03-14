@@ -53,7 +53,7 @@ namespace horus.Forms
         private void btnValiderEvenement_Click(object sender, EventArgs e)
         {
 
-            //On recupére la valeur decla combo box
+            //On recupére la valeur de la combo box
             string evenementSelectionne = comboBoxEvenements.SelectedItem as string;
 
             if (!string.IsNullOrEmpty(evenementSelectionne))
@@ -111,7 +111,7 @@ namespace horus.Forms
                 }
                 else
                 {
-                    //on cherche lma ligne ou la premier aveleurs de la ligne = le non selectionner dans la combo
+                    //on cherche la ligne ou la premier aveleurs de la ligne = le non selectionner dans la combo
                     int indexEvenement = evenements.FindIndex(ev => ev.Split(';')[0] == evenementSelectionne);
 
                     if (indexEvenement != -1)
@@ -210,11 +210,14 @@ namespace horus.Forms
             return total;
         }
 
-
+        /// <summary>
+        /// enleve les ligne qui ne servent pas 
+        /// </summary>
+        /// <param name="lignes"></param>
+        /// <returns></returns>
         private List<string> EnleverParam(List<string> lignes)
         {
             List<string> res = new List<string>();
-            //enleve les ligne qui ne servent pas 
             for (int i = 0; i < lignes.Count; i++)
             {
                 if (lignes[i].Split(';')[1] != "Date et heure ")
@@ -226,10 +229,13 @@ namespace horus.Forms
             return res;
         }
 
-
+        /// <summary>
+        /// tri par date
+        /// </summary>
+        /// <param name="lignes"></param>
+        /// <returns></returns>
         private List<string> Tri(List<string> lignes)
         {
-            //tri par date
             for (int i = lignes.Count - 1; i > 0; i--)
             {
                 for (int j = 0; j < i; j++)
@@ -247,10 +253,11 @@ namespace horus.Forms
             return lignes;
         }
 
-
+        /// <summary>
+        /// Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
+        /// </summary>
         private void ActualiserComboBoxEntree()
         {
-            // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
             EvenementNonActif.Clear();
             for (int i = 0; i < evenements.Count; i++)
             {
@@ -264,10 +271,11 @@ namespace horus.Forms
             comboBoxEvenements.DataSource = EvenementNonActif;
         }
 
-
+        /// <summary>
+        /// Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
+        /// </summary>
         private void ActualiserComboBoxSortie()
         {
-            // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
             EvenementActif.Clear();
             for (int i = 0; i < evenements.Count; i++)
             {

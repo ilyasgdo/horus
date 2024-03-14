@@ -36,9 +36,13 @@ namespace horus.Forms
             ActualiserComboBox();
         }
 
+        /// <summary>
+        /// Supprimer l'événement sélectionné
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
-            // Supprimer l'événement sélectionné
             string evenementSelectionne = comboBoxEvenements.SelectedItem as string;
             if (!string.IsNullOrEmpty(evenementSelectionne))
             {
@@ -68,10 +72,13 @@ namespace horus.Forms
             }
         }
 
-
+        /// <summary>
+        /// Ajouter un nouvel événement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAjouter_Click(object sender, EventArgs e)
         {
-            // Ajouter un nouvel événement
             string nouvelEvenement = textBoxNouvelEvenement.Text.Trim();
 
             if (nouvelEvenement.Contains(";"))
@@ -102,9 +109,12 @@ namespace horus.Forms
             textBoxNouvelEvenement.Text = "";
         }
 
+        /// <summary>
+        /// Appeler la méthode de sauvegarde des événements lors de la fermeture du formulaire
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            // Appeler la méthode de sauvegarde des événements lors de la fermeture du formulaire
             SauvegarderEvenements();
 
             base.OnFormClosing(e);
@@ -113,10 +123,12 @@ namespace horus.Forms
 
         // ---------------------------------------------------------- Fonctions écrites en dehors des évènements basiques ----------------------------------------------------------//
 
-
+        /// <summary>
+        /// Charger la liste d'événements depuis le fichier CSV
+        /// </summary>
+        /// <returns></returns>
         private List<string[]> ChargerEvenements()
         {
-            // Charger la liste d'événements depuis le fichier CSV
             try
             {
                 if (File.Exists(fichierCSV))
@@ -134,11 +146,13 @@ namespace horus.Forms
             return new List<string[]>();
         }
 
+        /// <summary>
+        /// Enregistrer la liste d'événements dans le fichier CSV
+        /// </summary>
         private void SauvegarderEvenements()
         {
             try
             {
-                // Enregistrer la liste d'événements dans le fichier CSV
                 File.WriteAllLines(fichierCSV, evenements.Select(ev => $"{ev[0]};{ev[1]}"));
                 Debug.WriteLine("Événements sauvegardés avec succès dans le fichier CSV.");
             }
@@ -148,19 +162,23 @@ namespace horus.Forms
             }
         }
 
+        /// <summary>
+        /// Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
+        /// </summary>
         private void ActualiserComboBox()
         {
-            // Mettre à jour la ComboBox avec la liste d'événements (nom seulement)
             comboBoxEvenements.DataSource = null;
             comboBoxEvenements.DataSource = evenements.Select(ev => $"{ev[0]}").ToList();
         }
 
-
+        /// <summary>
+        /// Lit le fichier CSV. Crée le fichier s'il n'existe pas
+        /// </summary>
+        /// <param name="cheminFichier"></param>
         private void CreerFichierCSV(string cheminFichier)
         {
             try
             {
-                // Crée le fichier s'il n'existe pas
                 if (!File.Exists(cheminFichier))
                 {
                     File.WriteAllText(cheminFichier, "");
