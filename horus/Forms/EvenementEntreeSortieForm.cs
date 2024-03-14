@@ -79,8 +79,6 @@ namespace horus.Forms
 
                 //recup des évènepents
                 string ligneParametre = ligneParametreProche();
-                //string ligneProche = LigneLaPlusProche(DateTime.Parse(strDateEtHeure));
-                //List<string> Evenements = ListeEvenements(ligneProche);
                 List<string> Evenements = new List<string>();
                 string[] contenuLigne = ligneParametre.Split(';');
                 for (int k = 3; k < contenuLigne.Length - 1; k++)
@@ -92,7 +90,6 @@ namespace horus.Forms
                 int j = 0; bool trouve = false;
                 while (j < Evenements.Count && trouve == false)
                 {
-                    //Debug.Write(evenementSelectionne + " est comparé à " + Evenements[j] + " ;  ");
                     if (Evenements[j] == evenementSelectionne)
                     {
                         trouve = true; j--;

@@ -31,7 +31,7 @@ namespace horus
             timer.Interval = 1000; // Intervalle en millisecondes (une seconde)
             timer.Tick += (sender, e) => lblHeure.Text = DateTime.Now.ToString("HH:mm:ss");
             timer.Start();
-            //tick pour warnig
+            //tick pour warning
             System.Windows.Forms.Timer timer10Minutes = new System.Windows.Forms.Timer();
             timer10Minutes.Interval = 1000;
             timer10Minutes.Tick += Timer10Minutes_Tick;
@@ -206,7 +206,10 @@ namespace horus
         }
 
 
-        // Méthode pour obtenir le nombre de personnes dans le fichier
+        /// <summary>
+        /// Méthode pour obtenir le nombre de personnes dans le fichier
+        /// </summary>
+        /// <returns></returns>
         private int GetNombrePersonnesReference()
         {
             try
@@ -443,7 +446,7 @@ namespace horus
                     string dateHeure = elements[0].Trim();
                     int nbPersonnes = int.Parse(elements[1].Trim());
 
-                    // Vérifiez si l'alerte est toujours valide (moins d'un jour depuis la création)
+                    // Vérifier si l'alerte est toujours valide (moins d'un jour depuis la création)
                     DateTime dateAvertissement = DateTime.ParseExact(dateHeure, "dd/MM/yyyy HH:mm:ss", null);
                     if ((DateTime.Now - dateAvertissement).TotalDays < 1)
                     {
